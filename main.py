@@ -5,9 +5,14 @@ from static.functions import *
 
 sg.theme("Reddit")
 
-## config.json の読み込み
-print("Loading... : ", load_file("static/config.json"))
+## load a config.json file
+config = get_json("static/config.json")
+#Get setting of language
+lang = config['user']['language']
+#Window Title
+title = { 'en':str('Calculator'), 'ja':str('関数電卓') }
 
+#MenuBar
 menu_def_jp = [
     ["&ファイル", ["新規",
                     "開く",
@@ -20,33 +25,42 @@ menu_def_jp = [
     ["&ヘルプ", ["Info of version"]]
 ]
 
-#MenuBarは一旦なしで作る [menu],
-#menu = sg.MenuBar(menu_def_jp, key="menubar", font=("メイリオ", 10), size=(15, 3))
-
-#Latex表記 -> .png形式で表示
-###             need resize the image
-image_formula_latex = sg.Image(filename="result.png", key="image_formula_latex", pad=((0, 0), (0, 0)), right_click_menu=None)
-
-##              <       Preview     >           ##
-#Tex表記 => Latexに変換する前の段階 + 任意の文字に変更可
-multiline_formula_tex = sg.Multiline(key='multiline_formula_tex', font=FONT_tex, pad=((0, 0), (0, 0)), size=(100, 4), enter_submits=True),
-
 #Edit
 right_click_menu_jp = ['&Right', ["Copy", "Paste"]]
 
+####        Window Layout
+#Latex表記 -> .png形式で表示
+###             need resize the image
+image_formula_latex = sg.Image(filename="result.png", key="image_formula_latex", size=(500, 300))
+column_buttons = [
+    [sg.Button('Integrate', key="integrate", font=FONT, size=(15, 1)), 
+     sg.Button('Sigma', key="sigma", font=FONT, size=(15, 1)),
+     sg.Button('limit', key="limit", font=FONT, size=(15, 1)),
+     sg.Button('Matrix', key="matrix", font=FONT, size=(15, 1))
+    ]
+]
+
+main_column = [
+    [image_formula_latex],
+    [column_buttons],
+    [sg.Button('Cancel', key="Cancel", font=FONT, size=(15, 1))]
+]
+
+
+#####
+#####           <   Output  >
+#####
+#Tex表記; 任意の文字に変更可
+multiline_formula_tex = sg.Multiline(key='multiline_formula_tex', font=FONT_tex, pad=((0, 0), (0, 0)), size=(100, 7), enter_submits=True)
+output_frame_title = { 'en':str('Output'), 'ja':str('出力') }
+output_frame = sg.Frame(output_frame_title[lang], [[multiline_formula_tex]], sg.Sizer(100, 700))
+
 #レイアウト
-layout = [[image_formula_latex],
-          [sg.Button('Integrate', key="integrate", font=FONT, size=(15, 1)), 
-            sg.Button('Sigma', key="sigma", font=FONT, size=(15, 1)), 
-            sg.Button('limit', key="limit", font=FONT, size=(15, 1))],
-          [sg.Button('Cancel', key="Cancel", font=FONT, size=(15, 1))],
-          [multiline_formula_tex]
-         ]
+layout = [ [main_column], 
+            [output_frame] ]
 
-title = { 'en':str('Calculator'), 'ja':str('関数電卓') }
-window = sg.Window(title['en'], layout, margins=(0,0), size=(750, 500), icon="", resizable=True, finalize=True)
-
-window['multiline_formula_tex'].expand(expand_x=True, expand_y=True)
+window = sg.Window(title[lang], layout, margins=(0,0), size=(720, 640), icon="", resizable=True, finalize=True)
+#window['multiline_formula_tex'].expand(expand_x=True, expand_y=True)
 
 # -------------------------------------
 #           イベント毎の処理
@@ -59,26 +73,25 @@ while True:
         break
     elif event == 'integrate':
         #式
-        y= sympy.E ** (-2 * x) * sympy.sin(3 * x)
+        y= sympy.E ** (-2 * x) * sympy.sin(3 * x) #type:ignore
         result_tex = sympy.latex((sympy.integrate(y, x)).doit())
 
         #F2 = x ** 5 + x + 1 # 高次式
         #result_tex = sympy.latex((sympy.solve(F2, x)))
 
         #tex
-        if multiline_formula_tex.index == None:
+        if multiline_formula_tex.do_not_clear == None:
             window["multiline_formula_tex"].print(" + ", result_tex) #type:ignore
         else: window["multiline_formula_tex"].print(result_tex) #type:ignore
         #Latex
         #-1個しか表示されない
         print("途中式は、 ", values["multiline_formula_tex"], " です。")
 
-        ##
-        ##          Tex表記に何とかして変換したい
-        ##                                   --->  積分定数は加えずに表示
+        ##積分定数は加えずに表示
         latex_result = r"""$${result_tex}$$""".format(result_tex=result_tex)
         image_result = sympy.preview(latex_result, viewer="file", filename="result.png", euler=False, dvioptions=["-T", "tight", "-z", "0", "--truecolor", "-D 600"])
         print(latex_result)
+
         #How to update the image at the sg.Image
         #window["image_formula_latex"].bind(image_result)  # type: ignore
 
