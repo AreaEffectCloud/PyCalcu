@@ -53,7 +53,7 @@ main_column = [
 #Tex表記; 任意の文字に変更可
 multiline_formula_tex = sg.Multiline(key='multiline_formula_tex', font=FONT_tex, pad=((0, 0), (0, 0)), size=(100, 7), enter_submits=True)
 output_frame_title = { 'en':str('Output'), 'ja':str('出力') }
-output_frame = sg.Frame(output_frame_title[lang], [[multiline_formula_tex]], sg.Sizer(100, 700))
+output_frame = sg.Frame(output_frame_title[lang], [[multiline_formula_tex]])
 
 #レイアウト
 layout = [ [main_column], 
@@ -67,7 +67,7 @@ window = sg.Window(title[lang], layout, margins=(0,0), size=(720, 640), icon="",
 # -------------------------------------
 while True:
 
-    event, values = window.read() # type: ignore
+    event, values = window.read()
 
     if event == sg.WIN_CLOSED or event == 'Cancel':
         break
