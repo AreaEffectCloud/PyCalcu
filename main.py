@@ -2,6 +2,7 @@ import PySimpleGUI as sg
 
 from static.buttons import *
 from static.functions import *
+from languages import *
 
 sg.theme("Reddit")
 
@@ -9,8 +10,6 @@ sg.theme("Reddit")
 config = get_json("static/config.json")
 #Get setting of language
 lang = config['user']['language']
-#Window Title
-title = { 'en':str('Calculator'), 'ja':str('関数電卓') }
 
 #MenuBar
 menu_def_jp = [
@@ -25,13 +24,12 @@ menu_def_jp = [
     ["&ヘルプ", ["Info of version"]]
 ]
 
-#Edit
-right_click_menu_jp = ['&Right', ["Copy", "Paste"]]
-
-####        Window Layout
+#####   #####   GUI Layout  #####  #####
 #Latex表記 -> .png形式で表示
-###             need resize the image
-image_formula_latex = sg.Image(filename="result.png", key="image_formula_latex", size=(500, 300))
+#Image Column で様々な場合における結果を中央に配置できない:  , pad=((0, 0), (158, 0))
+image_formula_latex_column = sg.Image(filename="result.png", key="image_formula_latex", right_click_menu=click_menu[lang])
+
+#####   Buttons #####
 column_buttons = [
     [sg.Button('Integrate', key="integrate", font=FONT, size=(15, 1)), 
      sg.Button('Sigma', key="sigma", font=FONT, size=(15, 1)),
@@ -40,26 +38,24 @@ column_buttons = [
     ]
 ]
 
+#####   Main GUI  #####
 main_column = [
-    [image_formula_latex],
+    [sg.Column([[image_formula_latex_column]], size=(800, 426), justification='center', scrollable=True)],
     [column_buttons],
-    [sg.Button('Cancel', key="Cancel", font=FONT, size=(15, 1))]
+    [sg.Button('Exit', key="Exit", font=FONT, size=(15, 1))]
 ]
 
-
-#####
-#####           <   Output  >
-#####
-#Tex表記; 任意の文字に変更可
+#####   Output  #####
 multiline_formula_tex = sg.Multiline(key='multiline_formula_tex', font=FONT_tex, pad=((0, 0), (0, 0)), size=(100, 7), enter_submits=True)
 output_frame_title = { 'en':str('Output'), 'ja':str('出力') }
 output_frame = sg.Frame(output_frame_title[lang], [[multiline_formula_tex]])
 
 #レイアウト
 layout = [ [main_column], 
-            [output_frame] ]
+            [output_frame],
+            [] ]
 
-window = sg.Window(title[lang], layout, margins=(0,0), size=(720, 640), icon="", resizable=True, finalize=True)
+window = sg.Window(title[lang], layout, margins=(0,0), icon="", resizable=True, finalize=True)
 #window['multiline_formula_tex'].expand(expand_x=True, expand_y=True)
 
 # -------------------------------------
@@ -67,17 +63,17 @@ window = sg.Window(title[lang], layout, margins=(0,0), size=(720, 640), icon="",
 # -------------------------------------
 while True:
 
-    event, values = window.read()
+    event, values = window.read()#type:ignore
 
-    if event == sg.WIN_CLOSED or event == 'Cancel':
+    if event == sg.WIN_CLOSED or event == 'Exit':
         break
     elif event == 'integrate':
         #式
         y= sympy.E ** (-2 * x) * sympy.sin(3 * x) #type:ignore
         result_tex = sympy.latex((sympy.integrate(y, x)).doit())
 
-        #F2 = x ** 5 + x + 1 # 高次式
-        #result_tex = sympy.latex((sympy.solve(F2, x)))
+        F2 = x ** 5 + x + 1 # 高次式
+        result_tex = sympy.latex((sympy.solve(F2, x)))
 
         #tex
         if multiline_formula_tex.do_not_clear == None:
