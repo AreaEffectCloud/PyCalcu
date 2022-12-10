@@ -1,5 +1,5 @@
 import sympy
-from static.buttons import *
+from static.tabs import *
 
 sympy.init_printing()
 
@@ -61,5 +61,5 @@ result = r"""$$
 - \frac{2 e^{- 2 x} \sin{\left(3 x \right)}}{13} - \frac{3 e^{- 2 x} \cos{\left(3 x \right)}}{13} +C
 $$"""
 wave = r"""$$\frac{\partial^2 u}{\partial t^2}=c^2\left(\frac{\partial^2 u}{\partial x^2}+\frac{\partial^2 u}{\partial y^2}\right)$$"""
-sympy.preview(result, viewer="file", filename="result.png", euler=False, fontsize=1,
+sympy.preview(result, viewer="file", filename="result.png", euler=False,
                 dvioptions=["-T", "tight", "-z", "0", "--truecolor", "-D 600"])

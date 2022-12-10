@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
 
-from static.buttons import *
+from static.tabs import *
 from static.functions import *
 from languages import *
 
@@ -11,52 +11,31 @@ config = get_json("static/config.json")
 #Get setting of language
 lang = config['user']['language']
 
-#MenuBar
-menu_def_jp = [
-    ["&ファイル", ["新規",
-                    "開く",
-                    "&上書き保存             Ctrl+S",
-                    "名前を付けて保存",
-                    "&終了"]],
-    ["&編集", ["元に戻す        Ctrl+Z",
-               "再実行           Ctrl+Y"]],
-    ["&書式", ["Font"]],
-    ["&ヘルプ", ["Info of version"]]
-]
-
 #####   #####   GUI Layout  #####  #####
 #Latex表記 -> .png形式で表示
 #Image Column で様々な場合における結果を中央に配置できない:  , pad=((0, 0), (158, 0))
 image_formula_latex_column = sg.Image(filename="result.png", key="image_formula_latex", right_click_menu=click_menu[lang])
 
-#####   Buttons #####
-column_buttons = [
-    [sg.Button('Integrate', key="integrate", font=FONT, size=(15, 1)), 
-     sg.Button('Sigma', key="sigma", font=FONT, size=(15, 1)),
-     sg.Button('limit', key="limit", font=FONT, size=(15, 1)),
-     sg.Button('Matrix', key="matrix", font=FONT, size=(15, 1))
-    ]
-]
+#####   Tab Group #####
 
-#####   Main GUI  #####
-main_column = [
-    [sg.Column([[image_formula_latex_column]], size=(800, 426), justification='center', scrollable=True)],
-    [column_buttons],
-    [sg.Button('Exit', key="Exit", font=FONT, size=(15, 1))]
-]
+main_column_Tabs = sg.TabGroup([[
+    sg.Tab(normal[lang], normal_layout, font=FONT, key="normal"),
+    sg.Tab(limit[lang], limit_layout, font=FONT, key="limit"),
+    sg.Tab(sigma[lang], sigma_layout, key="sigma", font=FONT),
+    sg.Tab(diff[lang], differential_layout, key="diff", font=FONT),
+    sg.Tab(integral[lang], integral_layout, key="integral", font=FONT)
+    ]], font=FONT, expand_x=True, expand_y=True)
 
 #####   Output  #####
-multiline_formula_tex = sg.Multiline(key='multiline_formula_tex', font=FONT_tex, pad=((0, 0), (0, 0)), size=(100, 7), enter_submits=True)
-output_frame_title = { 'en':str('Output'), 'ja':str('出力') }
-output_frame = sg.Frame(output_frame_title[lang], [[multiline_formula_tex]])
+multiline_formula_tex = sg.Output(key='multiline_formula_tex', font=FONT_tex, pad=((0, 0), (0, 0)), size=(100, 5), expand_x=True, expand_y=True)
+output_frame = sg.Frame(output_frame_title[lang], [[multiline_formula_tex]], expand_x=True, expand_y=True)
 
 #レイアウト
-layout = [ [main_column], 
-            [output_frame],
-            [] ]
+layout = [ [output_frame], 
+            [main_column_Tabs],
+            [sg.Column([[image_formula_latex_column]], size=(800, 426), justification='center', scrollable=True)]]
 
-window = sg.Window(title[lang], layout, margins=(0,0), icon="", resizable=True, finalize=True)
-#window['multiline_formula_tex'].expand(expand_x=True, expand_y=True)
+window = sg.Window(title[lang], layout, icon="", resizable=True, finalize=True)
 
 # -------------------------------------
 #           イベント毎の処理
