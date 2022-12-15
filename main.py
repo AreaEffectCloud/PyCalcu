@@ -36,7 +36,7 @@ layout = [ [output_frame],
             [main_column_left_tabs, main_column_right_tabs],
             [sg.Button("Debug", font=FONT, key="integral")],
             [sg.Button("Limit", font=FONT, key="limit_btn"), sg.Button("Integral", font=FONT, key="integral_btn")],
-            [sg.Column([[image_formula_latex_column]], size=(800, 426), justification='center', scrollable=True)]
+            #[sg.Column([[image_formula_latex_column]], size=(800, 426), justification='center', scrollable=True)]
             ]
 
 window = sg.Window(title[lang], layout, icon="", use_default_focus=False, resizable=True, finalize=True)

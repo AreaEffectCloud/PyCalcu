@@ -11,18 +11,53 @@ oo = sympy.oo #無限大
 # 使用する変数の定義(小文字1文字は全てシンボルとする)
 (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z) = sympy.symbols('a b c d e f g h i j k l m n o p q r s t u v w x y z')
 
-#Font of Button
+#Setting of Button
 FONT = ('HGS明朝B', 15)
 FONT_tex = ('HGS明朝B', 13)
+COLOR = ('white')
 
 ##### Main Left Layout #####
-btns = ["sin", "cos", "tan", "π", "x", "y", "z", "ω"]
-normal_layout = [
-    #縦にしか配置されない
-    [sg.Button(f'{i}')] for i in btns 
+
+#btns_1 = ["sin", "x", "log", "ln"]
+#btns_2 = ["cos", "y", "7", "4", "1", "+/-"]
+#btns_3 = ["tan", "z", "8", "5", "2", "0"]
+#btns_4 = ["π", "ω", "9", "6", "3", "e"]
+
+btns_1 = ["sin", "cos", "tan", " π "]
+btns_2 = [" x ", " y ", " z ", " ω "]
+btns_3 = ["^", "7", "8", "9"]
+btns_4 = ["∞", "4", "5", "6"]
+btns_5 = ["log", "1", "2", "3"]
+btns_6 = ["ln", "0", "( )", "AC"]
+
+one_layout = [
+    [sg.Button(f'{i}', font=FONT) for i in btns_1]
 ]
-print(normal_layout)
-    
+two_layout = [
+    [sg.Button(f'{i}', font=FONT) for i in btns_2]
+]
+three_layout = [
+    [sg.Button(f'{i}', font=FONT) for i in btns_3]
+]
+four_layout = [
+    [sg.Button(f'{i}', font=FONT) for i in btns_4]
+]
+five_layout = [
+    [sg.Button(f'{i}', font=FONT) for i in btns_5]
+]
+six_layout = [
+    [sg.Button(f'{i}', font=FONT) for i in btns_6]
+]
+
+normal_layout = [
+    #列ごとに設定する
+    [sg.Column(one_layout, background_color=COLOR)],
+    [sg.Column(two_layout, background_color=COLOR)],
+    [sg.Column(three_layout, background_color=COLOR)],
+    [sg.Column(four_layout, background_color=COLOR)],
+    [sg.Column(five_layout, background_color=COLOR)],
+    [sg.Column(six_layout, background_color=COLOR)], 
+]
 
 ##### Tab Layout #####
 limit_layout = [[]]
@@ -30,10 +65,3 @@ sigma_layout = [[]]
 differential_layout = [[]]
 integral_layout = [[]]
 matrix_layout = [[]]
-
-#[sg.Button("sin"), sg.Button("cos"), sg.Button("tan"), sg.Button("π")],
-#[sg.Button(""), sg.Button(""), sg.Button(""), sg.Button("")],
-#[sg.Button(""), sg.Button("7"), sg.Button("8"), sg.Button("9")],
-#[sg.Button(""), sg.Button("4"), sg.Button("5"), sg.Button("6")],
-#[sg.Button(""), sg.Button("1"), sg.Button("2"), sg.Button("3")],
-#[sg.Button(""), sg.Button("+/-"), sg.Button("0"), sg.Button("e")]
