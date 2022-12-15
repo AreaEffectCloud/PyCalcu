@@ -1,5 +1,5 @@
 import sympy
-from static.tabs import *
+from static.layout import *
 
 sympy.init_printing()
 

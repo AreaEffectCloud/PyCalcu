@@ -17,3 +17,4 @@ limit = { 'en':str('Limit'), 'ja':str('極限')}
 sigma = { 'en':str('Sigma'), 'ja':str('数列')}
 diff = { 'en':str('Differential'), 'ja':str('微分')}
 integral = { 'en':str('Integral'), 'ja':str('積分')}
+matrix = { 'en':str('Matrix'), 'ja':str('行列')}

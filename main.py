@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
 
-from static.tabs import *
+from static.layout import *
 from static.functions import *
 from languages import *
 
@@ -12,60 +12,64 @@ config = get_json("static/config.json")
 lang = config['user']['language']
 
 #####   #####   GUI Layout  #####  #####
-#Latex表記 -> .png形式で表示
-#Image Column で様々な場合における結果を中央に配置できない:  , pad=((0, 0), (158, 0))
 image_formula_latex_column = sg.Image(filename="result.png", key="image_formula_latex", right_click_menu=click_menu[lang])
 
 #####   Tab Group #####
 
-main_column_Tabs = sg.TabGroup([[
-    sg.Tab(normal[lang], normal_layout, font=FONT, key="normal"),
-    sg.Tab(limit[lang], limit_layout, font=FONT, key="limit"),
+main_column_left_tabs = sg.TabGroup([[
+    sg.Tab(normal[lang], normal_layout, key="normal")]], font=FONT, expand_x=True, expand_y=True)
+
+main_column_right_tabs = sg.TabGroup([[
+    sg.Tab(limit[lang], limit_layout, key="limit", font=FONT),
     sg.Tab(sigma[lang], sigma_layout, key="sigma", font=FONT),
     sg.Tab(diff[lang], differential_layout, key="diff", font=FONT),
-    sg.Tab(integral[lang], integral_layout, key="integral", font=FONT)
+    sg.Tab(integral[lang], integral_layout, key="integral", font=FONT),
+    sg.Tab(matrix[lang], matrix_layout, key="matrix", font=FONT)
     ]], font=FONT, expand_x=True, expand_y=True)
 
 #####   Output  #####
-multiline_formula_tex = sg.Output(key='multiline_formula_tex', font=FONT_tex, pad=((0, 0), (0, 0)), size=(100, 5), expand_x=True, expand_y=True)
+multiline_formula_tex = sg.Multiline(key='output_tex', font=FONT_tex, pad=((0, 0), (0, 0)), size=(100, 5), expand_x=True, expand_y=True)
 output_frame = sg.Frame(output_frame_title[lang], [[multiline_formula_tex]], expand_x=True, expand_y=True)
 
 #レイアウト
 layout = [ [output_frame], 
-            [main_column_Tabs],
-            [sg.Column([[image_formula_latex_column]], size=(800, 426), justification='center', scrollable=True)]]
+            [main_column_left_tabs, main_column_right_tabs],
+            [sg.Button("Debug", font=FONT, key="integral")],
+            [sg.Button("Limit", font=FONT, key="limit_btn"), sg.Button("Integral", font=FONT, key="integral_btn")],
+            [sg.Column([[image_formula_latex_column]], size=(800, 426), justification='center', scrollable=True)]
+            ]
 
-window = sg.Window(title[lang], layout, icon="", resizable=True, finalize=True)
+window = sg.Window(title[lang], layout, icon="", use_default_focus=False, resizable=True, finalize=True)
 
 # -------------------------------------
 #           イベント毎の処理
 # -------------------------------------
 while True:
 
-    event, values = window.read()#type:ignore
+    event, values = window.read() #type:ignore
 
-    if event == sg.WIN_CLOSED or event == 'Exit':
+    if event == sg.WIN_CLOSED:
         break
-    elif event == 'integrate':
+    elif event == "integral_btn":
         #式
         y= sympy.E ** (-2 * x) * sympy.sin(3 * x) #type:ignore
         result_tex = sympy.latex((sympy.integrate(y, x)).doit())
 
         F2 = x ** 5 + x + 1 # 高次式
-        result_tex = sympy.latex((sympy.solve(F2, x)))
+        tex_result = sympy.latex((sympy.solve(F2, x)))
 
         #tex
         if multiline_formula_tex.do_not_clear == None:
-            window["multiline_formula_tex"].print(" + ", result_tex) #type:ignore
-        else: window["multiline_formula_tex"].print(result_tex) #type:ignore
-        #Latex
-        #-1個しか表示されない
-        print("途中式は、 ", values["multiline_formula_tex"], " です。")
+            print(" + ", tex_result) 
+        else: print(tex_result)
 
         ##積分定数は加えずに表示
-        latex_result = r"""$${result_tex}$$""".format(result_tex=result_tex)
+        latex_result = r"""$${tex}$$""".format(tex=tex_result)
         image_result = sympy.preview(latex_result, viewer="file", filename="result.png", euler=False, dvioptions=["-T", "tight", "-z", "0", "--truecolor", "-D 600"])
         print(latex_result)
+
+        window["output_tex"].print(tex_result) #type:ignore
+        print("途中式は、 ", values["output_tex"], " です。")
 
         #How to update the image at the sg.Image
         #window["image_formula_latex"].bind(image_result)  # type: ignore
@@ -83,13 +87,14 @@ while True:
         #tex
         window["multiline_formula_tex"].print(r)  # type: ignore
 
-    elif event == 'limit':
+    elif event == 'limit_btn':
+        print("pressed it")
         y = sympy.sin(x ** 2) / (E ** (-x) + 1)
-        result_tex = sympy.latex(sympy.integrate(y, (x, -(Pi / 2), Pi / 2)).doit())
-        latex_result = r"""$${result_tex}$$""".format(result_tex=result_tex)
+        tex_result = sympy.latex(sympy.integrate(y, (x, -(Pi / 2), Pi / 2)).doit())
+        latex_result = r"""$${tex}$$""".format(tex=tex_result)
         image_result = sympy.preview(latex_result, viewer="file", filename="result.png", euler=False, dvioptions=["-T", "tight", "-z", "0", "--truecolor", "-D 600"])
         print(latex_result)
         #tex
-        window["multiline_formula_tex"].print(result_tex) #type:ignore
+        window["output_tex"].print(tex_result) #type:ignore
 
 window.close()
