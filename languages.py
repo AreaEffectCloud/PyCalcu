@@ -13,6 +13,7 @@ output_frame_title = { 'en':str('Output'), 'ja':str('出力') }
 
 #Tab title
 normal = { 'en':str('Normal'), 'ja':str('一般')}
+alphabet = { 'en':str('Alphabet'), 'ja':str('アルファベット')}
 limit = { 'en':str('Limit'), 'ja':str('極限')}
 sigma = { 'en':str('Sigma'), 'ja':str('数列')}
 diff = { 'en':str('Differential'), 'ja':str('微分')}

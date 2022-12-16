@@ -15,53 +15,43 @@ oo = sympy.oo #無限大
 FONT = ('HGS明朝B', 15)
 FONT_tex = ('HGS明朝B', 13)
 COLOR = ('white')
+SIZE = (4,1)
 
-##### Main Left Layout #####
-
-#btns_1 = ["sin", "x", "log", "ln"]
-#btns_2 = ["cos", "y", "7", "4", "1", "+/-"]
-#btns_3 = ["tan", "z", "8", "5", "2", "0"]
-#btns_4 = ["π", "ω", "9", "6", "3", "e"]
-
+##### Main / Left Layout #####
+#Normal
 btns_1 = ["sin", "cos", "tan", " π "]
-btns_2 = [" x ", " y ", " z ", " ω "]
-btns_3 = ["^", "7", "8", "9"]
-btns_4 = ["∞", "4", "5", "6"]
-btns_5 = ["log", "1", "2", "3"]
-btns_6 = ["ln", "0", "( )", "AC"]
+btns_2 = [" x ", " y ", " z ", " θ "]
+btns_3 = [" ^ ", " 7 ", " 8 ", " 9 "]
+btns_4 = [" ∞ ", " 4 ", " 5 ", " 6 "]
+btns_5 = ["log", " 1 ", " 2 ", " 3 "]
+btns_6 = [" ln ", " 0 ", "( )", " AC "]
 
-one_layout = [
-    [sg.Button(f'{i}', font=FONT) for i in btns_1]
-]
-two_layout = [
-    [sg.Button(f'{i}', font=FONT) for i in btns_2]
-]
-three_layout = [
-    [sg.Button(f'{i}', font=FONT) for i in btns_3]
-]
-four_layout = [
-    [sg.Button(f'{i}', font=FONT) for i in btns_4]
-]
-five_layout = [
-    [sg.Button(f'{i}', font=FONT) for i in btns_5]
-]
-six_layout = [
-    [sg.Button(f'{i}', font=FONT) for i in btns_6]
-]
-
+btns = [btns_1, btns_2, btns_3, btns_4, btns_5, btns_6]
 normal_layout = [
     #列ごとに設定する
-    [sg.Column(one_layout, background_color=COLOR)],
-    [sg.Column(two_layout, background_color=COLOR)],
-    [sg.Column(three_layout, background_color=COLOR)],
-    [sg.Column(four_layout, background_color=COLOR)],
-    [sg.Column(five_layout, background_color=COLOR)],
-    [sg.Column(six_layout, background_color=COLOR)], 
+    [sg.Button(f'{i}', font=FONT, size=SIZE) for i in btns_horizon] for btns_horizon in btns
 ]
 
-##### Tab Layout #####
+#Alphabet
+btns_1 = [" a ", " b ", " c ", " d "]
+btns_2 = [" e ", " f ", " g ", " h "]
+btns_3 = [" i ", " j ", " k ", " l "]
+btns_4 = [" m ", " n ", " o ", " p "]
+btns_5 = [" q ", " r ", " s ", " t "]
+btns_6 = [" u ", " v ", " w "]
+
+btns_al = [btns_1, btns_2, btns_3, btns_4, btns_5, btns_6]
+alphabet_layout = [
+    [sg.Button(f'{i}', font=FONT, size=SIZE) for i in btns_horizon] for btns_horizon in btns_al
+]
+
+##### Main / Right Layout #####
 limit_layout = [[]]
 sigma_layout = [[]]
 differential_layout = [[]]
 integral_layout = [[]]
-matrix_layout = [[]]
+
+#Matrix
+matrix_layout = [
+    [sg.Button("＋", enable_events=True, pad=(65, 5), font=FONT, size=SIZE, key="plus_vertical")],
+    [sg.Button("＋", enable_events=True, font=FONT, size=SIZE, key="plus_horizon"), sg.Input(font=FONT, size=SIZE)]]

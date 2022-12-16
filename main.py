@@ -6,18 +6,18 @@ from languages import *
 
 sg.theme("Reddit")
 
-## load a config.json file
+## load a config.json file | Get setting of language
 config = get_json("static/config.json")
-#Get setting of language
 lang = config['user']['language']
 
 #####   #####   GUI Layout  #####  #####
 image_formula_latex_column = sg.Image(filename="result.png", key="image_formula_latex", right_click_menu=click_menu[lang])
 
 #####   Tab Group #####
-
 main_column_left_tabs = sg.TabGroup([[
-    sg.Tab(normal[lang], normal_layout, key="normal")]], font=FONT, expand_x=True, expand_y=True)
+    sg.Tab(normal[lang], normal_layout, key="normal"),
+    sg.Tab(alphabet[lang], alphabet_layout, key="alphabet")
+    ]], font=FONT),
 
 main_column_right_tabs = sg.TabGroup([[
     sg.Tab(limit[lang], limit_layout, key="limit", font=FONT),
@@ -25,7 +25,7 @@ main_column_right_tabs = sg.TabGroup([[
     sg.Tab(diff[lang], differential_layout, key="diff", font=FONT),
     sg.Tab(integral[lang], integral_layout, key="integral", font=FONT),
     sg.Tab(matrix[lang], matrix_layout, key="matrix", font=FONT)
-    ]], font=FONT, expand_x=True, expand_y=True)
+    ]], font=FONT)
 
 #####   Output  #####
 multiline_formula_tex = sg.Multiline(key='output_tex', font=FONT_tex, pad=((0, 0), (0, 0)), size=(100, 5), expand_x=True, expand_y=True)
@@ -44,12 +44,25 @@ window = sg.Window(title[lang], layout, icon="", use_default_focus=False, resiza
 # -------------------------------------
 #           イベント毎の処理
 # -------------------------------------
+##縦と横
+vertical = 1
+horizon = 1
 while True:
 
     event, values = window.read() #type:ignore
 
     if event == sg.WIN_CLOSED:
         break
+    #Matrix, add input box
+    elif event == "plus_horizon": #横
+        if horizon < 11:
+            window.extend_layout(window['-matrix_horizon-'], new_horizon_layout(horizon))
+            i += 1
+    elif event == "plus_vertical": #縦
+        if vertical < 11:
+            window.extend_layout(window['-matrix_vertical-'], new_vertical_layout(vertical))
+            i += 1
+               
     elif event == "integral_btn":
         #式
         y= sympy.E ** (-2 * x) * sympy.sin(3 * x) #type:ignore
@@ -73,19 +86,6 @@ while True:
 
         #How to update the image at the sg.Image
         #window["image_formula_latex"].bind(image_result)  # type: ignore
-
-    #
-    #        DANGEROUS CODE HERE !!!!!!!!!!!!!!!
-    #    
-    elif event == 'sigma':
-        r = 0
-        for K in range(10000):
-            r += (sympy.N(sympy.sin(sympy.Rational(K, 10000).doit()), 50))
-
-        image_result = sympy.preview(r, viewer="file", filename="result.png", euler=False, dvioptions=["-T", "tight", "-z", "0", "--truecolor", "-D 600"])
-        print(r)
-        #tex
-        window["multiline_formula_tex"].print(r)  # type: ignore
 
     elif event == 'limit_btn':
         print("pressed it")

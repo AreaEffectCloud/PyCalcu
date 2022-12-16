@@ -9,7 +9,11 @@ def get_json(path):
        f = json.load(json_file)
     return f
 
-# Ex. {'user': [{'language': 'en', 'tex_multiline': 'True'}]
+def new_horizon_layout(i):
+    return [[]]
+
+def new_vertical_layout(i):
+    return [[]]
 
 #LiteralString -> r"""$${result_tex}$$"""
 #def autosize_latex(LiteralString):
