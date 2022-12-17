@@ -33,6 +33,7 @@ output_frame = sg.Frame(output_frame_title[lang], [[multiline_formula_tex]], exp
 
 #レイアウト
 layout = [ [output_frame], 
+            #横に配置されない -> ボタンじゃなくコラムにすればいける？ 
             [main_column_left_tabs, main_column_right_tabs],
             [sg.Button("Debug", font=FONT, key="integral")],
             [sg.Button("Limit", font=FONT, key="limit_btn"), sg.Button("Integral", font=FONT, key="integral_btn")],
