@@ -34,7 +34,7 @@ output_frame = sg.Frame(output_frame_title[lang], [[multiline_formula_tex]], fon
 #レイアウト
 layout = [ [output_frame], 
             [main_column_left_tabs, main_column_right_tabs],
-            [sg.Button("Limit", font=FONT, key="limit_btn"), sg.Button("Integral", font=FONT, key="integral_btn")],
+            #[sg.Button("Limit", font=FONT, key="limit_btn"), sg.Button("Integral", font=FONT, key="integral_btn")],
             #[sg.Column([[image_formula_latex_column]], size=(800, 426), justification='center', scrollable=True)]
             ]
 

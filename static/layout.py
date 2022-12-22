@@ -54,5 +54,7 @@ integral_layout = [[]]
 
 #Matrix
 matrix_layout = [
+    [sg.Column([
     [sg.Button("＋", enable_events=True, pad=(65, 5), font=FONT, size=SIZE, key="plus_vertical")],
-    [sg.Button("＋", enable_events=True, font=FONT, size=SIZE, key="plus_horizon"), sg.Input(font=FONT, size=SIZE)]]
+    [sg.Button("＋", enable_events=True, font=FONT, size=SIZE, key="plus_horizon"), sg.Input(font=FONT, size=SIZE)]])]
+]
