@@ -30,22 +30,6 @@ print(DIy)
 F10 = 2*x + 2*y + 6*z + 3
 F11 =   x +   y - 2*z - 7
 F12 = 5*x - 9*y + 2*z - 15
-print(sympy.solve([F10, F11, F12], [x, y, z]), "\n")
-
-F1 = x * x + 2 * x + 1 # 普通にシンボルを演算するだけ
-F2 = x ** 5 + x + 1 # 高次式
-F3 = (x + 2) * (x - 1) / ((x - 2) * (x - 2)) # 有理関数
-F4 = sympy.cos(Pi * x) # 三角関数
-F5 = sympy.exp(x) / sympy.Pow(x, 10) # 指数関数とべき乗
-F6 = sympy.log(x * x + 1) # 対数関数
-F7 = (x + y) ** 3 # 2変数関数
-F8 = (x + y + z / 2) ** 4 # 多変数関数
-
-print(sympy.latex((F1*F2*F3+F4)/(F5*F6/F7+F8)))
-
-F10 = 2*x + 2*y + 6*z + 3
-F11 =   x +   y - 2*z - 7
-F12 = 5*x - 9*y + 2*z - 15
 print(sympy.solve([F10, F11, F12], [x, y, z]))
 
 X = x * x + y * y - 1
@@ -61,5 +45,13 @@ result = r"""$$
 - \frac{2 e^{- 2 x} \sin{\left(3 x \right)}}{13} - \frac{3 e^{- 2 x} \cos{\left(3 x \right)}}{13} +C
 $$"""
 wave = r"""$$\frac{\partial^2 u}{\partial t^2}=c^2\left(\frac{\partial^2 u}{\partial x^2}+\frac{\partial^2 u}{\partial y^2}\right)$$"""
-sympy.preview(result, viewer="file", filename="result.png", euler=False,
+sympy.preview(wave, viewer="file", filename="result.png", euler=False,
                 dvioptions=["-T", "tight", "-z", "0", "--truecolor", "-D 600"])
+
+tex__ = sympy.log(100)
+tex = sympy.ln(100)
+latex = r"""$${tex}$$""".format(tex=tex)
+print(tex__, latex)
+
+sympy.preview(latex, viewer="file", filename="result.png", euler=False, 
+                        dvioptions=["-T", "tight", "-z", "0", "--truecolor", "-D 600"])

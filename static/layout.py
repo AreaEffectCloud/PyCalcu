@@ -14,39 +14,40 @@ oo = sympy.oo #無限大
 #Setting of Button
 FONT = ('HGS明朝B', 15)
 FONT_tex = ('HGS明朝B', 13)
+FONT_output = ('HGS明朝B', 13)
 COLOR = ('white')
 SIZE = (4,1)
 
 ##### Main / Left Layout #####
 #Normal
-btns_1 = ["sin", "cos", "tan", " π "]
-btns_2 = [" x ", " y ", " z ", " θ "]
-btns_3 = [" ^ ", " 7 ", " 8 ", " 9 "]
-btns_4 = [" ∞ ", " 4 ", " 5 ", " 6 "]
-btns_5 = ["log", " 1 ", " 2 ", " 3 "]
-btns_6 = [" ln ", " 0 ", "( )", " AC "]
+btns_1 = [" π ", "sin", "cos", "tan"]
+btns_2 = [" θ "]
+btns_3 = [" ^ ", " 7 ", " 8 ", " 9 ", " ÷ "]
+btns_4 = ["log", " 4 ", " 5 ", " 6 ", " × "]
+btns_5 = [" ln ", " 1 ", " 2 ", " 3 ", " - "]
+btns_6 = [" ∞ ", " 0 ", "( )", " AC ", " + "]
 
 btns = [btns_1, btns_2, btns_3, btns_4, btns_5, btns_6]
 normal_layout = [
     #列ごとに設定する
-    [sg.Button(f'{i}', font=FONT, size=SIZE) for i in btns_horizon] for btns_horizon in btns
+    [sg.Column([sg.Button(f'{i}', font=FONT, size=SIZE) for i in btns_horizon] for btns_horizon in btns)]
 ]
 
 #Alphabet
-btns_1 = [" a ", " b ", " c ", " d "]
-btns_2 = [" e ", " f ", " g ", " h "]
-btns_3 = [" i ", " j ", " k ", " l "]
-btns_4 = [" m ", " n ", " o ", " p "]
-btns_5 = [" q ", " r ", " s ", " t "]
-btns_6 = [" u ", " v ", " w "]
+btns_1 = [" a ", " b ", " c ", " d ", " α "]
+btns_2 = [" e ", " f ", " g ", " h ", " β "]
+btns_3 = [" i ", " j ", " k ", " l ", " ζ "]
+btns_4 = [" m ", " n ", " o ", " p ", " δ" ]
+btns_5 = [" q ", " r ", " s ", " t ", " ω "]
+btns_6 = [" u ", " v ", " w ", " x ", " y "]
 
 btns_al = [btns_1, btns_2, btns_3, btns_4, btns_5, btns_6]
 alphabet_layout = [
-    [sg.Button(f'{i}', font=FONT, size=SIZE) for i in btns_horizon] for btns_horizon in btns_al
+    [sg.Column([sg.Button(f'{i}', font=FONT, size=SIZE) for i in btns_horizon] for btns_horizon in btns_al)]
 ]
 
 ##### Main / Right Layout #####
-limit_layout = [[]]
+limit_layout = [[sg.Text("Sorry, but it isn't work on.",visible=True)]]
 sigma_layout = [[]]
 differential_layout = [[]]
 integral_layout = [[]]

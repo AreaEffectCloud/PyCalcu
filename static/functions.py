@@ -10,6 +10,7 @@ def get_json(path):
     return f
 
 def new_horizon_layout(i):
+    #matchで縦(横)の数ごとに増やす
     return [[]]
 
 def new_vertical_layout(i):

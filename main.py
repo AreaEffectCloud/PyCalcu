@@ -17,7 +17,7 @@ image_formula_latex_column = sg.Image(filename="result.png", key="image_formula_
 main_column_left_tabs = sg.TabGroup([[
     sg.Tab(normal[lang], normal_layout, key="normal"),
     sg.Tab(alphabet[lang], alphabet_layout, key="alphabet")
-    ]], font=FONT),
+    ]], font=FONT, expand_x=True, expand_y=True)
 
 main_column_right_tabs = sg.TabGroup([[
     sg.Tab(limit[lang], limit_layout, key="limit", font=FONT),
@@ -25,17 +25,15 @@ main_column_right_tabs = sg.TabGroup([[
     sg.Tab(diff[lang], differential_layout, key="diff", font=FONT),
     sg.Tab(integral[lang], integral_layout, key="integral", font=FONT),
     sg.Tab(matrix[lang], matrix_layout, key="matrix", font=FONT)
-    ]], font=FONT)
+    ]], font=FONT, expand_x=True, expand_y=True)
 
 #####   Output  #####
 multiline_formula_tex = sg.Multiline(key='output_tex', font=FONT_tex, pad=((0, 0), (0, 0)), size=(100, 5), expand_x=True, expand_y=True)
-output_frame = sg.Frame(output_frame_title[lang], [[multiline_formula_tex]], expand_x=True, expand_y=True)
+output_frame = sg.Frame(output_frame_title[lang], [[multiline_formula_tex]], font=FONT_output,expand_x=True, expand_y=True)
 
 #レイアウト
 layout = [ [output_frame], 
-            #横に配置されない -> ボタンじゃなくコラムにすればいける？ 
             [main_column_left_tabs, main_column_right_tabs],
-            [sg.Button("Debug", font=FONT, key="integral")],
             [sg.Button("Limit", font=FONT, key="limit_btn"), sg.Button("Integral", font=FONT, key="integral_btn")],
             #[sg.Column([[image_formula_latex_column]], size=(800, 426), justification='center', scrollable=True)]
             ]
@@ -63,7 +61,7 @@ while True:
         if vertical < 11:
             window.extend_layout(window['-matrix_vertical-'], new_vertical_layout(vertical))
             i += 1
-               
+   
     elif event == "integral_btn":
         #式
         y= sympy.E ** (-2 * x) * sympy.sin(3 * x) #type:ignore
