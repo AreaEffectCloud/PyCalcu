@@ -36,10 +36,11 @@ normal_layout = [
 ]
 
 #Functions
-btns_1 = [" e ", " π ", "sin", "cos", "tan"]
-btns_2 = [" θ ", " ω ", "asin", "acos", "atan"]
-btns_3 = [" α ", " β ", " γ ", "δ", "ε"]
-btns_4 = [" ζ ", " λ ", " μ ", " ρ ", " φ "]
+btns_1 = ["sin", "cos", "tan", "asin", "acos"]
+btns_2 = ["atan", " α ", " β ", " γ ", "δ"]
+btns_3 = [" ε ", " ζ ", " η ", " ι ", " κ "]
+btns_4 = [" λ ", " μ ", " ξ ", " ρ ", " σ "]
+btns_5 = [" τ ", " υ ", " φ ", " χ ", " ψ "]
 
 btns = [btns_1, btns_2, btns_3, btns_4, btns_5]
 function_layout = [
