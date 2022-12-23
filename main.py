@@ -9,8 +9,9 @@ sg.theme("Reddit")
 ## load a config.json file | Get setting of language
 config = get_json("static/config.json")
 lang = config['user']['language']
+##### ##### Layout  #####  #####
 
-#####   #####   GUI Layout  #####  #####
+#must resize
 image_formula_latex_column = sg.Image(filename="result.png", key="image_formula_latex", right_click_menu=click_menu[lang])
 
 #####   Tab Group #####
@@ -28,13 +29,12 @@ main_column_right_tabs = sg.TabGroup([[
     ]], font=FONT, expand_x=True, expand_y=True)
 
 #####   Output  #####
-multiline_formula_tex = sg.Multiline(key='output_tex', font=FONT_tex, pad=((0, 0), (0, 0)), size=(100, 5), expand_x=True, expand_y=True)
+multiline_formula_tex = sg.Output(key='output_tex', font=FONT_tex, pad=((0, 0), (0, 0)), size=(100, 5), expand_x=True, expand_y=True)
 output_frame = sg.Frame(output_frame_title[lang], [[multiline_formula_tex]], font=FONT_output,expand_x=True, expand_y=True)
 
 #レイアウト
 layout = [ [output_frame], 
             [main_column_left_tabs, main_column_right_tabs],
-            #[sg.Button("Limit", font=FONT, key="limit_btn"), sg.Button("Integral", font=FONT, key="integral_btn")],
             #[sg.Column([[image_formula_latex_column]], size=(800, 426), justification='center', scrollable=True)]
             ]
 
@@ -62,7 +62,7 @@ while True:
             window.extend_layout(window['-matrix_vertical-'], new_vertical_layout(vertical))
             i += 1
    
-    elif event == "integral_btn":
+    elif event == "integral_btn": #蛇足
         #式
         y= sympy.E ** (-2 * x) * sympy.sin(3 * x) #type:ignore
         result_tex = sympy.latex((sympy.integrate(y, x)).doit())
@@ -78,13 +78,10 @@ while True:
         ##積分定数は加えずに表示
         latex_result = r"""$${tex}$$""".format(tex=tex_result)
         image_result = sympy.preview(latex_result, viewer="file", filename="result.png", euler=False, dvioptions=["-T", "tight", "-z", "0", "--truecolor", "-D 600"])
-        print(latex_result)
+        print(f're'.format(result_tex))
 
         window["output_tex"].print(tex_result) #type:ignore
         print("途中式は、 ", values["output_tex"], " です。")
-
-        #How to update the image at the sg.Image
-        #window["image_formula_latex"].bind(image_result)  # type: ignore
 
     elif event == 'limit_btn':
         print("pressed it")

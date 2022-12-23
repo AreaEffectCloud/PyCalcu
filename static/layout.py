@@ -12,11 +12,14 @@ oo = sympy.oo #無限大
 (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z) = sympy.symbols('a b c d e f g h i j k l m n o p q r s t u v w x y z')
 
 #Setting of Button
+INPUT_FONT = ('HGS明朝B', 25)
+BTNS_FONT = ('HGS明朝B', 20)
 FONT = ('HGS明朝B', 15)
 FONT_tex = ('HGS明朝B', 13)
 FONT_output = ('HGS明朝B', 13)
 COLOR = ('white')
 SIZE = (4,1)
+SPACE = (0, 1)
 
 ##### Main / Left Layout #####
 #Normal
@@ -24,13 +27,13 @@ btns_1 = [" π ", "sin", "cos", "tan"]
 btns_2 = [" θ "]
 btns_3 = [" ^ ", " 7 ", " 8 ", " 9 ", " ÷ "]
 btns_4 = ["log", " 4 ", " 5 ", " 6 ", " × "]
-btns_5 = [" ln ", " 1 ", " 2 ", " 3 ", " - "]
+btns_5 = [" √ ", " 1 ", " 2 ", " 3 ", " - "]
 btns_6 = [" ∞ ", " 0 ", "( )", " AC ", " + "]
 
 btns = [btns_1, btns_2, btns_3, btns_4, btns_5, btns_6]
 normal_layout = [
     #列ごとに設定する
-    [sg.Column([sg.Button(f'{i}', font=FONT, size=SIZE) for i in btns_horizon] for btns_horizon in btns)]
+    [sg.Column([sg.Button(f'{i}', font=BTNS_FONT, size=SIZE, disabled=False) for i in btns_horizon] for btns_horizon in btns)]
 ]
 
 #Alphabet
@@ -43,11 +46,28 @@ btns_6 = [" u ", " v ", " w ", " x ", " y "]
 
 btns_al = [btns_1, btns_2, btns_3, btns_4, btns_5, btns_6]
 alphabet_layout = [
-    [sg.Column([sg.Button(f'{i}', font=FONT, size=SIZE) for i in btns_horizon] for btns_horizon in btns_al)]
+    [sg.Column([sg.Button(f'{i}', font=BTNS_FONT, size=SIZE) for i in btns_horizon] for btns_horizon in btns_al)]
 ]
 
 ##### Main / Right Layout #####
-limit_layout = [[sg.Text("Sorry, but it isn't work on.",visible=True)]]
+left = [
+    [sg.Column([[sg.Image(filename="images/limit.png")]], background_color=COLOR, vertical_alignment='c')],
+    [sg.Input("", font=INPUT_FONT, size=SIZE, key="lim_start"), 
+     sg.Text("→", font=INPUT_FONT, text_color=('Black'), background_color=COLOR),
+     sg.Input("", font=INPUT_FONT, size=SIZE, key="limit_end",)]
+]
+right = [
+    [sg.Text("  ", font=INPUT_FONT)],
+    [sg.Text("  ", font=INPUT_FONT, size=SPACE)],
+    [sg.Multiline("", font=INPUT_FONT, size=(20, 2))],
+    [sg.Text("  ", font=INPUT_FONT, size=SIZE)],
+    [sg.Text("  ", font=INPUT_FONT, size=SIZE)],
+]
+limit_layout = [
+    [sg.Column(left, element_justification='c', vertical_alignment='center', background_color=COLOR),
+     sg.Column(right, background_color=COLOR)]
+]
+
 sigma_layout = [[]]
 differential_layout = [[]]
 integral_layout = [[]]
