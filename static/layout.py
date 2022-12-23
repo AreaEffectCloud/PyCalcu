@@ -54,14 +54,18 @@ left = [
     [sg.Column([[sg.Image(filename="images/limit.png")]], background_color=COLOR, vertical_alignment='c')],
     [sg.Input("", font=INPUT_FONT, size=SIZE, key="lim_start"), 
      sg.Text("→", font=INPUT_FONT, text_color=('Black'), background_color=COLOR),
-     sg.Input("", font=INPUT_FONT, size=SIZE, key="limit_end",)]
+     sg.Input("", font=INPUT_FONT, size=SIZE, key="limit_end",)],
+    [sg.Button("Add", font=FONT, size=SIZE, key="add_limit"), 
+     sg.Button("Clear", font=FONT, key="delete_limit")]
 ]
 right = [
+    #上部分の調整
     [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
-    [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
+    [sg.Text("  ", background_color=COLOR, font=BTNS_FONT)],
     [sg.Multiline("", font=INPUT_FONT, size=(20, 2))],
-    [sg.Text("  ", background_color=COLOR)],
-    [sg.Text("  ", background_color=COLOR)],
+    #Tab内のサイズを調整
+    [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
+    [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
 ]
 limit_layout = [
     [sg.Column(left, element_justification='c', vertical_alignment='center', background_color=COLOR),
