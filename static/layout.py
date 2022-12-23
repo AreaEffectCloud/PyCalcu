@@ -23,34 +23,37 @@ SPACE = (0, 1)
 
 ##### Main / Left Layout #####
 #Normal
-btns_1 = [" π ", "sin", "cos", "tan"]
-btns_2 = [" θ "]
-btns_3 = [" ^ ", " 7 ", " 8 ", " 9 ", " ÷ "]
-btns_4 = ["log", " 4 ", " 5 ", " 6 ", " × "]
-btns_5 = [" √ ", " 1 ", " 2 ", " 3 ", " - "]
-btns_6 = [" ∞ ", " 0 ", "( )", " AC ", " + "]
+btns_2 = [" x² ", " e ", " π ", " θ ", " ∞ "]
+btns_3 = [" √ ", " 7 ", " 8 ", " 9 ", " ÷ "]
+btns_4 = [" ^ ", " 4 ", " 5 ", " 6 ", " × "]
+btns_5 = ["log", " 1 ", " 2 ", " 3 ", " - "]
+btns_6 = [" AC ", " 0 ", " ( ", " ) ", " + "]
 
-btns = [btns_1, btns_2, btns_3, btns_4, btns_5, btns_6]
+btns = [btns_2, btns_3, btns_4, btns_5, btns_6]
 normal_layout = [
     #列ごとに設定する
     [sg.Column([sg.Button(f'{i}', font=BTNS_FONT, size=SIZE, disabled=False) for i in btns_horizon] for btns_horizon in btns)]
 ]
 
 #Functions
+btns_1 = [" e ", " π ", "sin", "cos", "tan"]
+btns_2 = [" θ ", " ω ", "asin", "acos", "atan"]
+btns_3 = [" α ", " β ", " γ ", "δ", "ε"]
+btns_4 = [" ζ ", " λ ", " μ ", " ρ ", " φ "]
 
+btns = [btns_1, btns_2, btns_3, btns_4, btns_5]
 function_layout = [
-    []
+    [sg.Column([sg.Button(f'{i}', font=BTNS_FONT, size=SIZE, disabled=False) for i in btns_horizon] for btns_horizon in btns)]
 ]
 
 #Alphabet
-btns_1 = [" a ", " b ", " c ", " d ", " α "]
-btns_2 = [" e ", " f ", " g ", " h ", " β "]
-btns_3 = [" i ", " j ", " k ", " l ", " ζ "]
-btns_4 = [" m ", " n ", " o ", " p ", " δ" ]
-btns_5 = [" q ", " r ", " s ", " t ", " ω "]
-btns_6 = [" u ", " v ", " w ", " x ", " y "]
+btns_1 = [" a ", " b ", " c ", " d ", " f "]
+btns_2 = [" g ", " h ", " i ", " j ", " k "]
+btns_3 = [" l ", " m ", " n ", " o ", " p "]
+btns_4 = [" q ", " r ", " s ", " t ", " u "]
+btns_5 = [" v ", " w ", " x ", " y ", " z "]
 
-btns_al = [btns_1, btns_2, btns_3, btns_4, btns_5, btns_6]
+btns_al = [btns_1, btns_2, btns_3, btns_4, btns_5]
 alphabet_layout = [
     [sg.Column([sg.Button(f'{i}', font=BTNS_FONT, size=SIZE) for i in btns_horizon] for btns_horizon in btns_al)]
 ]
