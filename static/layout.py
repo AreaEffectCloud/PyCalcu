@@ -57,11 +57,11 @@ left = [
      sg.Input("", font=INPUT_FONT, size=SIZE, key="limit_end",)]
 ]
 right = [
-    [sg.Text("  ", font=INPUT_FONT)],
-    [sg.Text("  ", font=INPUT_FONT, size=SPACE)],
+    [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
+    [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
     [sg.Multiline("", font=INPUT_FONT, size=(20, 2))],
-    [sg.Text("  ", font=INPUT_FONT, size=SIZE)],
-    [sg.Text("  ", font=INPUT_FONT, size=SIZE)],
+    [sg.Text("  ", background_color=COLOR)],
+    [sg.Text("  ", background_color=COLOR)],
 ]
 limit_layout = [
     [sg.Column(left, element_justification='c', vertical_alignment='center', background_color=COLOR),
