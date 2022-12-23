@@ -36,6 +36,12 @@ normal_layout = [
     [sg.Column([sg.Button(f'{i}', font=BTNS_FONT, size=SIZE, disabled=False) for i in btns_horizon] for btns_horizon in btns)]
 ]
 
+#Functions
+
+function_layout = [
+    []
+]
+
 #Alphabet
 btns_1 = [" a ", " b ", " c ", " d ", " α "]
 btns_2 = [" e ", " f ", " g ", " h ", " β "]

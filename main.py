@@ -17,6 +17,7 @@ image_formula_latex_column = sg.Image(filename="result.png", key="image_formula_
 #####   Tab Group #####
 main_column_left_tabs = sg.TabGroup([[
     sg.Tab(normal[lang], normal_layout, key="normal"),
+    sg.Tab(function[lang], function_layout, key="function"),
     sg.Tab(alphabet[lang], alphabet_layout, key="alphabet")
     ]], font=FONT, expand_x=True, expand_y=True)
 
