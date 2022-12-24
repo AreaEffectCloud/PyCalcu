@@ -77,8 +77,8 @@ right = [
     [sg.Multiline("", font=INPUT_FONT, size=(20, 2))],
     #Tab内のサイズを調整
     [sg.Text("  ", background_color=COLOR, font=FONT)],
-    [sg.Button("Add", font=FONT, size=SIZE, key="add_limit"), 
-     sg.Button("Clear", font=FONT, key="delete_limit")]
+    [sg.Button("Add", font=BTNS_FONT, size=SIZE, key="add_limit"), 
+     sg.Button("Clear", font=BTNS_FONT, key="delete_limit")]
 ]
 limit_layout = [
     [sg.Column(left, element_justification='c', vertical_alignment='center', background_color=COLOR),
@@ -97,8 +97,8 @@ right = [
     [sg.Text("  ", background_color=COLOR, font=BTNS_FONT)],
     [sg.Multiline("", font=INPUT_FONT, size=(20, 2))],
     [sg.Text("  ", background_color=COLOR, font=FONT)],
-    [sg.Button("Add", font=FONT, size=SIZE, key="add_sum"), 
-     sg.Button("Clear", font=FONT, key="delete_sum")]
+    [sg.Button("Add", font=BTNS_FONT, size=SIZE, key="add_sum"), 
+     sg.Button("Clear", font=BTNS_FONT, key="delete_sum")]
 ]
 sigma_layout = [
     [sg.Column(left, element_justification='c', vertical_alignment='center', background_color=COLOR),
@@ -115,16 +115,15 @@ left = [
 right = [
     [sg.Column([
         [sg.Combo(values=['x', 'y', 't', 'v'], default_value='x', size=(1, 1), readonly=True, 
-        font=INPUT_FONT, background_color=COLOR, key="diff_select", enable_events=True)],
+        font=('HGS明朝B', 40), background_color=COLOR, key="diff_select", enable_events=True)],
         ], background_color=COLOR, vertical_alignment='c'),
      sg.Column([
         [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
         [sg.Text("  ", background_color=COLOR, font=BTNS_FONT)],
         [sg.Multiline("", font=INPUT_FONT, size=(20, 2))],
         [sg.Text("  ", background_color=COLOR, font=FONT)],
-        [sg.Button("Add", font=FONT, size=SIZE, key="add_diff"), 
-         sg.Button("Clear", font=FONT, key="delete_diff")],
-        [sg.Text("  ", background_color=COLOR, font=FONT)],
+        [sg.Button("Add", font=BTNS_FONT, size=SIZE, key="add_diff"), 
+         sg.Button("Clear", font=BTNS_FONT, key="delete_diff")],
         ], background_color=COLOR, element_justification='l', vertical_alignment='c')
     ]
 ]
@@ -139,12 +138,12 @@ left = [
         [sg.Image(filename="images/integral.png")],
         ], background_color=COLOR, vertical_alignment='c'),
     sg.Column([
-        [sg.Text(top[lang], background_color=('Gray'), font=FONT_output)],
+        [sg.Text(top[lang], background_color=('Gray'), font=FONT)],
         [sg.Input("", font=INPUT_FONT, size=SIZE, key="integral_end")],
         [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
         [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
         [sg.Input("", font=INPUT_FONT, size=SIZE, key="integral_start")],
-        [sg.Text(bottom[lang], background_color=('Gray'), font=FONT_output)],
+        [sg.Text(bottom[lang], background_color=('Gray'), font=FONT)],
         ], background_color=COLOR, vertical_alignment='c', element_justification='c')
     ]
 ]
@@ -153,9 +152,9 @@ right = [
     [sg.Text("  ", background_color=COLOR, font=BTNS_FONT)],
     [sg.Multiline("", font=INPUT_FONT, size=(20, 2))],
     [sg.Text("  ", background_color=COLOR, font=FONT)],
-    [sg.Button("Add", font=FONT, size=SIZE, key="add_integral"), 
-     sg.Button("Clear", font=FONT, key="delete_integral")],
-    [sg.Text("  ", background_color=COLOR, font=FONT)]
+    [sg.Button("Add", font=BTNS_FONT, size=SIZE, key="add_integral"), 
+     sg.Button("Clear", font=BTNS_FONT, key="delete_integral")],
+    [sg.Text("  ", background_color=COLOR, font=('HGS明朝B', 5))]
 ]
 integral_layout = [
     [sg.Column(left, element_justification='c', vertical_alignment='center', background_color=COLOR),
@@ -163,11 +162,28 @@ integral_layout = [
 ]
 
 #Matrix
+input_boxes = [
+    [sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE), 
+     sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE)],
+    [sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE), 
+     sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE)],
+    [sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE), 
+     sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE),],
+    [sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE), 
+     sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE),],
+    [sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE), 
+     sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE),]
+]
 matrix_layout = [
-    [sg.Column([
-    [sg.Button("＋", enable_events=True, pad=(65, 5), font=FONT, size=SIZE, key="plus_vertical")],
-    [sg.Button("＋", enable_events=True, font=FONT, size=SIZE, key="plus_horizon"), 
-     sg.Column([[sg.Input(font=FONT, size=SIZE), sg.Input(font=FONT, size=SIZE)]], element_justification='l')],
-    [sg.Column([[sg.Input(font=FONT, size=SIZE), sg.Input(font=FONT, size=SIZE)]], vertical_alignment='c')]
-    ])]
+    [sg.Text("  ", background_color=COLOR, font=FONT, size=(8, 1)), 
+     sg.Button("＋", font=FONT, size=SIZE, key="plus_vertical"),
+     sg.Text(rows[lang], background_color=('Gray'), font=FONT)],
+    [sg.Column([[sg.Button("＋", font=FONT, size=SIZE, key="plus_horizon")],
+    [sg.Text(columns[lang], background_color=('Gray'), font=FONT)],
+    ], background_color=COLOR, element_justification='c', vertical_alignment='top'), 
+     sg.Column(input_boxes, background_color=COLOR, element_justification='l', scrollable=False),
+     sg.Column([
+        [sg.Button("Add", font=BTNS_FONT, size=SIZE, key="add_matrix")],
+        [sg.Button("Clear", font=BTNS_FONT, key="delete_matrix")]
+     ], background_color=COLOR, element_justification='l', vertical_alignment='center')]
 ]
