@@ -30,8 +30,8 @@ main_column_right_tabs = sg.TabGroup([[
     ]], font=FONT, expand_x=True, expand_y=True)
 
 #####   Output  #####
-multiline_formula_tex = sg.Output(key='output_tex', font=FONT_tex, pad=((0, 0), (0, 0)), size=(100, 5), expand_x=True, expand_y=True)
-output_frame = sg.Frame(output_frame_title[lang], [[multiline_formula_tex]], font=FONT_output,expand_x=True, expand_y=True)
+multiline_formula_tex = sg.Output(key='output_tex', font=FONT_output, pad=((0, 0), (0, 0)), size=(100, 5), expand_x=True, expand_y=True)
+output_frame = sg.Frame(output_frame_title[lang], [[multiline_formula_tex]], font=FONT_output, expand_x=True)
 
 #レイアウト
 layout = [ [output_frame], 

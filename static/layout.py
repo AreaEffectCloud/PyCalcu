@@ -15,7 +15,6 @@ oo = sympy.oo #無限大
 INPUT_FONT = ('HGS明朝B', 25)
 BTNS_FONT = ('HGS明朝B', 20)
 FONT = ('HGS明朝B', 15)
-FONT_tex = ('HGS明朝B', 13)
 FONT_output = ('HGS明朝B', 13)
 COLOR = ('white')
 SIZE = (4,1)
@@ -60,13 +59,12 @@ alphabet_layout = [
 ]
 
 ##### Main / Right Layout #####
+#Limit
 left = [
     [sg.Column([[sg.Image(filename="images/limit.png")]], background_color=COLOR, vertical_alignment='c')],
     [sg.Input("", font=INPUT_FONT, size=SIZE, key="lim_start"), 
      sg.Text("→", font=INPUT_FONT, text_color=('Black'), background_color=COLOR),
-     sg.Input("", font=INPUT_FONT, size=SIZE, key="limit_end",)],
-    [sg.Button("Add", font=FONT, size=SIZE, key="add_limit"), 
-     sg.Button("Clear", font=FONT, key="delete_limit")]
+     sg.Input("", font=INPUT_FONT, size=SIZE, key="limit_end",)]
 ]
 right = [
     #上部分の調整
@@ -74,21 +72,96 @@ right = [
     [sg.Text("  ", background_color=COLOR, font=BTNS_FONT)],
     [sg.Multiline("", font=INPUT_FONT, size=(20, 2))],
     #Tab内のサイズを調整
-    [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
-    [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
+    [sg.Text("  ", background_color=COLOR, font=FONT)],
+    [sg.Button("Add", font=FONT, size=SIZE, key="add_limit"), 
+     sg.Button("Clear", font=FONT, key="delete_limit")]
 ]
 limit_layout = [
     [sg.Column(left, element_justification='c', vertical_alignment='center', background_color=COLOR),
      sg.Column(right, background_color=COLOR)]
 ]
 
-sigma_layout = [[]]
-differential_layout = [[]]
-integral_layout = [[]]
+#Sum
+left = [
+    [sg.Column([[sg.Input("", font=INPUT_FONT, size=SIZE, key="sum_end")], [sg.Image(filename="images/sum.png")]], background_color=COLOR, element_justification='c', vertical_alignment='c')],
+    [sg.Input("", font=INPUT_FONT, size=SIZE, key="sum_func"), 
+     sg.Text("=", font=INPUT_FONT, text_color=('Black'), background_color=COLOR),
+     sg.Input("", font=INPUT_FONT, size=SIZE, key="sum_start_value",)],
+]
+right = [
+    [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
+    [sg.Text("  ", background_color=COLOR, font=BTNS_FONT)],
+    [sg.Multiline("", font=INPUT_FONT, size=(20, 2))],
+    [sg.Text("  ", background_color=COLOR, font=FONT)],
+    [sg.Button("Add", font=FONT, size=SIZE, key="add_sum"), 
+     sg.Button("Clear", font=FONT, key="delete_sum")]
+]
+sigma_layout = [
+    [sg.Column(left, element_justification='c', vertical_alignment='center', background_color=COLOR),
+     sg.Column(right, background_color=COLOR)]
+]
+
+#Differential
+#Default -> d/dx
+left = [
+    [sg.Column([
+        [sg.Image(filename="images/diff.png")],
+        ], background_color=COLOR, vertical_alignment='c')]
+]
+right = [
+    [sg.Column([
+        [sg.Combo(values=['x ', 'y ', 't ', 'v '], default_value='x', size=(1, 1), 
+        font=INPUT_FONT, background_color=COLOR, key="diff_select", enable_events=True)],
+        ], background_color=COLOR, vertical_alignment='c'),
+     sg.Column([
+        [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
+        [sg.Text("  ", background_color=COLOR, font=BTNS_FONT)],
+        [sg.Multiline("", font=INPUT_FONT, size=(20, 2))],
+        [sg.Text("  ", background_color=COLOR, font=FONT)],
+        [sg.Button("Add", font=FONT, size=SIZE, key="add_diff"), 
+         sg.Button("Clear", font=FONT, key="delete_diff")],
+        [sg.Text("  ", background_color=COLOR, font=FONT)],
+        ], background_color=COLOR, element_justification='l', vertical_alignment='c')
+    ]
+]
+differential_layout = [
+    [sg.Column(left, element_justification='c', vertical_alignment='center', background_color=COLOR),
+     sg.Column(right, background_color=COLOR)]
+]
+
+#Integral
+left = [
+    [sg.Column([
+        [sg.Image(filename="images/integral.png")],
+        ], background_color=COLOR, vertical_alignment='c'),
+    sg.Column([
+        [sg.Input("", font=INPUT_FONT, size=SIZE, key="integral_end")],
+        [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
+        [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
+        [sg.Input("", font=INPUT_FONT, size=SIZE, key="integral_start")]
+        ], background_color=COLOR, vertical_alignment='c', element_justification='c')
+    ]
+]
+right = [
+    [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
+    [sg.Text("  ", background_color=COLOR, font=BTNS_FONT)],
+    [sg.Multiline("", font=INPUT_FONT, size=(20, 2))],
+    [sg.Text("  ", background_color=COLOR, font=FONT)],
+    [sg.Button("Add", font=FONT, size=SIZE, key="add_integral"), 
+     sg.Button("Clear", font=FONT, key="delete_integral")],
+    [sg.Text("  ", background_color=COLOR, font=FONT)]
+]
+integral_layout = [
+    [sg.Column(left, element_justification='c', vertical_alignment='center', background_color=COLOR),
+     sg.Column(right, background_color=COLOR)]
+]
 
 #Matrix
 matrix_layout = [
     [sg.Column([
     [sg.Button("＋", enable_events=True, pad=(65, 5), font=FONT, size=SIZE, key="plus_vertical")],
-    [sg.Button("＋", enable_events=True, font=FONT, size=SIZE, key="plus_horizon"), sg.Input(font=FONT, size=SIZE)]])]
+    [sg.Button("＋", enable_events=True, font=FONT, size=SIZE, key="plus_horizon"), 
+     sg.Column([[sg.Input(font=FONT, size=SIZE), sg.Input(font=FONT, size=SIZE)]], element_justification='l')],
+    [sg.Column([[sg.Input(font=FONT, size=SIZE), sg.Input(font=FONT, size=SIZE)]], vertical_alignment='c')]
+    ])]
 ]
