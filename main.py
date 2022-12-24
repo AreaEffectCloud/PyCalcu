@@ -63,6 +63,15 @@ while True:
     elif event == "diff_select":
         selected = values["diff_select"]
         window["diff_img"].update(filename="images/diff/diff_{i}.png".format(i=selected))
+    
+    #Left TabGroup
+    #同じキーだとそもそもボタンが生成されず、最後にそのキーを宣言したボタンのみ生成される
+    elif event == "power_two":
+        print(window[event].get_text()) #type:ignore
+    elif event == "function":
+        print(f"normal, function or alphabet")
+    elif event == "alphabet":
+        print(f"normal, function or alphabet")
 
     elif event == "integral_btn": #蛇足
         #式

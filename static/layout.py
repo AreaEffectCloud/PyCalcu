@@ -23,43 +23,30 @@ SPACE = (0, 1)
 
 ##### Main / Left Layout #####
 #Normal
-btns_2 = [" x² ", " e ", " π ", " θ ", " ∞ "]
-btns_3 = [" √ ", " 7 ", " 8 ", " 9 ", " ÷ "]
-btns_4 = [" ^ ", " 4 ", " 5 ", " 6 ", " × "]
-btns_5 = ["log", " 1 ", " 2 ", " 3 ", " - "]
-btns_6 = [" AC ", " 0 ", " ( ", " ) ", " + "]
+normal_2 = {"power_two":" x² ", "e":" e ", "pi":" π ", "theta":" θ ", "infty":" ∞ "}
+normal_3 = {"root":" √ ", "seven":" 7 ", "eight":" 8 ", "nine":" 9 ", "devide":" ÷ "}
+normal_4 = {"power":" ^ ", "four":" 4 ", "five":" 5 ", "six":" 6 ", "multi":" × "}
+normal_5 = {"log":"log", "one":" 1 ", "two":" 2 ", "three":" 3 ", "minus":" - "}
+normal_6 = {"allclear":" AC ", "zero":" 0 ", "left_brackets":" ( ", "right_brackets":" ) ", "plus":" + "}
 
-#key
-one = ["power_two", "e", "pi", "theta", "infty"]
-two = ["root", "seven", "eight", "nine", "devide"]
-three = ["power", "four", "five", "six", "multi"]
-four = ["log", "one", "two", "three", "minus"]
-five = ["allclear", "zero", "left_brackets", "right_brackets", "plus"]
-keys = [one, two, three, four, five]
-
-btns = [btns_2, btns_3, btns_4, btns_5, btns_6]
+btns = [normal_2, normal_3, normal_4, normal_5, normal_6]
 normal_layout = [
     #列ごとに設定する
-    [sg.Column([sg.Button(f'{i}', font=BTNS_FONT, size=SIZE, disabled=False) for i in btns_horizon] for btns_horizon in btns)]
+    [sg.Column([[sg.Button(f'{value}', font=BTNS_FONT, key=f'{key}', size=SIZE, disabled=False, expand_x=True) 
+    for key, value in btns_horizon.items()] for btns_horizon in btns], expand_x=True)]
 ]
 
 #Functions
-btns_1 = ["sin", "cos", "tan", "asin", "acos"]
-btns_2 = ["atan", " α ", " β ", " γ ", "δ"]
-btns_3 = [" ε ", " ζ ", " η ", " ι ", " κ "]
-btns_4 = [" λ ", " μ ", " ξ ", " ρ ", " σ "]
-btns_5 = [" τ ", " υ ", " φ ", " χ ", " ψ "]
-
-#key
-one =   ["sin", "cos", "tan", "asin", "acos"]
-two =   ["atan", "alpha", "beta", "gamma", "delta"]
-three = ["epsilon", "zeta", "eta", "iota", "kappa"]
-four =  ["lambda", "mu", "xi", "rho", "sigma"]
-five =  ["tau", "upsilon", "phi", "chi", "psi"]
+btns_1 = {"sin":"sin", "cos":"cos", "tan":"tan", "asin":"asin", "acos":"acos"}
+btns_2 = {"atan":"atan", "alpha":" α ", "beta":" β ", "gamma":" γ ", "delta":" δ "}
+btns_3 = {"epsilon":" ε ", "zeta":" ζ ", "eta":" η ", "iota":" ι ", "kappa":" κ "}
+btns_4 = {"lambda":" λ ", "mu":" μ ", "xi":" ξ ", "rho":" ρ ", "sigma":" σ "}
+btns_5 = {"tau":" τ ", "upsilon":" υ ", "phi":" φ ", "chi":" χ ", "psi":" ψ "}
 
 btns = [btns_1, btns_2, btns_3, btns_4, btns_5]
 function_layout = [
-    [sg.Column([sg.Button(f'{i}', font=BTNS_FONT, size=SIZE, disabled=False) for i in btns_horizon] for btns_horizon in btns)]
+    [sg.Column([[sg.Button(f'{value}', font=BTNS_FONT, key=f'{key}', size=SIZE, disabled=False, expand_x=True) 
+    for key, value in btns_horizon.items()] for btns_horizon in btns], expand_x=True)]
 ]
 
 #Alphabet
@@ -71,7 +58,8 @@ btns_5 = [" v ", " w ", " x ", " y ", " z "]
 
 btns_al = [btns_1, btns_2, btns_3, btns_4, btns_5]
 alphabet_layout = [
-    [sg.Column([sg.Button(f'{i}', font=BTNS_FONT, size=SIZE, key=i) for i in btns_horizon] for btns_horizon in btns_al)]
+    [sg.Column([[sg.Button(f'{i}', font=BTNS_FONT, size=SIZE, key=i, expand_x=True) 
+    for i in btns_horizon] for btns_horizon in btns_al], expand_x=True)]
 ]
 
 ##### Main / Right Layout #####
