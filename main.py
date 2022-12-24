@@ -6,9 +6,6 @@ from languages import *
 
 sg.theme("Reddit")
 
-## load a config.json file | Get setting of language
-config = get_json("static/config.json")
-lang = config['user']['language']
 ##### ##### Layout  #####  #####
 
 #must resize

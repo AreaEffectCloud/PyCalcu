@@ -1,6 +1,7 @@
 import PySimpleGUI as sg
 import sympy
-from sympy import Sum, oo, N
+
+from languages import *
 
 ##定数
 Pi = sympy.S.Pi # 円周率
@@ -41,7 +42,15 @@ btns_3 = [" ε ", " ζ ", " η ", " ι ", " κ "]
 btns_4 = [" λ ", " μ ", " ξ ", " ρ ", " σ "]
 btns_5 = [" τ ", " υ ", " φ ", " χ ", " ψ "]
 
+#key
+one =   ["sin", "cos", "tan", "asin", "acos"]
+two =   ["atan", "alpha", "beta", "gamma", "delta"]
+three = ["epsilon", "zeta", "eta", "iota", "kappa"]
+four =  ["lambda", "mu", "xi", "rho", "sigma"]
+five =  ["tau", "upsilon", "phi", "chi", "psi"]
+
 btns = [btns_1, btns_2, btns_3, btns_4, btns_5]
+keys = [one, two, three, four, five]
 function_layout = [
     [sg.Column([sg.Button(f'{i}', font=BTNS_FONT, size=SIZE, disabled=False) for i in btns_horizon] for btns_horizon in btns)]
 ]
@@ -55,7 +64,7 @@ btns_5 = [" v ", " w ", " x ", " y ", " z "]
 
 btns_al = [btns_1, btns_2, btns_3, btns_4, btns_5]
 alphabet_layout = [
-    [sg.Column([sg.Button(f'{i}', font=BTNS_FONT, size=SIZE) for i in btns_horizon] for btns_horizon in btns_al)]
+    [sg.Column([sg.Button(f'{i}', font=BTNS_FONT, size=SIZE, key=i) for i in btns_horizon] for btns_horizon in btns_al)]
 ]
 
 ##### Main / Right Layout #####
@@ -135,10 +144,12 @@ left = [
         [sg.Image(filename="images/integral.png")],
         ], background_color=COLOR, vertical_alignment='c'),
     sg.Column([
+        [sg.Text(top[lang], background_color=('Gray'), font=FONT_output)],
         [sg.Input("", font=INPUT_FONT, size=SIZE, key="integral_end")],
         [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
         [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
-        [sg.Input("", font=INPUT_FONT, size=SIZE, key="integral_start")]
+        [sg.Input("", font=INPUT_FONT, size=SIZE, key="integral_start")],
+        [sg.Text(bottom[lang], background_color=('Gray'), font=FONT_output)],
         ], background_color=COLOR, vertical_alignment='c', element_justification='c')
     ]
 ]
