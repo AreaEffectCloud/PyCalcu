@@ -16,7 +16,7 @@ main_column_left_tabs = sg.TabGroup([[
     sg.Tab(normal[lang], normal_layout, key="normal"),
     sg.Tab(function[lang], function_layout, key="function"),
     sg.Tab(alphabet[lang], alphabet_layout, key="alphabet")
-    ]], font=FONT, expand_x=True, expand_y=True)
+    ]], font=FONT, expand_x=True)
 
 main_column_right_tabs = sg.TabGroup([[
     sg.Tab(limit[lang], limit_layout, key="limit", font=FONT),
@@ -24,7 +24,7 @@ main_column_right_tabs = sg.TabGroup([[
     sg.Tab(diff[lang], differential_layout, key="diff", font=FONT),
     sg.Tab(integral[lang], integral_layout, key="integral", font=FONT),
     sg.Tab(matrix[lang], matrix_layout, key="matrix", font=FONT)
-    ]], font=FONT, expand_x=True, expand_y=True)
+    ]], font=FONT, expand_x=True)
 
 #####   Output  #####
 multiline_formula_tex = sg.Output(key='output_tex', font=FONT_output, pad=((0, 0), (0, 0)), size=(100, 5), expand_x=True, expand_y=True)
@@ -59,7 +59,11 @@ while True:
         if vertical < 11:
             window.extend_layout(window['-matrix_vertical-'], new_vertical_layout(vertical))
             i += 1
-   
+    #Diff / Change Image
+    elif event == "diff_select":
+        selected = values["diff_select"]
+        window["diff_img"].update(filename="images/diff/diff_{i}.png".format(i=selected))
+
     elif event == "integral_btn": #蛇足
         #式
         y= sympy.E ** (-2 * x) * sympy.sin(3 * x) #type:ignore

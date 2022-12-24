@@ -29,6 +29,14 @@ btns_4 = [" ^ ", " 4 ", " 5 ", " 6 ", " × "]
 btns_5 = ["log", " 1 ", " 2 ", " 3 ", " - "]
 btns_6 = [" AC ", " 0 ", " ( ", " ) ", " + "]
 
+#key
+one = ["power_two", "e", "pi", "theta", "infty"]
+two = ["root", "seven", "eight", "nine", "devide"]
+three = ["power", "four", "five", "six", "multi"]
+four = ["log", "one", "two", "three", "minus"]
+five = ["allclear", "zero", "left_brackets", "right_brackets", "plus"]
+keys = [one, two, three, four, five]
+
 btns = [btns_2, btns_3, btns_4, btns_5, btns_6]
 normal_layout = [
     #列ごとに設定する
@@ -50,7 +58,6 @@ four =  ["lambda", "mu", "xi", "rho", "sigma"]
 five =  ["tau", "upsilon", "phi", "chi", "psi"]
 
 btns = [btns_1, btns_2, btns_3, btns_4, btns_5]
-keys = [one, two, three, four, five]
 function_layout = [
     [sg.Column([sg.Button(f'{i}', font=BTNS_FONT, size=SIZE, disabled=False) for i in btns_horizon] for btns_horizon in btns)]
 ]
@@ -114,12 +121,12 @@ sigma_layout = [
 #Default -> d/dx
 left = [
     [sg.Column([
-        [sg.Image(filename="images/diff.png")],
+        [sg.Image(filename="images/diff/diff_x.png", key="diff_img")],
         ], background_color=COLOR, vertical_alignment='c')]
 ]
 right = [
     [sg.Column([
-        [sg.Combo(values=['x ', 'y ', 't ', 'v '], default_value='x', size=(1, 1), 
+        [sg.Combo(values=['x', 'y', 't', 'v'], default_value='x', size=(1, 1), readonly=True, 
         font=INPUT_FONT, background_color=COLOR, key="diff_select", enable_events=True)],
         ], background_color=COLOR, vertical_alignment='c'),
      sg.Column([
