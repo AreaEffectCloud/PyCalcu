@@ -37,26 +37,26 @@ normal_layout = [
 ]
 
 #Functions
-btns_1 = {"sin":"sin", "cos":"cos", "tan":"tan", "asin":"asin", "acos":"acos"}
-btns_2 = {"atan":"atan", "alpha":" α ", "beta":" β ", "gamma":" γ ", "delta":" δ "}
-btns_3 = {"epsilon":" ε ", "zeta":" ζ ", "eta":" η ", "iota":" ι ", "kappa":" κ "}
-btns_4 = {"lambda":" λ ", "mu":" μ ", "xi":" ξ ", "rho":" ρ ", "sigma":" σ "}
-btns_5 = {"tau":" τ ", "upsilon":" υ ", "phi":" φ ", "chi":" χ ", "psi":" ψ "}
+func_1 = {"sin":"sin", "cos":"cos", "tan":"tan", "asin":"asin", "acos":"acos"}
+func_2 = {"atan":"atan", "alpha":" α ", "beta":" β ", "gamma":" γ ", "delta":" δ "}
+func_3 = {"epsilon":" ε ", "zeta":" ζ ", "eta":" η ", "iota":" ι ", "kappa":" κ "}
+func_4 = {"lambda":" λ ", "mu":" μ ", "xi":" ξ ", "rho":" ρ ", "sigma":" σ "}
+func_5 = {"tau":" τ ", "upsilon":" υ ", "phi":" φ ", "chi":" χ ", "psi":" ψ "}
 
-btns = [btns_1, btns_2, btns_3, btns_4, btns_5]
+btns = [func_1, func_2, func_3, func_4, func_5]
 function_layout = [
     [sg.Column([[sg.Button(f'{value}', font=BTNS_FONT, key=f'{key}', size=SIZE, disabled=False, expand_x=True) 
     for key, value in btns_horizon.items()] for btns_horizon in btns], expand_x=True)]
 ]
 
 #Alphabet
-btns_1 = [" a ", " b ", " c ", " d ", " f "]
-btns_2 = [" g ", " h ", " i ", " j ", " k "]
-btns_3 = [" l ", " m ", " n ", " o ", " p "]
-btns_4 = [" q ", " r ", " s ", " t ", " u "]
-btns_5 = [" v ", " w ", " x ", " y ", " z "]
+alpha_1 = {" a ", " b ", " c ", " d ", " f "}
+alpha_2 = [" g ", " h ", " i ", " j ", " k "]
+alpha_3 = [" l ", " m ", " n ", " o ", " p "]
+alpha_4 = [" q ", " r ", " s ", " t ", " u "]
+alpha_5 = [" v ", " w ", " x ", " y ", " z "]
 
-btns_al = [btns_1, btns_2, btns_3, btns_4, btns_5]
+btns_al = [alpha_1, alpha_2, alpha_3, alpha_4, alpha_5]
 alphabet_layout = [
     [sg.Column([[sg.Button(f'{i}', font=BTNS_FONT, size=SIZE, key=i, expand_x=True) 
     for i in btns_horizon] for btns_horizon in btns_al], expand_x=True)]
