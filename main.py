@@ -38,12 +38,16 @@ layout = [ [output_frame],
 
 window = sg.Window(title[lang], layout, icon="", use_default_focus=False, resizable=True, finalize=True)
 
+bind(window)
+
 # -------------------------------------
 #           イベント毎の処理
 # -------------------------------------
 ##縦と横
 vertical = 1
 horizon = 1
+#Focusing InputBox
+focus = ""
 while True:
 
     event, values = window.read() #type:ignore
@@ -63,8 +67,25 @@ while True:
     elif event == "diff_select":
         selected = values["diff_select"]
         window["diff_img"].update(filename="images/diff/diff_{i}.png".format(i=selected))
-    
-    #Left TabGroup
+
+    #get Focus
+    elif event in "limit_start+Input":
+        focus = event
+        print(focus)
+        print(f's t a r t s')
+    elif event in "limit_end+Input":
+        print(f'the end')
+    elif event in "sum_end+Input":
+        print(f'sum_End')
+    elif event in "sum_func+Input":
+        print(f'sum_Function')
+    elif event in "sum_start+Input":
+        print(f'sum_start')
+    elif event in 'integral_end+Input':
+        print(f'integral_E ND ND')
+    elif event in 'integral_start+Input':
+        print(f'integral_ s s tat r')
+
     #Normal
     elif event == "allclear":
         print(f' - All Clear - ')

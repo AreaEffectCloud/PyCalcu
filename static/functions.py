@@ -9,6 +9,29 @@ def get_json(path):
        f = json.load(json_file)
     return f
 
+#どの Input / Multiline boxにFocusされているかを設定するEventをbind
+def bind(window):
+    #Limit
+    window['limit_start'].bind('<FocusIn>', '+Input')
+    window['limit_end'].bind('<FocusIn>', '+Input')
+    window['limit_formula'].bind('<FocusIn>', '+Input')
+
+    #Sum
+    window['sum_end'].bind('<FocusIn>', '+Input')
+    window['sum_func'].bind('<FocusIn>', '+Input')
+    window['sum_start'].bind('<FocusIn>', '+Input')
+    window['sum_formula'].bind('<FocusIn>', '+Input')
+
+    #Diff
+    window['diff_formula'].bind('<FocusIn>', '+Input')
+
+    #Integral
+    window['integral_end'].bind('<FocusIn>', '+Input')
+    window['integral_start'].bind('<FocusIn>', '+Input')
+    window['integral_formula'].bind('<FocusIn>', '+Input')
+
+    return None
+
 def new_horizon_layout(i):
     #matchで縦(横)の数ごとに増やす
     return [[]]

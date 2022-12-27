@@ -23,11 +23,11 @@ SPACE = (0, 1)
 
 ##### Main / Left Layout #####
 #Normal
-normal_2 = {"power_two":" x² ", "e":" e ", "pi":" π ", "theta":" θ ", "infty":" ∞ "}
-normal_3 = {"root":" √ ", "seven":" 7 ", "eight":" 8 ", "nine":" 9 ", "devide":" ÷ "}
-normal_4 = {"power":" ^ ", "four":" 4 ", "five":" 5 ", "six":" 6 ", "multi":" × "}
-normal_5 = {"log":"log", "one":" 1 ", "two":" 2 ", "three":" 3 ", "minus":" - "}
-normal_6 = {"allclear":" AC ", "zero":" 0 ", "left_brackets":" ( ", "right_brackets":" ) ", "plus":" + "}
+normal_2 = {"power_two":"x²", "e":"e", "pi":"π", "theta":"θ", "infty":"∞"}
+normal_3 = {"root":"√", "seven":"7", "eight":"8", "nine":"9", "devide":"÷"}
+normal_4 = {"power":"^", "four":"4", "five":"5", "six":"6", "multi":"×"}
+normal_5 = {"log":"log", "one":"1", "two":"2", "three":"3", "minus":"－"}
+normal_6 = {"allclear":"AC", "zero":"0", "left_brackets":"(", "right_brackets":")", "plus":"＋"}
 
 btns = [normal_2, normal_3, normal_4, normal_5, normal_6]
 normal_layout = [
@@ -38,10 +38,10 @@ normal_layout = [
 
 #Functions
 func_1 = {"sin":"sin", "cos":"cos", "tan":"tan", "asin":"asin", "acos":"acos"}
-func_2 = {"atan":"atan", "alpha":" α ", "beta":" β ", "gamma":" γ ", "delta":" δ "}
-func_3 = {"epsilon":" ε ", "zeta":" ζ ", "eta":" η ", "iota":" ι ", "kappa":" κ "}
-func_4 = {"lambda":" λ ", "mu":" μ ", "xi":" ξ ", "rho":" ρ ", "sigma":" σ "}
-func_5 = {"tau":" τ ", "upsilon":" υ ", "phi":" φ ", "chi":" χ ", "psi":" ψ "}
+func_2 = {"atan":"atan", "alpha":"α", "beta":"β", "gamma":"γ", "delta":"δ"}
+func_3 = {"epsilon":"ε", "zeta":"ζ", "eta":"η", "iota":"ι", "kappa":"κ"}
+func_4 = {"lambda":"λ", "mu":"μ", "xi":"ξ", "rho":"ρ", "sigma":"σ"}
+func_5 = {"tau":"τ", "upsilon":"υ", "phi":"φ", "chi":"χ", "psi":"ψ"}
 
 btns = [func_1, func_2, func_3, func_4, func_5]
 function_layout = [
@@ -50,11 +50,11 @@ function_layout = [
 ]
 
 #Alphabet
-alpha_1 = {" a ", " b ", " c ", " d ", " f "}
-alpha_2 = [" g ", " h ", " i ", " j ", " k "]
-alpha_3 = [" l ", " m ", " n ", " o ", " p "]
-alpha_4 = [" q ", " r ", " s ", " t ", " u "]
-alpha_5 = [" v ", " w ", " x ", " y ", " z "]
+alpha_1 = ["a", "b", "c", "d", "f"]
+alpha_2 = ["g", "h", "i", "j", "k"]
+alpha_3 = ["l", "m", "n", "o", "p"]
+alpha_4 = ["q", "r", "s", "t", "u"]
+alpha_5 = ["v", "w", "x", "y", "z"]
 
 btns_al = [alpha_1, alpha_2, alpha_3, alpha_4, alpha_5]
 alphabet_layout = [
@@ -66,7 +66,7 @@ alphabet_layout = [
 #Limit
 left = [
     [sg.Column([[sg.Image(filename="images/limit.png")]], background_color=COLOR, vertical_alignment='c')],
-    [sg.Input("", font=INPUT_FONT, size=SIZE, key="lim_start"), 
+    [sg.Input("", font=INPUT_FONT, size=SIZE, key="limit_start"), 
      sg.Text("→", font=INPUT_FONT, text_color=('Black'), background_color=COLOR),
      sg.Input("", font=INPUT_FONT, size=SIZE, key="limit_end",)]
 ]
@@ -74,7 +74,7 @@ right = [
     #上部分の調整
     [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
     [sg.Text("  ", background_color=COLOR, font=BTNS_FONT)],
-    [sg.Multiline("", font=INPUT_FONT, size=(20, 2))],
+    [sg.Multiline("", font=INPUT_FONT, size=(20, 2), key="limit_formula")],
     #Tab内のサイズを調整
     [sg.Text("  ", background_color=COLOR, font=FONT)],
     [sg.Button("Add", font=BTNS_FONT, size=SIZE, key="add_limit"), 
@@ -90,12 +90,12 @@ left = [
     [sg.Column([[sg.Input("", font=INPUT_FONT, size=SIZE, key="sum_end")], [sg.Image(filename="images/sum.png")]], background_color=COLOR, element_justification='c', vertical_alignment='c')],
     [sg.Input("", font=INPUT_FONT, size=SIZE, key="sum_func"), 
      sg.Text("=", font=INPUT_FONT, text_color=('Black'), background_color=COLOR),
-     sg.Input("", font=INPUT_FONT, size=SIZE, key="sum_start_value",)],
+     sg.Input("", font=INPUT_FONT, size=SIZE, key="sum_start",)],
 ]
 right = [
     [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
     [sg.Text("  ", background_color=COLOR, font=BTNS_FONT)],
-    [sg.Multiline("", font=INPUT_FONT, size=(20, 2))],
+    [sg.Multiline("", font=INPUT_FONT, size=(20, 2), key="sum_formula")],
     [sg.Text("  ", background_color=COLOR, font=FONT)],
     [sg.Button("Add", font=BTNS_FONT, size=SIZE, key="add_sum"), 
      sg.Button("Clear", font=BTNS_FONT, key="delete_sum")]
@@ -120,7 +120,7 @@ right = [
      sg.Column([
         [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
         [sg.Text("  ", background_color=COLOR, font=BTNS_FONT)],
-        [sg.Multiline("", font=INPUT_FONT, size=(20, 2))],
+        [sg.Multiline("", font=INPUT_FONT, size=(20, 2), key="diff_formula")],
         [sg.Text("  ", background_color=COLOR, font=FONT)],
         [sg.Button("Add", font=BTNS_FONT, size=SIZE, key="add_diff"), 
          sg.Button("Clear", font=BTNS_FONT, key="delete_diff")],
@@ -150,7 +150,7 @@ left = [
 right = [
     [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
     [sg.Text("  ", background_color=COLOR, font=BTNS_FONT)],
-    [sg.Multiline("", font=INPUT_FONT, size=(20, 2))],
+    [sg.Multiline("", font=INPUT_FONT, size=(20, 2), key="integral_formula")],
     [sg.Text("  ", background_color=COLOR, font=FONT)],
     [sg.Button("Add", font=BTNS_FONT, size=SIZE, key="add_integral"), 
      sg.Button("Clear", font=BTNS_FONT, key="delete_integral")],

@@ -18,7 +18,7 @@ output_frame_title = { 'en':str('Output'), 'ja':str('出力') }
 
 #Tab title
 normal = { 'en':str('Normal'), 'ja':str('一般')}
-function = { 'en':str('Functions'), 'ja':str('関数')}
+function = { 'en':str('Function'), 'ja':str('関数')}
 alphabet = { 'en':str('Alphabet'), 'ja':str('アルファベット')}
 limit = { 'en':str('Limit'), 'ja':str('極限')}
 sigma = { 'en':str('Sigma'), 'ja':str('数列')}
@@ -29,3 +29,6 @@ bottom = { 'en':str('Bottom'), 'ja':str('下端')}
 matrix = { 'en':str('Matrix'), 'ja':str('行列')}
 rows = { 'en':str('Rows'), 'ja':str('行')}
 columns = { 'en':str('Columns'), 'ja':str('列')}
+
+add = { 'en':str('Add'), 'ja':str('追加')}
+clear = { 'en':str('Clear'), 'ja':str('クリア')}
