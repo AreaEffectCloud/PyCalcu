@@ -10,7 +10,7 @@ def get_json(path):
     return f
 
 #どの Input / Multiline boxにFocusされているかを設定するEventをbind
-def bind(window):
+def set_bind(window):
     #Limit
     window['limit_start'].bind('<FocusIn>', '+Input')
     window['limit_end'].bind('<FocusIn>', '+Input')
@@ -31,6 +31,11 @@ def bind(window):
     window['integral_formula'].bind('<FocusIn>', '+Input')
 
     return None
+
+binds = ["limit_start+Input", "limit_end+Input", "limit_formula+Input",
+         "sum_end+Input", "sum_func+Input", "sum_start+Input", "sum_formula+Input",
+         "diff_formula+Input",
+         "integral_end+Input", "integral_start+Input", "integral_formula+Input"]
 
 def new_horizon_layout(i):
     #matchで縦(横)の数ごとに増やす

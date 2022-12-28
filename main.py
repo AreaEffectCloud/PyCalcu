@@ -38,7 +38,7 @@ layout = [ [output_frame],
 
 window = sg.Window(title[lang], layout, icon="", use_default_focus=False, resizable=True, finalize=True)
 
-bind(window)
+set_bind(window)
 
 # -------------------------------------
 #           イベント毎の処理
@@ -69,22 +69,9 @@ while True:
         window["diff_img"].update(filename="images/diff/diff_{i}.png".format(i=selected))
 
     #get Focus
-    elif event in "limit_start+Input":
+    elif event in binds:
         focus = event
         print(focus)
-        print(f's t a r t s')
-    elif event in "limit_end+Input":
-        print(f'the end')
-    elif event in "sum_end+Input":
-        print(f'sum_End')
-    elif event in "sum_func+Input":
-        print(f'sum_Function')
-    elif event in "sum_start+Input":
-        print(f'sum_start')
-    elif event in 'integral_end+Input':
-        print(f'integral_E ND ND')
-    elif event in 'integral_start+Input':
-        print(f'integral_ s s tat r')
 
     #Normal
     elif event == "allclear":
