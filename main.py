@@ -70,25 +70,32 @@ while True:
 
     #get Focus
     elif event in binds:
-        focus = event
+        focus = str(event).replace("+Input", "")
         print(focus)
 
     #Normal
     elif event == "allclear":
         print(f' - All Clear - ')
-    elif event == "power_two":
-        print(f' - Power Two ex. x² - ')
     #get forcus where it is
-    elif event in normal_2 or event in normal_3 or event in normal_4 or event in normal_5 or event in normal_6:
-        print(window[event].get_text()) #type:ignore
-    #Function
-    elif event in func_1 or event in func_2 or event in func_3 or event in func_4 or event in func_5:
-        print(window[event].get_text()) #type:ignore
-    #Alphabet
-    elif event in alpha_1 or event in alpha_2 or event in alpha_3 or event in alpha_4 or event in alpha_5:
-        print(window[event].get_text()) #type:ignore
+    elif event in all_btns_keys:
+        if focus != None:
+            text = values["{i}".format(i=focus)]
+            text = text + window[event].get_text() #type:ignore
+            window["{i}".format(i=focus)].update(text)
+        elif focus == None:
+            print(f'Error tgom@@smngopmrpomnyrwn@g]kd@vbg,p@,trsb[lpnptr')
+    #Add
+    elif event in add_btn:
+        break
+    #Clear
+    elif event in clear_btn:
+        print(clear_btn)
+        #???
+        if focus != None:
+            window["{i}".format(i=focus)].update(text="")
+        elif focus == None:
+            print(f'Error tgom@@smngopmrpomnyrwn@g]kd@vbg,p@,trsb[lpnptr')
 
-    
     elif event == "integral_btn": #蛇足
         #式
         y= sympy.E ** (-2 * x) * sympy.sin(3 * x) #type:ignore
@@ -99,7 +106,7 @@ while True:
 
         #tex
         if multiline_formula_tex.do_not_clear == None:
-            print(" + ", tex_result) 
+            print(f" + ", tex_result) 
         else: print(tex_result)
 
         ##積分定数は加えずに表示
@@ -108,10 +115,10 @@ while True:
         print(f're'.format(result_tex))
 
         window["output_tex"].print(tex_result) #type:ignore
-        print("途中式は、 ", values["output_tex"], " です。")
+        print(f"途中式は、 ", values["output_tex"], " です。")
 
     elif event == 'limit_btn':
-        print("pressed it")
+        print(f"pressed it")
         y = sympy.sin(x ** 2) / (E ** (-x) + 1)
         tex_result = sympy.latex(sympy.integrate(y, (x, -(Pi / 2), Pi / 2)).doit())
         latex_result = r"""$${tex}$$""".format(tex=tex_result)
