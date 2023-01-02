@@ -24,7 +24,7 @@ SPACE = (0, 1)
 ##### Main / Left Layout #####
 #Normal
 normal_2 = {"power_two":"x²", "e":"e", "pi":"π", "theta":"θ", "infty":"∞"}
-normal_3 = {"root":"√", "seven":"7", "eight":"8", "nine":"9", "devide":"÷"}
+normal_3 = {"root":"√", "seven":"7", "eight":"8", "nine":"9", "devide":"/"}
 normal_4 = {"power":"^", "four":"4", "five":"5", "six":"6", "multi":"×"}
 normal_5 = {"log":"log", "one":"1", "two":"2", "three":"3", "minus":"－"}
 normal_6 = {"allclear":"AC", "zero":"0", "left_brackets":"(", "right_brackets":")", "plus":"＋"}
@@ -64,7 +64,7 @@ alphabet_layout = [
 
 all_btns_keys = ["power_two", "e", "pi", "theta", "infty", "root", "seven",
             "eight", "nine", "devide", "power", "four", "five", "six", 
-            "multi", "log", "one", "two", "three", "minus", "allclear", "zero", 
+            "multi", "log", "one", "two", "three", "minus", "zero", 
             "left_brackets", "right_brackets", "plus",
             "sin", "cos", "tan", "asin", "acos", "atan", "alpha", "beta", "gamma",
             "delta", "epsilon", "zeta", "eta", "iota", "kappa", "lambda", "mu", "xi", 

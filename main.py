@@ -76,25 +76,21 @@ while True:
     #Normal
     elif event == "allclear":
         print(f' - All Clear - ')
-    #get forcus where it is
+    
+    #Left Tab Bottons
     elif event in all_btns_keys:
-        if focus != None:
+        if focus != "":
             text = values["{i}".format(i=focus)]
             text = text + window[event].get_text() #type:ignore
             window["{i}".format(i=focus)].update(text)
-        elif focus == None:
-            print(f'Error tgom@@smngopmrpomnyrwn@g]kd@vbg,p@,trsb[lpnptr')
     #Add
     elif event in add_btn:
-        break
+        if focus != "":
+            break
     #Clear
     elif event in clear_btn:
-        print(clear_btn)
-        #???
-        if focus != None:
+        if focus != "":
             window["{i}".format(i=focus)].update(text="")
-        elif focus == None:
-            print(f'Error tgom@@smngopmrpomnyrwn@g]kd@vbg,p@,trsb[lpnptr')
 
     elif event == "integral_btn": #蛇足
         #式
