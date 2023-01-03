@@ -37,6 +37,11 @@ binds = ["limit_start+Input", "limit_end+Input", "limit_formula+Input",
          "diff_formula+Input",
          "integral_end+Input", "integral_start+Input", "integral_formula+Input"]
 
+limit_tab = ["limit_start", "limit_end", "limit_formula"]
+sum_tab = ["sum_end", "sum_func", "sum_start", "sum_formula"]
+diff_tab = ["diff_formula"]
+integral_tab = ["integral_end", "integral_start", "integral_formula"]
+
 def new_horizon_layout(i):
     #matchで縦(横)の数ごとに増やす
     return [[]]

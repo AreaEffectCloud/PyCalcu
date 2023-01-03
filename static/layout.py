@@ -72,8 +72,6 @@ all_btns_keys = ["power_two", "e", "pi", "theta", "infty", "root", "seven",
             "a", "b", "c", "d", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", 
             "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
-add_btn = ["add_limit", "add_sum", "add_diff", "add_integral", "add_matrix"]
-
 clear_btn = ["delete_limit", "delete_sum", "delete_diff", "delete_integral", "delete_matrix"]
 
 ##### Main / Right Layout #####

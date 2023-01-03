@@ -48,6 +48,7 @@ vertical = 1
 horizon = 1
 #Focusing InputBox
 focus = ""
+space = ""
 while True:
 
     event, values = window.read() #type:ignore
@@ -73,9 +74,20 @@ while True:
         focus = str(event).replace("+Input", "")
         print(focus)
 
-    #Normal
+    #All Clear
     elif event == "allclear":
-        print(f' - All Clear - ')
+        if focus in limit_tab:
+            for box in limit_tab:
+                window["{i}".format(i=box)].update(space) #type:ignore
+        elif focus in sum_tab:
+            for box in sum_tab:
+                window["{i}".format(i=box)].update(space) #type:ignore
+        elif focus in diff_tab:
+            for box in diff_tab:
+                window["{i}".format(i=box)].update(space) #type:ignore
+        elif focus in integral_tab:
+            for box in integral_tab:
+                window["{i}".format(i=box)].update(space) #type:ignore
     
     #Left Tab Bottons
     elif event in all_btns_keys:
@@ -83,21 +95,36 @@ while True:
             text = values["{i}".format(i=focus)]
             text = text + window[event].get_text() #type:ignore
             window["{i}".format(i=focus)].update(text)
+    
     #Add
-    elif event in add_btn:
-        if focus != "":
-            break
+    elif event in "add_limit":
+        if values["limit_formula"] != "":
+            if values["limit_start"] != "" and values["limit_end"] != "":
+                print(f'G')
+
+    elif event in "add_sum":
+        if values["sum_formula"] != "":
+            print(f'G')
+
+    elif event in "add_diff":
+        if values["diff_formula"] != "":
+            print(f'G')
+            
+    elif event in "add_integral":
+        if values["integral_formula"] != "":
+            print(f'G')
+
     #Clear
     elif event in clear_btn:
         if focus != "":
-            window["{i}".format(i=focus)].update(text="")
+            window["{i}".format(i=focus)].update(space) #type:ignore
 
-    elif event == "integral_btn": #蛇足
-        #式
+    #Waste
+    elif event == "integral_btn":
         y= sympy.E ** (-2 * x) * sympy.sin(3 * x) #type:ignore
         result_tex = sympy.latex((sympy.integrate(y, x)).doit())
 
-        F2 = x ** 5 + x + 1 # 高次式
+        F2 = x ** 5 + x + 1
         tex_result = sympy.latex((sympy.solve(F2, x)))
 
         #tex
