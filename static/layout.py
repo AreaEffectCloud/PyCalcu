@@ -62,15 +62,12 @@ alphabet_layout = [
     for i in btns_horizon] for btns_horizon in btns_al], expand_x=True)]
 ]
 
-all_btns_keys = ["power_two", "e", "pi", "theta", "infty", "root", "seven",
-            "eight", "nine", "devide", "power", "four", "five", "six", 
-            "multi", "log", "one", "two", "three", "minus", "zero", 
-            "left_brackets", "right_brackets", "plus",
-            "sin", "cos", "tan", "asin", "acos", "atan", "alpha", "beta", "gamma",
-            "delta", "epsilon", "zeta", "eta", "iota", "kappa", "lambda", "mu", "xi", 
-            "rho", "sigma", "tau", "upsilon", "phi", "chi", "psi",
-            "a", "b", "c", "d", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", 
-            "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+brackets = ["root", "power", "log", "sin", "cos", "tan", "asin", "acos", "atan"]
+
+all_btns_keys = ["power_two", "e", "pi", "theta", "infty", "seven",
+            "eight", "nine", "devide", "four", "five", "six", "multi", "one", "two", "three", "minus", "zero", "left_brackets", "right_brackets", "plus",
+            "alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta", "iota", "kappa", "lambda", "mu", "xi", "rho", "sigma", "tau", "upsilon", "phi", "chi", "psi",
+            "a", "b", "c", "d", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
 clear_btn = ["delete_limit", "delete_sum", "delete_diff", "delete_integral", "delete_matrix"]
 

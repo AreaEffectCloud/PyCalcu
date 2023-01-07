@@ -42,14 +42,10 @@ sum_tab = ["sum_end", "sum_func", "sum_start", "sum_formula"]
 diff_tab = ["diff_formula"]
 integral_tab = ["integral_end", "integral_start", "integral_formula"]
 
-def new_horizon_layout(i):
-    #matchで縦(横)の数ごとに増やす
-    return [[]]
-
-def new_vertical_layout(i):
-    return [[]]
-
 #LiteralString -> r"""$${result_tex}$$"""
+def transfer_latex(text):
+    return text
+    
 #def autosize_latex(LiteralString):
     #行列
     #定積分

@@ -23,7 +23,7 @@ main_column_right_tabs = sg.TabGroup([[
     sg.Tab(sigma[lang], sigma_layout, key="sigma", font=FONT),
     sg.Tab(diff[lang], differential_layout, key="diff", font=FONT),
     sg.Tab(integral[lang], integral_layout, key="integral", font=FONT),
-    sg.Tab(matrix[lang], matrix_layout, key="matrix", font=FONT)
+    #No There # sg.Tab(matrix[lang], matrix_layout, key="matrix", font=FONT)
     ]], font=FONT, expand_x=True)
 
 #####   Output  #####
@@ -33,7 +33,7 @@ output_frame = sg.Frame(output_frame_title[lang], [[multiline_formula_tex]], fon
 #レイアウト
 layout = [ [output_frame], 
             [main_column_left_tabs, main_column_right_tabs],
-            #[sg.Column([[image_formula_latex_column]], size=(800, 426), justification='center', scrollable=True)]
+            [sg.Column([[image_formula_latex_column]],  justification='center', scrollable=True)]
             ]
 
 window = sg.Window(title[lang], layout, icon="", use_default_focus=False, resizable=True, finalize=True)
@@ -43,10 +43,6 @@ set_bind(window)
 # -------------------------------------
 #           イベント毎の処理
 # -------------------------------------
-##縦と横
-vertical = 1
-horizon = 1
-#Focusing InputBox
 focus = ""
 space = ""
 while True:
@@ -55,15 +51,6 @@ while True:
 
     if event == sg.WIN_CLOSED:
         break
-    #Matrix, add input box
-    elif event == "plus_horizon": #横
-        if horizon < 11:
-            window.extend_layout(window['-matrix_horizon-'], new_horizon_layout(horizon))
-            i += 1
-    elif event == "plus_vertical": #縦
-        if vertical < 11:
-            window.extend_layout(window['-matrix_vertical-'], new_vertical_layout(vertical))
-            i += 1
     #Diff / Change Image
     elif event == "diff_select":
         selected = values["diff_select"]
@@ -89,7 +76,22 @@ while True:
             for box in integral_tab:
                 window["{i}".format(i=box)].update(space) #type:ignore
     
-    #Left Tab Bottons
+    #括弧含む
+    elif event in brackets:
+        if focus != "":
+            text = values["{i}".format(i=focus)]
+            text = text + window[event].get_text() + "(" #type:ignore
+            window["{i}".format(i=focus)].update(text)
+    
+    #2乗
+    elif event in "power_two":
+        if focus != "":
+            text = values["{i}".format(i=focus)]
+            if text != "":
+                text = text + "²"
+                window["{i}".format(i=focus)].update(text)
+
+    #Other Bottons
     elif event in all_btns_keys:
         if focus != "":
             text = values["{i}".format(i=focus)]
@@ -108,11 +110,18 @@ while True:
 
     elif event in "add_diff":
         if values["diff_formula"] != "":
-            print(f'G')
+            formula = r"""$${i}$$""".format(i=values["diff_formula"])
+            print(formula)
             
     elif event in "add_integral":
         if values["integral_formula"] != "":
-            print(f'G')
+            if values["integral_start"] != "" and values["integral_end"] != "":
+                #定積分
+                formula = values["integral_formula"]
+            
+            elif values["integral_start"] == "" and values["integral_end"] == "":
+                #不定積分
+                formula = values["integral_formula"]
 
     #Clear
     elif event in clear_btn:
