@@ -2,11 +2,11 @@ from static.functions import *
 
 #En and Jp
 ## load a config.json file | Get setting of language
-config = get_json("static/config.json")
+config = get_json("config.json")
 lang = config['user']['language']
 
 #Window title
-title = { 'en':str('Calculator'), 'ja':str('関数電卓') }
+title = { 'en':str('Function Application'), 'ja':str('関数アプリ') }
 
 #Edit image
 right_click_menu_en = ['&Right', ["Copy", "Paste"]]
@@ -26,9 +26,6 @@ diff = { 'en':str('Differential'), 'ja':str('微分')}
 integral = { 'en':str('Integral'), 'ja':str('積分')}
 top = { 'en':str('Top'), 'ja':str('上端')}
 bottom = { 'en':str('Bottom'), 'ja':str('下端')}
-matrix = { 'en':str('Matrix(unavailable)'), 'ja':str('行列(未実装)')}
-rows = { 'en':str('Rows'), 'ja':str('行')}
-columns = { 'en':str('Columns'), 'ja':str('列')}
 
 add = { 'en':str('Add'), 'ja':str('追加')}
 clear = { 'en':str('Clear'), 'ja':str('クリア')}

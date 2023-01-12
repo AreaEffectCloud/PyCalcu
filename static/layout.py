@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
 import sympy
 
-from languages import *
+from static.languages import *
 
 ##定数
 Pi = sympy.S.Pi # 円周率
@@ -23,7 +23,7 @@ SPACE = (0, 1)
 
 ##### Main / Left Layout #####
 #Normal
-normal_2 = {"power_two":"x²", "e":"e", "pi":"π", "theta":"θ", "infty":"∞"}
+normal_2 = {"power_twice":"x²", "e":"e", "pi":"π", "theta":"θ", "infty":"∞"}
 normal_3 = {"root":"√", "seven":"7", "eight":"8", "nine":"9", "devide":"/"}
 normal_4 = {"power":"^", "four":"4", "five":"5", "six":"6", "multi":"×"}
 normal_5 = {"log":"log", "one":"1", "two":"2", "three":"3", "minus":"－"}
@@ -64,7 +64,7 @@ alphabet_layout = [
 
 brackets = ["root", "power", "log", "sin", "cos", "tan", "asin", "acos", "atan"]
 
-all_btns_keys = ["power_two", "e", "pi", "theta", "infty", "seven",
+all_btns_keys = ["e", "pi", "theta", "infty", "seven",
             "eight", "nine", "devide", "four", "five", "six", "multi", "one", "two", "three", "minus", "zero", "left_brackets", "right_brackets", "plus",
             "alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta", "iota", "kappa", "lambda", "mu", "xi", "rho", "sigma", "tau", "upsilon", "phi", "chi", "psi",
             "a", "b", "c", "d", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
@@ -168,31 +168,4 @@ right = [
 integral_layout = [
     [sg.Column(left, element_justification='c', vertical_alignment='center', background_color=COLOR),
      sg.Column(right, background_color=COLOR)]
-]
-
-#Matrix
-input_boxes = [
-    [sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE), 
-     sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE)],
-    [sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE), 
-     sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE)],
-    [sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE), 
-     sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE),],
-    [sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE), 
-     sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE),],
-    [sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE), 
-     sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE), sg.Input(font=BTNS_FONT, size=SIZE),]
-]
-matrix_layout = [
-    [sg.Text("  ", background_color=COLOR, font=FONT, size=(8, 1)), 
-     sg.Button("＋", font=FONT, size=SIZE, key="plus_vertical"),
-     sg.Text(rows[lang], background_color=('Gray'), font=FONT)],
-    [sg.Column([[sg.Button("＋", font=FONT, size=SIZE, key="plus_horizon")],
-    [sg.Text(columns[lang], background_color=('Gray'), font=FONT)],
-    ], background_color=COLOR, element_justification='c', vertical_alignment='top'), 
-     sg.Column(input_boxes, background_color=COLOR, element_justification='l', scrollable=False),
-     sg.Column([
-        [sg.Button("Add", font=BTNS_FONT, size=SIZE, key="add_matrix")],
-        [sg.Button("Clear", font=BTNS_FONT, key="delete_matrix")]
-     ], background_color=COLOR, element_justification='l', vertical_alignment='center')]
 ]

@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 
 from static.layout import *
 from static.functions import *
-from languages import *
+from static.languages import *
 
 sg.theme("Reddit")
 
@@ -84,7 +84,7 @@ while True:
             window["{i}".format(i=focus)].update(text)
     
     #2乗
-    elif event in "power_two":
+    elif event in "power_twice":
         if focus != "":
             text = values["{i}".format(i=focus)]
             if text != "":
@@ -95,6 +95,7 @@ while True:
     elif event in all_btns_keys:
         if focus != "":
             text = values["{i}".format(i=focus)]
+            #values[event] occur error
             text = text + window[event].get_text() #type:ignore
             window["{i}".format(i=focus)].update(text)
     
