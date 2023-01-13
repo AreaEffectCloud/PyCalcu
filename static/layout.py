@@ -3,12 +3,6 @@ import sympy
 
 from static.languages import *
 
-##定数
-Pi = sympy.S.Pi # 円周率
-E = sympy.S.Exp1 # 自然対数の底
-I = sympy.S.ImaginaryUnit # 虚数単位
-oo = sympy.oo #無限大
-
 # 使用する変数の定義(小文字1文字は全てシンボルとする)
 (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z) = sympy.symbols('a b c d e f g h i j k l m n o p q r s t u v w x y z')
 
@@ -25,9 +19,9 @@ SPACE = (0, 1)
 #Normal
 normal_2 = {"power_twice":"x²", "e":"e", "pi":"π", "theta":"θ", "infty":"∞"}
 normal_3 = {"root":"√", "seven":"7", "eight":"8", "nine":"9", "devide":"/"}
-normal_4 = {"power":"^", "four":"4", "five":"5", "six":"6", "multi":"×"}
-normal_5 = {"log":"log", "one":"1", "two":"2", "three":"3", "minus":"－"}
-normal_6 = {"allclear":"AC", "zero":"0", "left_brackets":"(", "right_brackets":")", "plus":"＋"}
+normal_4 = {"power":"^", "four":"4", "five":"5", "six":"6", "minus":"－"}
+normal_5 = {"log":"log", "one":"1", "two":"2", "three":"3", "plus":"＋"}
+normal_6 = {"allclear":"AC", "zero":"0", "left_brackets":"{", "right_brackets":"}", "eq":"="}
 
 btns = [normal_2, normal_3, normal_4, normal_5, normal_6]
 normal_layout = [
@@ -70,6 +64,8 @@ all_btns_keys = ["e", "pi", "theta", "infty", "seven",
             "a", "b", "c", "d", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
 clear_btn = ["delete_limit", "delete_sum", "delete_diff", "delete_integral", "delete_matrix"]
+
+setting_layout = [[]]
 
 ##### Main / Right Layout #####
 #Limit
@@ -149,8 +145,10 @@ left = [
     sg.Column([
         [sg.Text(top[lang], background_color=('Gray'), font=FONT)],
         [sg.Input("", font=INPUT_FONT, size=SIZE, key="integral_end")],
-        [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
-        [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
+        [sg.Text("  ", background_color=COLOR, font=('HGS明朝B', 5))],
+        [sg.Combo(values=[' dx ', ' dy ', ' dt ', ' dv '], default_value=' dx ', size=(3, 1), readonly=True, 
+        font=('HGS明朝B', 33), background_color=COLOR, key="integral_select")],
+        [sg.Text("  ", background_color=COLOR, font=('HGS明朝B', 5))],
         [sg.Input("", font=INPUT_FONT, size=SIZE, key="integral_start")],
         [sg.Text(bottom[lang], background_color=('Gray'), font=FONT)],
         ], background_color=COLOR, vertical_alignment='c', element_justification='c')

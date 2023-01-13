@@ -21,6 +21,16 @@ while True:
     elif event == "first":
         #updateで変更可
         window["second"].update(disabled=False)
+
+        text = "\\sin^{2}{\\left(x \\right)} - \\cos^{2}{\\left(x \\right)}"
+
+        tex = text.replace("\\\\", "\\", 1).replace("log", "root")
+        #三角関数
+        tex = tex.replace("sin", "\\sin").replace("cos", "\\cos").replace("tan", "\\tan")
+        #逆三角関数
+        tex = tex.replace("asin", "\\arcsin").replace("acos", "\\arccos").replace("atan", "\\arctan")
+        print(tex)
+
     elif event in 'IN+FOCUS IN+':
         sg.popup_ok('フォーカスされました。')
         break

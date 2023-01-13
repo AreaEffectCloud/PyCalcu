@@ -42,9 +42,16 @@ sum_tab = ["sum_end", "sum_func", "sum_start", "sum_formula"]
 diff_tab = ["diff_formula"]
 integral_tab = ["integral_end", "integral_start", "integral_formula"]
 
-#LiteralString -> r"""$${result_tex}$$"""
+#LiteralString ->return: r"""$${latex}$$"""
+tex = ""
 def transfer_latex(text):
-    return text
+    tex = text.replcae("²", "^{2}")
+    #tex = tex.replace("√", "\\sqrt").replace("∞", "\\infty").replace("π", "\\pi").replace("log", "\\log")
+    #三角関数
+    tex = tex.replace("sin", "\\sin").replace("cos", "\\cos").replace("tan", "\\tan")
+    #逆三角関数
+    tex = tex.replace("asin", "\\arcsin").replace("acos", "\\arccos").replace("atan", "\\arctan")
+    return tex
     
 #def autosize_latex(LiteralString):
     #行列
