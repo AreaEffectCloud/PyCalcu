@@ -1,6 +1,23 @@
 """ disabled=True でボタン自体の操作を無効化する"""
 import PySimpleGUI as sg
 
+import re
+string = r"\sin{x^{2}} ＋ e / {\pi / {25 / {\cos{\theta}}}}"
+#pattern = "[＋－×]{1} [^/]+ [/] [{] [^/]+ [}]"
+pattern = "[＋－][^/]+[^}]+"
+
+res = re.search(pattern, string)
+print(res, " || ", pattern)
+#match='＋ e / {\\pi / {25 / {\\cos{\\theta'
+
+#分子
+numerator = ""
+#分母
+denominator = ""
+frac = res.group().replace("", "") #type:ignore
+
+#\frac{分子}{分母}
+
 sg.theme("Default1")
 font = ('HGS明朝B', 24)
 layout = [
@@ -24,7 +41,7 @@ while True:
 
         text = "\\sin^{2}{\\left(x \\right)} - \\cos^{2}{\\left(x \\right)}"
 
-        tex = text.replace("\\\\", "\\", 1).replace("log", "root")
+        tex = text.replace("\\\\", "\\")
         #三角関数
         tex = tex.replace("sin", "\\sin").replace("cos", "\\cos").replace("tan", "\\tan")
         #逆三角関数

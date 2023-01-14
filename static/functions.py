@@ -51,6 +51,7 @@ def transfer_latex(text):
     tex = tex.replace("asin", "\\arcsin").replace("acos", "\\arccos").replace("atan", "\\arctan")
     #三角関数
     tex = tex.replace("sin", "\\sin").replace("cos", "\\cos").replace("tan", "\\tan")
+    #分数
     return tex
     
 #def autosize_latex(LiteralString):
