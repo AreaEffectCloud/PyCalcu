@@ -2,19 +2,30 @@
 import PySimpleGUI as sg
 
 import re
-string = r"\sin{x^{2}} ＋ e / {\pi / {25 / {\cos{\theta}}}}"
+#分数有式
+string = "\\sin{x^{2}} ＋ e / {\\pi / {25 / {\\cos{\\theta}}}}"
+
 #pattern = "[＋－×]{1} [^/]+ [/] [{] [^/]+ [}]"
 pattern = "[＋－][^/]+[^}]+"
 
-res = re.search(pattern, string)
-print(res, " || ", pattern)
-#match='＋ e / {\\pi / {25 / {\\cos{\\theta'
+res_frac = re.search(pattern, string)
+print(res_frac, " || ", pattern)
+match_res = res_frac.group() #type:ignore
+print(match_res, " |||||| ")
+#＋ e / {\pi / {25 / {\cos{\theta
 
 #分子
-numerator = ""
-#分母
-denominator = ""
-frac = res.group().replace("", "") #type:ignore
+string = str(match_res).replace("\\", "\\\\")
+#＋ e / {\\pi / {25 / {\\cos{\\theta
+pattern = "[^{]+"
+#search(パターン, 参照する文字列)
+res = re.search(pattern, string)
+print(string, " ||| Pattern: ", pattern, " ||| ", res)
+bunshi = res.group().replace("＋ ", "").replace("－ ", "").replace("/", "")#type:ignore
+bunbo = res_frac.group().replace(res.group(), "")#type:ignore
+print("分子 : ", bunshi, "\n分母 : ", bunbo)
+
+#frac = res.group().replace("", "")
 
 #\frac{分子}{分母}
 
