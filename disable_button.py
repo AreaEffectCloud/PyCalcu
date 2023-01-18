@@ -1,38 +1,3 @@
-import re
-#分数有式
-string = r"\sin{x^{2}} / {e^{\pi}}"
-string = r"\sin{\pi^{2}} － 1 / {x} = 25 ＋ e / {\pi ＋ {25 / {\cos{\theta}}}}"
-
-pattern = r"[＋－][^/]+[^}]+"
-#演算記号で分割 -> 分数の抽出
-split_formula = re.split(r"[＋－=]", string)
-print("Split : ", split_formula)
-#Split :  ['\\sin{\\pi^{2}} ', ' 1 / {x} ', ' 25 ', ' e / {\\pi / {25 / {\\cos{\\theta}}}}']
-
-#項で分割
-for i in split_formula:
-    try:
-        pattern = "[^/]+[^}]+"
-        res = re.search(pattern, i).group() #type:ignore
-        
-        #更に分数がある場合
-        if res.__contains__("/"):
-            print("\n", res)
-            res = res.replace("\\", "\\\\")
-            bunshi_pattern = "[^{]+"
-            frac = re.search(bunshi_pattern, res).group() #type:ignore
-            bunshi = frac.replace("/", "")
-            bunbo = res.replace(frac, "")
-            bunbo = bunbo.lstrip("{")
-            print("\n分子 : ", bunshi, "\n分母 : ", bunbo)
-            print("\n \\frac{{{0}}}{{{1}".format(bunshi, bunbo))
-
-            #if bunbo.__contains__("/"):
-    except:
-        break
-
-# \frac{e  }{{\pi / {25 / {\cos{\theta
-
 """ disabled=True でボタン自体の操作を無効化する"""
 import PySimpleGUI as sg
 

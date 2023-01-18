@@ -56,10 +56,10 @@ alphabet_layout = [
     for i in btns_horizon] for btns_horizon in btns_al], expand_x=True)]
 ]
 
-brackets = ["root", "power", "log", "sin", "cos", "tan", "asin", "acos", "atan"]
+brackets = ["devide", "root", "power", "log", "sin", "cos", "tan", "asin", "acos", "atan"]
 
 all_btns_keys = ["e", "pi", "theta", "infty", "seven",
-            "eight", "nine", "devide", "four", "five", "six", "multi", "one", "two", "three", "minus", "zero", "left_brackets", "right_brackets", "plus",
+            "eight", "nine", "four", "five", "six", "multi", "one", "two", "three", "minus", "zero", "left_brackets", "right_brackets", "plus",
             "alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta", "iota", "kappa", "lambda", "mu", "xi", "rho", "sigma", "tau", "upsilon", "phi", "chi", "psi",
             "a", "b", "c", "d", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 

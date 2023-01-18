@@ -64,39 +64,39 @@ while True:
     elif event == "allclear":
         if focus in limit_tab:
             for box in limit_tab:
-                window["{i}".format(i=box)].update(space) #type:ignore
+                window["{0}".format(box)].update(space) #type:ignore
         elif focus in sum_tab:
             for box in sum_tab:
-                window["{i}".format(i=box)].update(space) #type:ignore
+                window["{0}".format(box)].update(space) #type:ignore
         elif focus in diff_tab:
             for box in diff_tab:
-                window["{i}".format(i=box)].update(space) #type:ignore
+                window["{0}".format(box)].update(space) #type:ignore
         elif focus in integral_tab:
             for box in integral_tab:
-                window["{i}".format(i=box)].update(space) #type:ignore
+                window["{0}".format(box)].update(space) #type:ignore
     
     #括弧含む
     elif event in brackets:
         if focus != "":
-            text = values["{i}".format(i=focus)]
+            text = values["{0}".format(focus)]
             text = text + window[event].get_text() + "{" #type:ignore
-            window["{i}".format(i=focus)].update(text) # type: ignore
+            window["{0}".format(focus)].update(text) # type: ignore
 
     #Other Bottons
     elif event in all_btns_keys:
         if focus != "":
-            text = values["{i}".format(i=focus)]
+            text = values["{0}".format(focus)]
             #values[event] occur error
             text = text + window[event].get_text() #type:ignore
-            window["{i}".format(i=focus)].update(text) # type: ignore
+            window["{0}".format(focus)].update(text) # type: ignore
     
     #2乗
     elif event in "power_twice":
         if focus != "":
-            text = values["{i}".format(i=focus)]
+            text = values["{0}".format(focus)]
             if text != "":
                 text = text + "²"
-                window["{i}".format(i=focus)].update(text) # type: ignore
+                window["{0}".format(focus)].update(text) # type: ignore
     
     #Add
     elif event in "add_limit":
