@@ -4,15 +4,13 @@ import re
 string = r"\sin{\pi^{2}} － 1 / {x} = 25 ＋ e / {\pi ＋ {25 / {\cos{\theta}}}}"
 string = r"1 / {x ＋ \pi} = 25 ＋ e / {\pi ＋ {25 / 2021}}"
 
-#分子の中に演算記号があるかどうか
-pattern = r"/ {.*?[^}][＋－]" # / {.*? ＋－ .*?}
-
-plus_in_frac = re.search(pattern, string).group() #type:ignore
-plus = plus_in_frac.replace("＋", "+(Edited)")
-print("分数中の演算: ", plus_in_frac)
-
-string = string.replace(plus_in_frac, plus)
-print(string)
+#分子中に於ける演算記号の有無
+pattern = r"/ {[^}]+[＋－]"
+plus_in_frac = re.findall(pattern, string)
+for i in plus_in_frac:
+    plus = str(i).replace("＋", "+(Edited)")
+    string = string.replace(i, plus)
+    print("Match: ", i, " || Pattern: ", pattern, " || 結果: ", string)
 
 regex = r"[＋－=]"
 split_formula = re.split(regex, string)

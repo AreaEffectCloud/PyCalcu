@@ -5,7 +5,7 @@ string = r"\sin{\pi^{2}} － 1 / {x} = 25 ＋ e / {\pi ＋ {25 / {\cos{\theta}}}
 
 pattern = r"[＋－][^/]+[^}]+"
 #演算記号で分割 -> 分数の抽出
-split_formula = re.split(r"[^/]{0} {.{0} [＋－=] [^}]{0}", string)
+split_formula = re.split(r"[＋－=]", string)
 print("Split : ", split_formula)
 #Split :  ['\\sin{\\pi^{2}} ', ' 1 / {x} ', ' 25 ', ' e / {\\pi / {25 / {\\cos{\\theta}}}}']
 
