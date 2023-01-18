@@ -53,6 +53,11 @@ def transfer_latex(text):
     tex = tex.replace("sin", "\\sin").replace("cos", "\\cos").replace("tan", "\\tan")
     #分数
     return tex
+
+# "/" が2つ以上
+def frac(formula):
+    #\\pi / {25 / {\\cos{\\theta
+    formula
     
 #def autosize_latex(LiteralString):
     #定積分

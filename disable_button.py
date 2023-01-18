@@ -1,33 +1,40 @@
-""" disabled=True でボタン自体の操作を無効化する"""
-import PySimpleGUI as sg
-
 import re
 #分数有式
-string = "\\sin{x^{2}} ＋ e / {\\pi / {25 / {\\cos{\\theta}}}}"
+string = r"\sin{x^{2}} / {e^{\pi}}"
+string = r"\sin{\pi^{2}} － 1 / {x} = 25 ＋ e / {\pi ＋ {25 / {\cos{\theta}}}}"
 
-#pattern = "[＋－×]{1} [^/]+ [/] [{] [^/]+ [}]"
-pattern = "[＋－][^/]+[^}]+"
+pattern = r"[＋－][^/]+[^}]+"
+#演算記号で分割 -> 分数の抽出
+split_formula = re.split(r"[^/]{0} {.{0} [＋－=] [^}]{0}", string)
+print("Split : ", split_formula)
+#Split :  ['\\sin{\\pi^{2}} ', ' 1 / {x} ', ' 25 ', ' e / {\\pi / {25 / {\\cos{\\theta}}}}']
 
-res_frac = re.search(pattern, string)
-print(res_frac, " || ", pattern)
-match_res = res_frac.group() #type:ignore
-print(match_res, " |||||| ")
-#＋ e / {\pi / {25 / {\cos{\theta
+#項で分割
+for i in split_formula:
+    try:
+        pattern = "[^/]+[^}]+"
+        res = re.search(pattern, i).group() #type:ignore
+        
+        #更に分数がある場合
+        if res.__contains__("/"):
+            print("\n", res)
+            res = res.replace("\\", "\\\\")
+            bunshi_pattern = "[^{]+"
+            frac = re.search(bunshi_pattern, res).group() #type:ignore
+            bunshi = frac.replace("/", "")
+            bunbo = res.replace(frac, "")
+            bunbo = bunbo.lstrip("{")
+            print("\n分子 : ", bunshi, "\n分母 : ", bunbo)
+            print("\n \\frac{{{0}}}{{{1}".format(bunshi, bunbo))
 
-#分子
-string = str(match_res).replace("\\", "\\\\")
-#＋ e / {\\pi / {25 / {\\cos{\\theta
-pattern = "[^{]+"
-#search(パターン, 参照する文字列)
-res = re.search(pattern, string)
-print(string, " ||| Pattern: ", pattern, " ||| ", res)
-bunshi = res.group().replace("＋ ", "").replace("－ ", "").replace("/", "")#type:ignore
-bunbo = res_frac.group().replace(res.group(), "")#type:ignore
-print("分子 : ", bunshi, "\n分母 : ", bunbo)
+            #if bunbo.__contains__("/"):
+    except:
+        break
 
-#frac = res.group().replace("", "")
+# \frac{e  }{{\pi / {25 / {\cos{\theta
 
-#\frac{分子}{分母}
+""" disabled=True でボタン自体の操作を無効化する"""
+import PySimpleGUI as sg
 
 sg.theme("Default1")
 font = ('HGS明朝B', 24)

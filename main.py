@@ -80,7 +80,7 @@ while True:
         if focus != "":
             text = values["{i}".format(i=focus)]
             text = text + window[event].get_text() + "{" #type:ignore
-            window["{i}".format(i=focus)].update(text)
+            window["{i}".format(i=focus)].update(text) # type: ignore
 
     #Other Bottons
     elif event in all_btns_keys:
@@ -88,7 +88,7 @@ while True:
             text = values["{i}".format(i=focus)]
             #values[event] occur error
             text = text + window[event].get_text() #type:ignore
-            window["{i}".format(i=focus)].update(text)
+            window["{i}".format(i=focus)].update(text) # type: ignore
     
     #2乗
     elif event in "power_twice":
@@ -96,7 +96,7 @@ while True:
             text = values["{i}".format(i=focus)]
             if text != "":
                 text = text + "²"
-                window["{i}".format(i=focus)].update(text)
+                window["{i}".format(i=focus)].update(text) # type: ignore
     
     #Add
     elif event in "add_limit":
