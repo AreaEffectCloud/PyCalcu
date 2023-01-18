@@ -53,6 +53,10 @@ for i in split_formula:
                     bunbo = bunbo.replace(i, plus)
                     print("Match: ", i, " || Pattern: ", pattern, " || 結果: ", bunbo)
 
+                regex = r"[＋－=]"
+                split_formula = re.split(regex, bunbo)
+                print("Split : ", split_formula)
+
     except:
         break
 
