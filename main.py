@@ -44,6 +44,8 @@ set_bind(window)
 # -------------------------------------
 focus = ""
 space = ""
+diff_selected = "x"
+integral_selected = "dx"
 while True:
 
     event, values = window.read() #type:ignore
@@ -51,9 +53,13 @@ while True:
     if event == sg.WIN_CLOSED:
         break
     #Diff / Change Image
-    elif event == "diff_select":
-        selected = values["diff_select"]
-        window["diff_img"].update(filename="images/diff/diff_{i}.png".format(i=selected))
+    elif event in "diff_select":
+        diff_selected = values["diff_select"]
+        window["diff_img"].update(filename="images/diff/diff_{0}.png".format(diff_selected))
+
+    #Integral /
+    elif event in "integral_select":
+        integral_selected = values["integral_select"]
 
     #get Focus
     elif event in binds:
@@ -79,7 +85,7 @@ while True:
     elif event in brackets:
         if focus != "":
             text = values["{0}".format(focus)]
-            text = text + window[event].get_text() + "{" #type:ignore
+            text = text + window[event].get_text() + "(" #type:ignore
             window["{0}".format(focus)].update(text) # type: ignore
 
     #Other Bottons
@@ -99,18 +105,23 @@ while True:
                 window["{0}".format(focus)].update(text) # type: ignore
     
     #Add
+    #極限
     elif event in "add_limit":
         if values["limit_formula"] != "":
+            #All
             if values["limit_start"] != "" and values["limit_end"] != "":
                 window["output_tex"].update(space) #type:ignore
-                #tex = "\\lim_{{0} \to {1}}{2}".format(values["limit_start"], values["limit_end"], values["limit_formula"])
+                tex_start = transform_latex(values["limit_start"])
+                tex_end = transform_latex(values["limit_end"])
+                tex_formula = transform_latex(values["limit_formula"])
 
-                print(values["limit_start"], values["limit_end"], values["limit_formula"])
+                limit_tex = r"\lim_{{ {0} \to {1} }}{{{2}}}".format(tex_start, tex_end, tex_formula)
 
-            if values["limit_start"] == "" and values["limit_end"] == "":
+            elif values["limit_start"] == "" and values["limit_end"] == "":
                 window["output_tex"].update(space) #type:ignore
-                print(transfer_latex(values["limit_formula"]))
+                tex = transform_latex(values["limit_formula"])
 
+    #数列
     elif event in "add_sum":
         if values["sum_formula"] != "":
             if values["sum_func"] != "":
@@ -121,22 +132,32 @@ while True:
                 elif values["sum_end"] != "" and values["sum_start"] != "":
                     print()
 
-
+    #微分
     elif event in "add_diff":
         if values["diff_formula"] != "":
-            formula = r"""$${i}$$""".format(i=values["diff_formula"])
-            print(formula)
-            
+            window["output_tex"].update(space) #type:ignore
+            diff = transform_latex(values["diff_formula"])
+            diff_tex = r"\frac{{d}}{{d{0}}}{{{1}}}".format(diff_selected, diff)
+            print(diff_tex)
+
+    #積分   
     elif event in "add_integral":
         if values["integral_formula"] != "":
             if values["integral_start"] != "" and values["integral_end"] != "":
                 #定積分
-                formula = values["integral_formula"]
+                tex_start = transform_latex(values["integral_start"])
+                tex_end = transform_latex(values["integral_end"])
+                tex_formula = transform_latex(values["integral_formula"])
+                integral_int_tex = r"\int\limits_{{{0}}}^{{{1}}}{{{2}}}{{{3}}}".format(tex_start, tex_end, tex_formula, integral_selected)
+
+                print(integral_int_tex)
             
             elif values["integral_start"] == "" and values["integral_end"] == "":
                 #不定積分
-                formula = values["integral_formula"]
-
+                tex_formula = transform_latex(values["integral_formula"])
+                integral_tex = r"\int\limits_{{}}^{{}}{{{0}}}{1}".format(tex_formula, integral_selected)
+                print(integral_tex)
+                
     #Clear
     elif event in clear_btn:
         if focus != "":

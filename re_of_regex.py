@@ -1,20 +1,20 @@
 import re
-from static.functions import *
 
 #分数有式
 string = r"\sin{\pi^{2}} － 1 / {x} = 25 ＋ e / {\pi ＋ {25 / {\cos{\theta}}}}"
 #string = r"1 / {x ＋ \pi} = 25 ＋ e / {\pi ＋ {25 / 2021}}"
 #string = r"100/{\pi ＋ e}"
+string = r"e ＋ 25 / {\cos\zeta ＋ \pi / {\tan{\theta}}}"
 
 print("[ Formula : ] ", string)
 
-#分子中に於ける演算記号の有無
-pattern = r"/\s*?{[^}]+[＋－]"
-plus_in_frac = re.findall(pattern, string)
+#分子、分母に於ける演算記号の有無
+ptn_numerator = r"(/\s*?{[^}]+[＋－]) | ([＋－=]\s*?.*?\s*?/)"
+plus_in_frac = re.findall(ptn_numerator, string)
 for i in plus_in_frac:
     plus = str(i).replace("＋", "+")
     string = string.replace(i, plus)
-    print("Match: ", i, " || Pattern: ", pattern, " || 結果: ", string)
+    print("Match: ", i, " || Pattern: ", ptn_numerator, " || 結果: ", string)
 
 regex = r"[＋－=]"
 split_formula = re.split(regex, string)
@@ -29,9 +29,7 @@ for i in split_formula:
         #分数がある場合
         if res.__contains__("/"):
             print("\n 分数: ", res)
-            res = res.replace("\\\\", "")
             print("Before add \" \\ \" : ", res)
-            res = res.replace("\\", "\\\\")
             bunshi_pattern = "[^{]+"
             frac = re.search(bunshi_pattern, res).group() #type:ignore
             bunshi = frac.replace("/", "")
@@ -43,7 +41,7 @@ for i in split_formula:
             #\\pi + {25 / {\\cos{\\theta
             if bunbo.__contains__("/"):
                 bunbo = bunbo.replace("\\\\", "\\")
-                print("[Not edit yet]", bunbo)
+                print("\n[Not edit yet]", bunbo)
 
                 #分子中に於ける演算記号の有無
                 pattern = r"/\s*?{[^}]+[＋－]"
@@ -56,12 +54,8 @@ for i in split_formula:
                 regex = r"[＋－=]"
                 split_formula = re.split(regex, bunbo)
                 print("Split : ", split_formula)
-
     except:
         break
-
-string = r"1 / {x ＋ \pi} = 25 ＋ e / {\pi ＋ {25 / 2021}}"
-#print("関数: \n", transfer_frac(string))
 
 ##### Regex #####
 # . : 任意の1文字

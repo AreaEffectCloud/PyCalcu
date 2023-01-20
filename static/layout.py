@@ -19,9 +19,9 @@ SPACE = (0, 1)
 #Normal
 normal_2 = {"power_twice":"x²", "e":"e", "pi":"π", "theta":"θ", "infty":"∞"}
 normal_3 = {"root":"√", "seven":"7", "eight":"8", "nine":"9", "devide":"/"}
-normal_4 = {"power":"^", "four":"4", "five":"5", "six":"6", "minus":"－"}
-normal_5 = {"log":"log", "one":"1", "two":"2", "three":"3", "plus":"＋"}
-normal_6 = {"allclear":"AC", "zero":"0", "left_brackets":"{", "right_brackets":"}", "eq":"="}
+normal_4 = {"power":"^", "four":"4", "five":"5", "six":"6", "multi":"*"}
+normal_5 = {"log":"log", "one":"1", "two":"2", "three":"3", "minus":"－"}
+normal_6 = {"allclear":"AC", "zero":"0", "left_brackets":"(", "right_brackets":")", "plus":"＋"}
 
 btns = [normal_2, normal_3, normal_4, normal_5, normal_6]
 normal_layout = [
@@ -58,10 +58,10 @@ alphabet_layout = [
 
 brackets = ["devide", "root", "power", "log", "sin", "cos", "tan", "asin", "acos", "atan"]
 
-all_btns_keys = ["e", "pi", "theta", "infty", "seven",
-            "eight", "nine", "four", "five", "six", "multi", "one", "two", "three", "minus", "zero", "left_brackets", "right_brackets", "plus",
+all_btns_keys = ["pi", "theta", "infty", "seven",
+            "eight", "nine", "four", "five", "six", "one", "two", "three", "zero", "left_brackets", "right_brackets", "minus", "plus", "multi",
             "alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta", "iota", "kappa", "lambda", "mu", "xi", "rho", "sigma", "tau", "upsilon", "phi", "chi", "psi",
-            "a", "b", "c", "d", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+            "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
 clear_btn = ["delete_limit", "delete_sum", "delete_diff", "delete_integral", "delete_matrix"]
 
