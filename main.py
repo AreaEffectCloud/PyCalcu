@@ -115,10 +115,11 @@ while True:
                 tex_end = transform_latex(values["limit_end"])
                 tex_formula = transform_latex(values["limit_formula"])
 
-                limit_tex = r"\lim_{{ {0} \to {1} }}{{{2}}}".format(tex_start, tex_end, tex_formula)
+                limit_tex = r"\lim_{{{0}\to{1}}}{{{2}}}".format(tex_start, tex_end, tex_formula)
 
             elif values["limit_start"] == "" and values["limit_end"] == "":
                 window["output_tex"].update(space) #type:ignore
+                #一般方程式
                 tex = transform_latex(values["limit_formula"])
 
     #数列
@@ -127,10 +128,26 @@ while True:
             if values["sum_func"] != "":
                 #関数のみの数列
                 if values["sum_end"] == "" and values["sum_start"] == "":
-                    print()
+                    window["output_tex"].update(space) #type:ignore
+                    tex_func = transform_latex(values["sum_func"])
+                    tex_formula = transform_latex(values["sum_formula"])
+
+                    sum_func_tex = r"\sum_{{{0}=}}^{{}}{{{1}}}".format(tex_func, tex_formula)
+
                 #全て入力された状態
                 elif values["sum_end"] != "" and values["sum_start"] != "":
-                    print()
+                    window["output_tex"].update(space) #type:ignore
+                    tex_func = transform_latex(values["sum_func"])
+                    tex_start = transform_latex(values["sum_start"])
+                    tex_end = transform_latex(values["sum_end"])
+                    tex_formula = transform_latex(values["sum_formula"])
+
+                    sum_tex = r"\sum_{{{0}={1}}}^{{{2}}}{{{3}}}".format(tex_func, tex_start, tex_end, tex_formula)
+
+            elif values["sum_func"] == "" and values["sum_end"] == "" and values["sum_start"] == "":
+                window["output_tex"].update(space) #type:ignore
+                #一般方程式
+                tex = transform_latex(values["sum_formula"])
 
     #微分
     elif event in "add_diff":
@@ -144,6 +161,7 @@ while True:
     elif event in "add_integral":
         if values["integral_formula"] != "":
             if values["integral_start"] != "" and values["integral_end"] != "":
+                window["output_tex"].update(space) #type:ignore
                 #定積分
                 tex_start = transform_latex(values["integral_start"])
                 tex_end = transform_latex(values["integral_end"])
@@ -153,6 +171,7 @@ while True:
                 print(integral_int_tex)
             
             elif values["integral_start"] == "" and values["integral_end"] == "":
+                window["output_tex"].update(space) #type:ignore
                 #不定積分
                 tex_formula = transform_latex(values["integral_formula"])
                 integral_tex = r"\int\limits_{{}}^{{}}{{{0}}}{1}".format(tex_formula, integral_selected)
@@ -162,26 +181,5 @@ while True:
     elif event in clear_btn:
         if focus != "":
             window["{i}".format(i=focus)].update(space) #type:ignore
-
-    #Waste
-    elif event == "integral_btn":
-        y= sympy.E ** (-2 * x) * sympy.sin(3 * x) #type:ignore
-        result_tex = sympy.latex((sympy.integrate(y, x)).doit())
-
-        F2 = x ** 5 + x + 1
-        tex_result = sympy.latex((sympy.solve(F2, x)))
-
-        #tex
-        if multiline_formula_tex.do_not_clear == None:
-            print(f" + ", tex_result) 
-        else: print(tex_result)
-
-        ##積分定数は加えずに表示
-        latex_result = r"""$${tex}$$""".format(tex=tex_result)
-        image_result = sympy.preview(latex_result, viewer="file", filename="result.png", euler=False, dvioptions=["-T", "tight", "-z", "0", "--truecolor", "-D 600"])
-        print(f're'.format(result_tex))
-
-        window["output_tex"].print(tex_result) #type:ignore
-        print(f"途中式は、 ", values["output_tex"], " です。")
 
 window.close()
