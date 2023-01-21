@@ -79,7 +79,7 @@ right = [
     #上部分の調整
     [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
     [sg.Text("  ", background_color=COLOR, font=BTNS_FONT)],
-    [sg.Multiline("", font=INPUT_FONT, size=(20, 2), key="limit_formula")],
+    [sg.Multiline("", font=INPUT_FONT, size=(20, 2), key="limit_formula", expand_x=True)],
     #Tab内のサイズを調整
     [sg.Text("  ", background_color=COLOR, font=FONT)],
     [sg.Button("Add", font=BTNS_FONT, size=SIZE, key="add_limit"), 
@@ -100,7 +100,7 @@ left = [
 right = [
     [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
     [sg.Text("  ", background_color=COLOR, font=BTNS_FONT)],
-    [sg.Multiline("", font=INPUT_FONT, size=(20, 2), key="sum_formula")],
+    [sg.Multiline("", font=INPUT_FONT, size=(20, 2), key="sum_formula", expand_x=True)],
     [sg.Text("  ", background_color=COLOR, font=FONT)],
     [sg.Button("Add", font=BTNS_FONT, size=SIZE, key="add_sum"), 
      sg.Button("Clear", font=BTNS_FONT, key="delete_sum")]
@@ -125,7 +125,7 @@ right = [
      sg.Column([
         [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
         [sg.Text("  ", background_color=COLOR, font=BTNS_FONT)],
-        [sg.Multiline("", font=INPUT_FONT, size=(20, 2), key="diff_formula")],
+        [sg.Multiline("", font=INPUT_FONT, size=(20, 2), key="diff_formula", expand_x=True)],
         [sg.Text("  ", background_color=COLOR, font=FONT)],
         [sg.Button("Add", font=BTNS_FONT, size=SIZE, key="add_diff"), 
          sg.Button("Clear", font=BTNS_FONT, key="delete_diff")],
@@ -157,7 +157,7 @@ left = [
 right = [
     [sg.Text("  ", background_color=COLOR, font=INPUT_FONT)],
     [sg.Text("  ", background_color=COLOR, font=BTNS_FONT)],
-    [sg.Multiline("", font=INPUT_FONT, size=(20, 2), key="integral_formula")],
+    [sg.Multiline("", font=INPUT_FONT, size=(20, 2), key="integral_formula", expand_x=True)],
     [sg.Text("  ", background_color=COLOR, font=FONT)],
     [sg.Button("Add", font=BTNS_FONT, size=SIZE, key="add_integral"), 
      sg.Button("Clear", font=BTNS_FONT, key="delete_integral")],
