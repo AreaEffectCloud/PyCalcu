@@ -50,12 +50,24 @@ def transform_latex(text):
         formula = sympify(text, convert_xor=True, evaluate=True)
         text = sympy.latex(formula)
     except:
+        #How to show the error that is format error
         print(f"Fromat error")
     return text
 
-#def autosize_latex(LiteralString):
+# formula : r"{\frac{}{}}"
+def autosize_latex(formula):
+    sympy.preview(formula, viewer="file", filename="formula.png", euler=False, dvioptions=["-T", "tight", "-z", "0", "--truecolor", "-D 600"])
+
+    im = Image.open("result.png")
+    size = (300, 200)
+    im.thumbnail(size, Image.ANTIALIAS)
+    out_dim = im.size
+    out_name = "resized-" + str(out_dim[0]) + "-" + str(out_dim[1]) + ".png"
+    im.save(out_name, "PNG")
+    im.close()
+    
+    #極限
+    #数列
     #定積分
     #不定積分
-    #数列
-    #極限
     #方程式

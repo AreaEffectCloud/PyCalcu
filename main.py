@@ -9,7 +9,9 @@ sg.theme("Reddit")
 ##### ##### Layout  #####  #####
 
 #must resize
-image_formula_latex_column = sg.Image(filename="result.png", key="image_formula_latex")
+image_formula_latex_column = sg.Column([
+    [sg.Image(filename="result.png", key="image_formula_latex", expand_x=True, expand_y=True)]
+    ], scrollable=True, element_justification='c', expand_x=True, expand_y=True)
 
 #####   Tab Group #####
 main_column_left_tabs = sg.TabGroup([[
@@ -30,20 +32,20 @@ multiline_formula_tex = sg.Output(key='output_tex', font=FONT_output, pad=((0, 0
 output_frame = sg.Frame(output_frame_title[lang], [[multiline_formula_tex]], font=FONT_output, expand_x=True)
 
 #レイアウト
-layout = [ [output_frame], 
-            [main_column_left_tabs, main_column_right_tabs],
-            #[sg.Column([[image_formula_latex_column]],  justification='center', scrollable=True)]
-            ]
+layout = [[output_frame], 
+          [main_column_left_tabs, main_column_right_tabs],
+          [image_formula_latex_column]
+         ]
 
 window = sg.Window(title[lang], layout, icon="", use_default_focus=False, resizable=True, finalize=True)
 
 set_bind(window)
-
 # -------------------------------------
 #           イベント毎の処理
 # -------------------------------------
 focus = ""
 space = ""
+index = 0
 diff_selected = "x"
 integral_selected = "dx"
 while True:
@@ -121,6 +123,7 @@ while True:
                 window["output_tex"].update(space) #type:ignore
                 #一般方程式
                 tex = transform_latex(values["limit_formula"])
+                autosize_latex(tex)
 
     #数列
     elif event in "add_sum":
