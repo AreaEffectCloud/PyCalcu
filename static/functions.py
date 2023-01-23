@@ -58,9 +58,12 @@ def transform_latex(text):
 def autosize_latex(formula):
     sympy.preview(formula, viewer="file", filename="formula.png", euler=False, dvioptions=["-T", "tight", "-z", "0", "--truecolor", "-D 600"])
 
-    im = Image.open("result.png")
-    size = (300, 200)
-    im.thumbnail(size, Image.ANTIALIAS)
+    #画像の大きさに応じて、縦を調整
+    im = Image.open("formula.png")
+    width, height = im.size
+    print("Width : ", width, "Height : ", height)
+    size = (650, width)
+    im.thumbnail(size)
     out_dim = im.size
     out_name = "resized-" + str(out_dim[0]) + "-" + str(out_dim[1]) + ".png"
     im.save(out_name, "PNG")
@@ -71,3 +74,8 @@ def autosize_latex(formula):
     #定積分
     #不定積分
     #方程式
+
+wave = r"""$$\frac{\partial^2 u}{\partial t^2}=c^2\left(\frac{\partial^2 u}{\partial x^2}+\frac{\partial^2 u}{\partial y^2}\right)$$"""
+int = r"""$$\int\limits_{}^{}{y^{64} - \frac{y^{π}}{\log{\left(y + y² \right)}}}dx$$"""
+frac = r"""$$\int\limits_{0}^{1}{- \frac{π}{2}}dx\\$$"""
+autosize_latex(frac)

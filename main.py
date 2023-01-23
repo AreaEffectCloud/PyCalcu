@@ -10,8 +10,8 @@ sg.theme("Reddit")
 
 #must resize
 image_formula_latex_column = sg.Column([
-    [sg.Image(filename="result.png", key="image_formula_latex", expand_x=True, expand_y=True)]
-    ], scrollable=True, element_justification='c', expand_x=True, expand_y=True)
+    [sg.Image(filename="resized-650-160.png", key="image_formula_latex", expand_y=True)]
+    ], element_justification='c', vertical_alignment='center', expand_x=True, expand_y=True, visible=True)
 
 #####   Tab Group #####
 main_column_left_tabs = sg.TabGroup([[
