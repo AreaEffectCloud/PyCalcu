@@ -10,8 +10,8 @@ sg.theme("Reddit")
 
 #must resize
 image_formula_latex_column = sg.Column([
-    [sg.Image(filename="resized-650-160.png", key="image_formula_latex", expand_y=True)]
-    ], element_justification='c', vertical_alignment='center', expand_x=True, expand_y=True, visible=True)
+    [sg.Image(filename="formula.png", key="image_formula_latex", expand_y=True)]
+    ], element_justification='c', vertical_alignment='center', expand_x=True, expand_y=True, visible=False)
 
 #####   Tab Group #####
 main_column_left_tabs = sg.TabGroup([[
@@ -117,13 +117,15 @@ while True:
                 tex_end = transform_latex(values["limit_end"])
                 tex_formula = transform_latex(values["limit_formula"])
 
-                limit_tex = r"\lim_{{{0}\to{1}}}{{{2}}}".format(tex_start, tex_end, tex_formula)
+                limit_tex = r"""$$\lim_{{{0}\to{1}}}{{{2}}}$$""".format(tex_start, tex_end, tex_formula)
+                print(limit_tex)
 
             elif values["limit_start"] == "" and values["limit_end"] == "":
                 window["output_tex"].update(space) #type:ignore
                 #一般方程式
-                tex = transform_latex(values["limit_formula"])
-                autosize_latex(tex)
+                tex = r"""$${0}$$""".format(transform_latex(values["limit_formula"]))
+                print(tex)
+                #autosize_latex(tex)
 
     #数列
     elif event in "add_sum":
@@ -132,10 +134,10 @@ while True:
                 #関数のみの数列
                 if values["sum_end"] == "" and values["sum_start"] == "":
                     window["output_tex"].update(space) #type:ignore
-                    tex_func = transform_latex(values["sum_func"])
+                    tex_func = values["sum_func"]
                     tex_formula = transform_latex(values["sum_formula"])
 
-                    sum_func_tex = r"\sum_{{{0}=}}^{{}}{{{1}}}".format(tex_func, tex_formula)
+                    sum_func_tex = r"""$$\sum_{{{0}=}}^{{}}{{{1}}}$$""".format(tex_func, tex_formula)
 
                 #全て入力された状態
                 elif values["sum_end"] != "" and values["sum_start"] != "":
@@ -145,19 +147,19 @@ while True:
                     tex_end = transform_latex(values["sum_end"])
                     tex_formula = transform_latex(values["sum_formula"])
 
-                    sum_tex = r"\sum_{{{0}={1}}}^{{{2}}}{{{3}}}".format(tex_func, tex_start, tex_end, tex_formula)
+                    sum_tex = r"""$$\sum_{{{0}={1}}}^{{{2}}}{{{3}}}$$""".format(tex_func, tex_start, tex_end, tex_formula)
 
             elif values["sum_func"] == "" and values["sum_end"] == "" and values["sum_start"] == "":
                 window["output_tex"].update(space) #type:ignore
                 #一般方程式
-                tex = transform_latex(values["sum_formula"])
+                tex = r"""$${0}$$""".format(transform_latex(values["limit_formula"]))
 
     #微分
     elif event in "add_diff":
         if values["diff_formula"] != "":
             window["output_tex"].update(space) #type:ignore
             diff = transform_latex(values["diff_formula"])
-            diff_tex = r"\frac{{d}}{{d{0}}}{{{1}}}".format(diff_selected, diff)
+            diff_tex = r"""$$\frac{{d}}{{d{0}}}{{{1}}}$$""".format(diff_selected, diff)
             print(diff_tex)
 
     #積分   
@@ -169,7 +171,7 @@ while True:
                 tex_start = transform_latex(values["integral_start"])
                 tex_end = transform_latex(values["integral_end"])
                 tex_formula = transform_latex(values["integral_formula"])
-                integral_int_tex = r"\int\limits_{{{0}}}^{{{1}}}{{{2}}}{{{3}}}".format(tex_start, tex_end, tex_formula, integral_selected)
+                integral_int_tex = r"""$$\int\limits_{{{0}}}^{{{1}}}{{{2}}}{{{3}}}$$""".format(tex_start, tex_end, tex_formula, integral_selected)
 
                 print(integral_int_tex)
             
@@ -177,7 +179,7 @@ while True:
                 window["output_tex"].update(space) #type:ignore
                 #不定積分
                 tex_formula = transform_latex(values["integral_formula"])
-                integral_tex = r"\int\limits_{{}}^{{}}{{{0}}}{1}".format(tex_formula, integral_selected)
+                integral_tex = r"""$$\int{{{0}}}{1}$$""".format(tex_formula, integral_selected)
                 print(integral_tex)
                 
     #Clear
