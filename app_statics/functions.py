@@ -50,12 +50,8 @@ all_alpha = {"alpha":"α", "beta":"β", "gamma":"γ", "delta":"δ",
 def symbol_latex(text):
     for key, value in all_alpha.items():
         text = str(text)
-        if text.__contains__(value):
-            #Debug
-            print("\n[Before]", text, "\n[Key]", key, " [Value]", value)                
+        if text.__contains__(value):              
             text = text.replace(value, "\\" + key)
-            #Debug
-            print("[Result]", text)
     return text
 
 #LiteralString ->return: r"""$${tex}$$"""
@@ -63,32 +59,22 @@ def transform_latex(text):
     #How to replace π to \pi
     text= str(text).replace("√", "sqrt").replace("∞", "oo").replace("＋", "+").replace("－", "-")
     try:
-        #Debug
-        print(text)
         formula = sympify(text, convert_xor=True, evaluate=True)
-        #Debug
-        print("[After Sympify : ]", formula)
         text = sympy.latex(formula)
-        #Debug
-        print("[After Latex : ]", text)
     except:
-        #How to show the error that is format error
-        #Debug
-        print(f"[ Format error ] Sympify Error")
+        #How to show the error about format error
         print(f"[Error Text : ]", text)
     return text
 
 # formula : r"{\frac{}{}}"
 def autosize_latex(formula):
     formula = symbol_latex(formula)
-    print("\n", formula)
     formula = formula.replace("π", "\\pi")
     sympy.preview(formula, viewer="file", filename="output_images/formula.png", euler=False, dvioptions=["-T", "tight", "-z", "0", "--truecolor", "-D 600"])
 
     #元画像は保存
     im = Image.open("output_images/formula.png")
     width, height = im.size
-    print("Width : ", width, "Height : ", height)
     
     #全ての画像の縦の大きさを260に指定
     #拡大は不可
