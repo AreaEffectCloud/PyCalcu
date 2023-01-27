@@ -54,7 +54,8 @@ def symbol_latex(text):
 
 #LiteralString ->return: r"""$${tex}$$"""
 def transform_latex(text):
-    text= str(text).replace("√", "sqrt").replace("∞", "oo").replace("π", "pi").replace("＋", "+").replace("－", "-")
+    #How to replace π to \pi
+    text= str(text).replace("√", "sqrt").replace("∞", "oo").replace("＋", "+").replace("－", "-")
     try:
         #Debug
         print(text)
@@ -75,18 +76,18 @@ def transform_latex(text):
 def autosize_latex(formula):
     formula = symbol_latex(formula)
     print("\n", formula)
-    formula = r"""$${0}$$""".format(formula)
-    sympy.preview(formula, viewer="file", filename="formula.png", euler=False, dvioptions=["-T", "tight", "-z", "0", "--truecolor", "-D 600"])
+    formula = formula.replace("π", "\\pi")
+    sympy.preview(formula, viewer="file", filename="output_images/formula.png", euler=False, dvioptions=["-T", "tight", "-z", "0", "--truecolor", "-D 600"])
 
     #画像の大きさに応じて、縦を調整
-    im = Image.open("formula.png")
+    im = Image.open("output_images/formula.png")
     width, height = im.size
     print("Width : ", width, "Height : ", height)
     size = (650, width)
     im.thumbnail(size)
     out_dim = im.size
     out_name = "resized-" + str(out_dim[0]) + "-" + str(out_dim[1]) + ".png"
-    im.save(out_name, "PNG")
+    im.save("output_images/" + out_name, "PNG")
     im.close()
     
     #極限
@@ -97,4 +98,6 @@ def autosize_latex(formula):
 
 test = transform_latex("arctan(x**α) / (e / (tan(x)))")
 print("[First : ]", test)
-print("[Second : ]", autosize_latex(test))
+#Successful
+b = r"""$$$$"""
+print("[Second : ]", autosize_latex(b))

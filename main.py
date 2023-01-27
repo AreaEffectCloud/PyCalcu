@@ -9,7 +9,7 @@ sg.theme("Reddit")
 
 #must resize
 image_formula_latex_column = sg.Column([
-    [sg.Image(filename="formula.png", key="image_formula_latex", expand_y=True)]
+    [sg.Image(filename="output_images/formula.png", key="image_formula_latex", expand_y=True)]
     ], element_justification='c', vertical_alignment='center', expand_x=True, expand_y=True, visible=False)
 
 #####   Tab Group #####
@@ -124,13 +124,14 @@ while True:
 
                 limit_tex = r"""$$\lim_{{{0}\to{1}}}{{{2}}}$$""".format(tex_start, tex_end, tex_formula)
                 print(limit_tex)
+                autosize_latex(limit_tex)
 
             elif values["limit_start"] == "" and values["limit_end"] == "":
                 window["output_tex"].update(space) #type:ignore
                 #一般方程式
                 tex = r"""$${0}$$""".format(transform_latex(values["limit_formula"]))
                 print(tex)
-                #autosize_latex(tex)
+                autosize_latex(tex)
 
     #数列
     elif event in "add_sum":
@@ -157,7 +158,7 @@ while True:
             elif values["sum_func"] == "" and values["sum_end"] == "" and values["sum_start"] == "":
                 window["output_tex"].update(space) #type:ignore
                 #一般方程式
-                tex = r"""$${0}$$""".format(transform_latex(values["limit_formula"]))
+                tex = r"""$${0}$$""".format(transform_latex(values["sum_formula"]))
 
     #微分
     elif event in "add_diff":
