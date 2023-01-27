@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
 
-from static.functions import *
-from static.layout import *
+from app_statics.gui_layout import *
+from app_statics.functions import *
 
 sg.theme("Reddit")
 
@@ -31,12 +31,12 @@ multiline_formula_tex = sg.Output(key='output_tex', font=FONT_output, pad=((0, 0
 output_frame = sg.Frame(output_frame_title[lang], [[multiline_formula_tex]], font=FONT_output, expand_x=True)
 
 #レイアウト
-layout = [[output_frame], 
+gui_layout = [[output_frame], 
           [main_column_left_tabs, main_column_right_tabs],
           [image_formula_latex_column]
          ]
 
-window = sg.Window(title[lang], layout, icon="", use_default_focus=False, resizable=True, finalize=True)
+window = sg.Window(title[lang], gui_layout, icon="", use_default_focus=False, resizable=True, finalize=True)
 
 set_bind(window)
 # -------------------------------------
@@ -61,11 +61,13 @@ while True:
     #Integral /
     elif event in "integral_select":
         integral_selected = values["integral_select"]
+        integral_selected = str(integral_selected).strip()
 
     #get Focus
     elif event in binds:
         focus = str(event).replace("+Input", "")
         print(focus)
+        print(values["integral_select"])
 
     #All Clear
     elif event == "allclear":
@@ -108,7 +110,7 @@ while True:
         if focus != "":
             text = values["{0}".format(focus)]
             if text != "":
-                text = text + "** 2"
+                text = text + "**(2)"
                 window["{0}".format(focus)].update(text) # type: ignore
     
     #Add
@@ -143,7 +145,8 @@ while True:
                     tex_func = values["sum_func"]
                     tex_formula = transform_latex(values["sum_formula"])
 
-                    sum_func_tex = r"""$$\sum_{{{0}=}}^{{}}{{{1}}}$$""".format(tex_func, tex_formula)
+                    sum_func_tex = r"""$$\sum_{{{0}}}^{{}}{{{1}}}$$""".format(tex_func, tex_formula)
+                    autosize_latex(sum_func_tex)
 
                 #全て入力された状態
                 elif values["sum_end"] != "" and values["sum_start"] != "":
@@ -154,11 +157,13 @@ while True:
                     tex_formula = transform_latex(values["sum_formula"])
 
                     sum_tex = r"""$$\sum_{{{0}={1}}}^{{{2}}}{{{3}}}$$""".format(tex_func, tex_start, tex_end, tex_formula)
+                    autosize_latex(sum_tex)
 
             elif values["sum_func"] == "" and values["sum_end"] == "" and values["sum_start"] == "":
                 window["output_tex"].update(space) #type:ignore
                 #一般方程式
                 tex = r"""$${0}$$""".format(transform_latex(values["sum_formula"]))
+                autosize_latex(tex)
 
     #微分
     elif event in "add_diff":
@@ -166,6 +171,7 @@ while True:
             window["output_tex"].update(space) #type:ignore
             diff = transform_latex(values["diff_formula"])
             diff_tex = r"""$$\frac{{d}}{{d{0}}}{{{1}}}$$""".format(diff_selected, diff)
+            autosize_latex(diff_tex)
             print(diff_tex)
 
     #積分   
@@ -177,16 +183,20 @@ while True:
                 tex_start = transform_latex(values["integral_start"])
                 tex_end = transform_latex(values["integral_end"])
                 tex_formula = transform_latex(values["integral_formula"])
-                integral_int_tex = r"""$$\int\limits_{{{0}}}^{{{1}}}{{{2}}}{{{3}}}$$""".format(tex_start, tex_end, tex_formula, integral_selected)
-
+                integral_int_tex = r"""$$\int\limits_{{{0}}}^{{{1}}}{{{2}}}{3}$$""".format(tex_start, tex_end, tex_formula, integral_selected)
+                autosize_latex(integral_int_tex)
                 print(integral_int_tex)
+
             
             elif values["integral_start"] == "" and values["integral_end"] == "":
                 window["output_tex"].update(space) #type:ignore
                 #不定積分
                 tex_formula = transform_latex(values["integral_formula"])
                 integral_tex = r"""$$\int{{{0}}}{1}$$""".format(tex_formula, integral_selected)
+                autosize_latex(integral_tex)
                 print(integral_tex)
+                print(tex_formula)
+                print(integral_selected)
                 
     #Clear
     elif event in clear_btn:

@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-from static.languages import *
+from app_statics.languages import *
 
 #Setting of Button
 INPUT_FONT = ('HGS明朝B', 25)
@@ -12,7 +12,7 @@ SPACE = (0, 1)
 
 ##### Main / Left Layout #####
 #Normal
-normal_2 = {"power_twice":"x²", "e":"e", "pi":"π", "theta":"θ", "infty":"∞"}
+normal_2 = {"power_twice":"x²", "napier":"e", "pi":"π", "theta":"θ", "infty":"∞"}
 normal_3 = {"root":"√", "seven":"7", "eight":"8", "nine":"9", "devide":"/"}
 normal_4 = {"power":"**", "four":"4", "five":"5", "six":"6", "multi":"*"}
 normal_5 = {"log":"log", "one":"1", "two":"2", "three":"3", "minus":"-"}
@@ -56,10 +56,10 @@ brackets = ["sin", "cos", "tan", "power", "log", "root", "devide"]
 #arcsin()
 triangle_brackets = ["arcsin", "arccos", "arctan"]
 
-all_btns_keys = ["pi", "theta", "infty", "seven",
+all_btns_keys = ["pi", "theta", "infty", "napier", "seven",
             "eight", "nine", "four", "five", "six", "one", "two", "three", "zero", "left_brackets", "right_brackets", "minus", "plus", "multi",
             "alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta", "iota", "kappa", "lambda", "mu", "xi", "rho", "sigma", "tau", "upsilon", "phi", "chi", "psi",
-            "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+            "a", "b", "c", "d", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
 clear_btn = ["delete_limit", "delete_sum", "delete_diff", "delete_integral", "delete_matrix"]
 
@@ -145,7 +145,7 @@ left = [
         [sg.Input("", font=INPUT_FONT, size=SIZE, key="integral_end")],
         [sg.Text("  ", background_color=COLOR, font=('HGS明朝B', 5))],
         [sg.Combo(values=[' dx ', ' dy ', ' dt ', ' dv '], default_value=' dx ', size=(3, 1), readonly=True, 
-        font=('HGS明朝B', 33), background_color=COLOR, key="integral_select")],
+        font=('HGS明朝B', 33), background_color=COLOR, key="integral_selected")],
         [sg.Text("  ", background_color=COLOR, font=('HGS明朝B', 5))],
         [sg.Input("", font=INPUT_FONT, size=SIZE, key="integral_start")],
         [sg.Text(bottom[lang], background_color=('Gray'), font=FONT)],

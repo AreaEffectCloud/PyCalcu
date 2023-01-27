@@ -2,7 +2,6 @@ import sympy
 from sympy import sympify
 from PIL import Image
 
-#どの Input / Multiline boxにFocusされているかを設定するEventをbind
 def set_bind(window):
     #Limit
     window['limit_start'].bind('<FocusIn>', '+Input')
@@ -95,9 +94,3 @@ def autosize_latex(formula):
     #定積分
     #不定積分
     #方程式
-
-test = transform_latex("arctan(x**α) / (e / (tan(x)))")
-print("[First : ]", test)
-#Successful
-b = r"""$$$$"""
-print("[Second : ]", autosize_latex(b))
