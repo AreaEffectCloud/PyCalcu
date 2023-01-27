@@ -63,13 +63,10 @@ while True:
     #Integral /
     elif event in "integral_select":
         int_selected = values["integral_select"]
-        print(int_selected)
 
     #get Focus
     elif event in binds:
         focus = str(event).replace("+Input", "")
-        print(focus)
-        print(values["integral_select"])
 
     #All Clear
     elif event == "allclear":
@@ -192,14 +189,12 @@ while True:
             
             elif values["integral_start"] == "" and values["integral_end"] == "":
                 window["output_tex"].update(space) #type:ignore
-                print(f"[Start : ]", int_selected)
                 #不定積分
                 tex_formula = transform_latex(values["integral_formula"])
                 integral_tex = r"""$$\int{{{0}}}{{{1}}}$$""".format(tex_formula, int_selected)
                 autosize_latex(integral_tex)
                 print(tex_formula)
                 print(integral_tex)
-                print(int_selected)
                 
     #Clear
     elif event in clear_btn:

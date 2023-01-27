@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
-from .languages import lang, top, bottom, add, clear
+#from .languages import lang, top, bottom, add, clear
+from app_statics.languages import *
 
 #Setting of Button
 INPUT_FONT = ('HGS明朝B', 25)
