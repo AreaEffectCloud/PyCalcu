@@ -85,19 +85,17 @@ def autosize_latex(formula):
     formula = formula.replace("π", "\\pi")
     sympy.preview(formula, viewer="file", filename="output_images/formula.png", euler=False, dvioptions=["-T", "tight", "-z", "0", "--truecolor", "-D 600"])
 
-    #画像の大きさに応じて、縦を調整
+    #元画像は保存
     im = Image.open("output_images/formula.png")
     width, height = im.size
     print("Width : ", width, "Height : ", height)
-    size = (650, width)
+    
+    #全ての画像の縦の大きさを260に指定
+    #拡大は不可
+    size = (width, 260)
     im.thumbnail(size)
     out_dim = im.size
-    out_name = "resized-" + str(out_dim[0]) + "-" + str(out_dim[1]) + ".png"
+    out_name = "formula_resized-" + str(out_dim[0]) + "-" + str(out_dim[1]) + ".png"
     im.save("output_images/" + out_name, "PNG")
     im.close()
-    
-    #極限
-    #数列
-    #定積分
-    #不定積分
-    #方程式
+    return "output_images/" + out_name
