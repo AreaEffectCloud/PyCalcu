@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-from app_statics.languages import *
+from .languages import lang, top, bottom, add, clear
 
 #Setting of Button
 INPUT_FONT = ('HGS明朝B', 25)
@@ -80,8 +80,8 @@ right = [
     [sg.Multiline("", font=INPUT_FONT, size=(20, 2), key="limit_formula", expand_x=True)],
     #Tab内のサイズを調整
     [sg.Text("  ", background_color=COLOR, font=FONT)],
-    [sg.Button("Add", font=BTNS_FONT, size=SIZE, key="add_limit"), 
-     sg.Button("Clear", font=BTNS_FONT, key="delete_limit")]
+    [sg.Button(add[lang], font=BTNS_FONT, size=SIZE, key="add_limit"), 
+     sg.Button(clear[lang], font=BTNS_FONT, key="delete_limit")]
 ]
 limit_layout = [
     [sg.Column(left, element_justification='c', vertical_alignment='center', background_color=COLOR),
@@ -100,8 +100,8 @@ right = [
     [sg.Text("  ", background_color=COLOR, font=BTNS_FONT)],
     [sg.Multiline("", font=INPUT_FONT, size=(20, 2), key="sum_formula", expand_x=True)],
     [sg.Text("  ", background_color=COLOR, font=FONT)],
-    [sg.Button("Add", font=BTNS_FONT, size=SIZE, key="add_sum"), 
-     sg.Button("Clear", font=BTNS_FONT, key="delete_sum")]
+    [sg.Button(add[lang], font=BTNS_FONT, size=SIZE, key="add_sum"), 
+     sg.Button(clear[lang], font=BTNS_FONT, key="delete_sum")]
 ]
 sigma_layout = [
     [sg.Column(left, element_justification='c', vertical_alignment='center', background_color=COLOR),
@@ -125,8 +125,8 @@ right = [
         [sg.Text("  ", background_color=COLOR, font=BTNS_FONT)],
         [sg.Multiline("", font=INPUT_FONT, size=(20, 2), key="diff_formula", expand_x=True)],
         [sg.Text("  ", background_color=COLOR, font=FONT)],
-        [sg.Button("Add", font=BTNS_FONT, size=SIZE, key="add_diff"), 
-         sg.Button("Clear", font=BTNS_FONT, key="delete_diff")],
+        [sg.Button(add[lang], font=BTNS_FONT, size=SIZE, key="add_diff"), 
+         sg.Button(clear[lang], font=BTNS_FONT, key="delete_diff")],
         ], background_color=COLOR, element_justification='l', vertical_alignment='c')
     ]
 ]
@@ -145,7 +145,7 @@ left = [
         [sg.Input("", font=INPUT_FONT, size=SIZE, key="integral_end")],
         [sg.Text("  ", background_color=COLOR, font=('HGS明朝B', 5))],
         [sg.Combo(values=[' dx ', ' dy ', ' dt ', ' dv '], default_value=' dx ', size=(3, 1), readonly=True, 
-        font=('HGS明朝B', 33), background_color=COLOR, key="integral_selected")],
+        font=('HGS明朝B', 33), background_color=COLOR, key="integral_select", enable_events=True)],
         [sg.Text("  ", background_color=COLOR, font=('HGS明朝B', 5))],
         [sg.Input("", font=INPUT_FONT, size=SIZE, key="integral_start")],
         [sg.Text(bottom[lang], background_color=('Gray'), font=FONT)],
@@ -157,8 +157,8 @@ right = [
     [sg.Text("  ", background_color=COLOR, font=BTNS_FONT)],
     [sg.Multiline("", font=INPUT_FONT, size=(20, 2), key="integral_formula", expand_x=True)],
     [sg.Text("  ", background_color=COLOR, font=FONT)],
-    [sg.Button("Add", font=BTNS_FONT, size=SIZE, key="add_integral"), 
-     sg.Button("Clear", font=BTNS_FONT, key="delete_integral")],
+    [sg.Button(add[lang], font=BTNS_FONT, size=SIZE, key="add_integral"), 
+     sg.Button(clear[lang], font=BTNS_FONT, key="delete_integral")],
     [sg.Text("  ", background_color=COLOR, font=('HGS明朝B', 5))]
 ]
 integral_layout = [

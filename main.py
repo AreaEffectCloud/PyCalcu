@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 
+from app_statics.languages import *
 from app_statics.gui_layout import *
 from app_statics.functions import *
 
@@ -31,12 +32,12 @@ multiline_formula_tex = sg.Output(key='output_tex', font=FONT_output, pad=((0, 0
 output_frame = sg.Frame(output_frame_title[lang], [[multiline_formula_tex]], font=FONT_output, expand_x=True)
 
 #レイアウト
-gui_layout = [[output_frame], 
+layout = [[output_frame], 
           [main_column_left_tabs, main_column_right_tabs],
           [image_formula_latex_column]
          ]
 
-window = sg.Window(title[lang], gui_layout, icon="", use_default_focus=False, resizable=True, finalize=True)
+window = sg.Window(title[lang], layout, icon="", use_default_focus=False, resizable=True, finalize=True)
 
 set_bind(window)
 # -------------------------------------
@@ -46,13 +47,14 @@ focus = ""
 space = ""
 index = 0
 diff_selected = "x"
-integral_selected = "dx"
+int_selected = "dx"
 while True:
 
     event, values = window.read() #type:ignore
 
-    if event == sg.WIN_CLOSED:
+    if event == sg.WIN_CLOSED or event == None:
         break
+
     #Diff / Change Image
     elif event in "diff_select":
         diff_selected = values["diff_select"]
@@ -60,8 +62,8 @@ while True:
 
     #Integral /
     elif event in "integral_select":
-        integral_selected = values["integral_select"]
-        integral_selected = str(integral_selected).strip()
+        int_selected = values["integral_select"]
+        print(int_selected)
 
     #get Focus
     elif event in binds:
@@ -183,20 +185,21 @@ while True:
                 tex_start = transform_latex(values["integral_start"])
                 tex_end = transform_latex(values["integral_end"])
                 tex_formula = transform_latex(values["integral_formula"])
-                integral_int_tex = r"""$$\int\limits_{{{0}}}^{{{1}}}{{{2}}}{3}$$""".format(tex_start, tex_end, tex_formula, integral_selected)
+                integral_int_tex = r"""$$\int\limits_{{{0}}}^{{{1}}}{{{2}}}{{{3}}}$$""".format(tex_start, tex_end, tex_formula, int_selected)
                 autosize_latex(integral_int_tex)
                 print(integral_int_tex)
 
             
             elif values["integral_start"] == "" and values["integral_end"] == "":
                 window["output_tex"].update(space) #type:ignore
+                print(f"[Start : ]", int_selected)
                 #不定積分
                 tex_formula = transform_latex(values["integral_formula"])
-                integral_tex = r"""$$\int{{{0}}}{1}$$""".format(tex_formula, integral_selected)
+                integral_tex = r"""$$\int{{{0}}}{{{1}}}$$""".format(tex_formula, int_selected)
                 autosize_latex(integral_tex)
-                print(integral_tex)
                 print(tex_formula)
-                print(integral_selected)
+                print(integral_tex)
+                print(int_selected)
                 
     #Clear
     elif event in clear_btn:

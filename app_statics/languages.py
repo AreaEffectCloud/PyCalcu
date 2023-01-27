@@ -1,12 +1,6 @@
-import json
+from .functions import get_json
 #En and Jp
 ## load a config.json file | Get setting of language
-##### config.json から設定の読み込み
-def get_json(path):
-    with open(path, encoding="utf-8_sig") as json_file:
-       f = json.load(json_file)
-    return f
-
 config = get_json("config.json")
 lang = config['user']['language']
 

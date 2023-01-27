@@ -1,6 +1,13 @@
+import json
 import sympy
 from sympy import sympify
 from PIL import Image
+
+##### config.json から設定の読み込み
+def get_json(path):
+    with open(path, encoding="utf-8_sig") as json_file:
+       f = json.load(json_file)
+    return f
 
 def set_bind(window):
     #Limit
