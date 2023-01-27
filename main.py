@@ -1,8 +1,7 @@
 import PySimpleGUI as sg
 
-from static.layout import *
 from static.functions import *
-from static.languages import *
+from static.layout import *
 
 sg.theme("Reddit")
 
@@ -89,6 +88,12 @@ while True:
             text = values["{0}".format(focus)]
             text = text + window[event].get_text() + "(" #type:ignore
             window["{0}".format(focus)].update(text) # type: ignore
+    #逆三角関数
+    elif event in triangle_brackets:
+        if focus != "":
+            value = window[event].get_text().lstrip("a") #type:ignore
+            text = values["{0}".format(focus)] + "arc" + value + "("
+            window["{0}".format(focus)].update(text) # type: ignore
 
     #Other Bottons
     elif event in all_btns_keys:
@@ -103,7 +108,7 @@ while True:
         if focus != "":
             text = values["{0}".format(focus)]
             if text != "":
-                text = text + "²"
+                text = text + "** 2"
                 window["{0}".format(focus)].update(text) # type: ignore
     
     #Add

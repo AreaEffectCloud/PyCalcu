@@ -1,10 +1,5 @@
 import PySimpleGUI as sg
-import sympy
-
 from static.languages import *
-
-# 使用する変数の定義(小文字1文字は全てシンボルとする)
-(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z) = sympy.symbols('a b c d e f g h i j k l m n o p q r s t u v w x y z')
 
 #Setting of Button
 INPUT_FONT = ('HGS明朝B', 25)
@@ -19,9 +14,9 @@ SPACE = (0, 1)
 #Normal
 normal_2 = {"power_twice":"x²", "e":"e", "pi":"π", "theta":"θ", "infty":"∞"}
 normal_3 = {"root":"√", "seven":"7", "eight":"8", "nine":"9", "devide":"/"}
-normal_4 = {"power":"^", "four":"4", "five":"5", "six":"6", "multi":"*"}
-normal_5 = {"log":"log", "one":"1", "two":"2", "three":"3", "minus":"－"}
-normal_6 = {"allclear":"AC", "zero":"0", "left_brackets":"(", "right_brackets":")", "plus":"＋"}
+normal_4 = {"power":"**", "four":"4", "five":"5", "six":"6", "multi":"*"}
+normal_5 = {"log":"log", "one":"1", "two":"2", "three":"3", "minus":"-"}
+normal_6 = {"allclear":"AC", "zero":"0", "left_brackets":"(", "right_brackets":")", "plus":"+"}
 
 btns = [normal_2, normal_3, normal_4, normal_5, normal_6]
 normal_layout = [
@@ -31,8 +26,8 @@ normal_layout = [
 ]
 
 #Functions
-func_1 = {"sin":"sin", "cos":"cos", "tan":"tan", "asin":"asin", "acos":"acos"}
-func_2 = {"atan":"atan", "alpha":"α", "beta":"β", "gamma":"γ", "delta":"δ"}
+func_1 = {"sin":"sin", "cos":"cos", "tan":"tan", "arcsin":"asin", "arccos":"acos"}
+func_2 = {"arctan":"atan", "alpha":"α", "beta":"β", "gamma":"γ", "delta":"δ"}
 func_3 = {"epsilon":"ε", "zeta":"ζ", "eta":"η", "iota":"ι", "kappa":"κ"}
 func_4 = {"lambda":"λ", "mu":"μ", "xi":"ξ", "rho":"ρ", "sigma":"σ"}
 func_5 = {"tau":"τ", "upsilon":"υ", "phi":"φ", "chi":"χ", "psi":"ψ"}
@@ -56,7 +51,10 @@ alphabet_layout = [
     for i in btns_horizon] for btns_horizon in btns_al], expand_x=True)]
 ]
 
-brackets = ["devide", "root", "power", "log", "sin", "cos", "tan", "asin", "acos", "atan"]
+#()
+brackets = ["sin", "cos", "tan", "power", "log", "root", "devide"]
+#arcsin()
+triangle_brackets = ["arcsin", "arccos", "arctan"]
 
 all_btns_keys = ["pi", "theta", "infty", "seven",
             "eight", "nine", "four", "five", "six", "one", "two", "three", "zero", "left_brackets", "right_brackets", "minus", "plus", "multi",
@@ -65,7 +63,7 @@ all_btns_keys = ["pi", "theta", "infty", "seven",
 
 clear_btn = ["delete_limit", "delete_sum", "delete_diff", "delete_integral", "delete_matrix"]
 
-setting_layout = [[]]
+#setting_layout = [[]]
 
 ##### Main / Right Layout #####
 #Limit

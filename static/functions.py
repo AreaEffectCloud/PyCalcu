@@ -1,14 +1,6 @@
-import json
 import sympy
 from sympy import sympify
 from PIL import Image
-
-##### config.json から設定の読み込み
-#####
-def get_json(path):
-    with open(path, encoding="utf-8_sig") as json_file:
-       f = json.load(json_file)
-    return f
 
 #どの Input / Multiline boxにFocusされているかを設定するEventをbind
 def set_bind(window):
@@ -43,22 +35,47 @@ sum_tab = ["sum_end", "sum_func", "sum_start", "sum_formula"]
 diff_tab = ["diff_formula"]
 integral_tab = ["integral_end", "integral_start", "integral_formula"]
 
+all_alpha = {"alpha":"α", "beta":"β", "gamma":"γ", "delta":"δ",
+             "epsilon":"ε", "zeta":"ζ", "eta":"η", "iota":"ι", "kappa":"κ",
+             "lambda":"λ", "mu":"μ", "xi":"ξ", "rho":"ρ", "sigma":"σ",
+             "tau":"τ", "upsilon":"υ", "phi":"φ", "chi":"Χ", "psi":"Ψ"}
+
+#α -> alpha
+def symbol_latex(text):
+    for key, value in all_alpha.items():
+        text = str(text)
+        if text.__contains__(value):
+            #Debug
+            print("\n[Before]", text, "\n[Key]", key, " [Value]", value)                
+            text = text.replace(value, "\\" + key)
+            #Debug
+            print("[Result]", text)
+    return text
+
 #LiteralString ->return: r"""$${tex}$$"""
 def transform_latex(text):
-    text= str(text).replace("√", "\\sqrt").replace("∞", "\\infty").replace("π", "\\pi").replace("＋", "+").replace("－", "-")
+    text= str(text).replace("√", "sqrt").replace("∞", "oo").replace("π", "pi").replace("＋", "+").replace("－", "-")
     try:
-        print("[After Replace : ]", text)
+        #Debug
+        print(text)
         formula = sympify(text, convert_xor=True, evaluate=True)
+        #Debug
         print("[After Sympify : ]", formula)
         text = sympy.latex(formula)
+        #Debug
+        print("[After Latex : ]", text)
     except:
         #How to show the error that is format error
+        #Debug
         print(f"[ Format error ] Sympify Error")
-        print("[Error Text : ]", text)
+        print(f"[Error Text : ]", text)
     return text
 
 # formula : r"{\frac{}{}}"
 def autosize_latex(formula):
+    formula = symbol_latex(formula)
+    print("\n", formula)
+    formula = r"""$${0}$$""".format(formula)
     sympy.preview(formula, viewer="file", filename="formula.png", euler=False, dvioptions=["-T", "tight", "-z", "0", "--truecolor", "-D 600"])
 
     #画像の大きさに応じて、縦を調整
@@ -78,11 +95,6 @@ def autosize_latex(formula):
     #不定積分
     #方程式
 
-wave = r"""$$\frac{\partial^2 u}{\partial t^2}=c^2\left(\frac{\partial^2 u}{\partial x^2}+\frac{\partial^2 u}{\partial y^2}\right)$$"""
-int = r"""$$\int\limits_{- \frac{\pi}{2}}^{- \frac{\pi}{2}}{y^{64} - \frac{y^{\pi\infty}}{\log{\left(y + y^2 \right)}}}dx$$"""
-integral = r"""$$\int{-\frac{1}{x^{456}}}dx$$"""
-diff = r"""$$\frac{d}{dx}{x^{6} + 64 x^{3} - 124 x}$$"""
-test = "456/{{2π}}"
-print("\n[First : ]", transform_latex(test))
-autosize_latex(transform_latex(test))
-autosize_latex(integral)
+test = transform_latex("arctan(x**α) / (e / (tan(x)))")
+print("[First : ]", test)
+print("[Second : ]", autosize_latex(test))
