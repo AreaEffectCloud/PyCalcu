@@ -8,7 +8,8 @@ BTNS_FONT = ('HGS明朝B', 20)
 FONT = ('HGS明朝B', 15)
 FONT_output = ('HGS明朝B', 13)
 COLOR = ('white')
-SIZE = (4,1)
+SIZE = (4, 1)
+Add_size = (6, 1)
 SPACE = (0, 1)
 
 ##### Main / Left Layout #####
@@ -31,7 +32,7 @@ func_1 = {"sin":"sin", "cos":"cos", "tan":"tan", "arcsin":"asin", "arccos":"acos
 func_2 = {"arctan":"atan", "alpha":"α", "beta":"β", "gamma":"γ", "delta":"δ"}
 func_3 = {"epsilon":"ε", "zeta":"ζ", "eta":"η", "iota":"ι", "kappa":"κ"}
 func_4 = {"lambda":"λ", "mu":"μ", "xi":"ξ", "rho":"ρ", "sigma":"σ"}
-func_5 = {"tau":"τ", "upsilon":"υ", "phi":"φ", "chi":"χ", "psi":"ψ"}
+func_5 = {"tau":"τ", "phi":"φ", "chi":"χ", "psi":"ψ", "omega":"ω"}
 
 btns = [func_1, func_2, func_3, func_4, func_5]
 function_layout = [
@@ -48,19 +49,22 @@ alpha_5 = ["v", "w", "x", "y", "z"]
 
 btns_al = [alpha_1, alpha_2, alpha_3, alpha_4, alpha_5]
 alphabet_layout = [
-    [sg.Column([[sg.Button(f'{i}', font=BTNS_FONT, size=SIZE, key=i, expand_x=True) 
+    [sg.Column([[sg.Button(f'{i}', font=BTNS_FONT, size=SIZE, key="alphabet_" + i, expand_x=True) 
     for i in btns_horizon] for btns_horizon in btns_al], expand_x=True)]
 ]
 
 #()
 brackets = ["sin", "cos", "tan", "power", "log", "root", "devide"]
-#arcsin()
 triangle_brackets = ["arcsin", "arccos", "arctan"]
 
-all_btns_keys = ["pi", "theta", "infty", "napier", "seven",
-            "eight", "nine", "four", "five", "six", "one", "two", "three", "zero", "left_brackets", "right_brackets", "minus", "plus", "multi",
-            "alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta", "iota", "kappa", "lambda", "mu", "xi", "rho", "sigma", "tau", "upsilon", "phi", "chi", "psi",
-            "a", "b", "c", "d", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+all_btns_keys = ["pi", "theta", "infty", "napier", 
+            "seven", "eight", "nine", "four", "five", "six", "one", "two", "three", "zero",
+            "left_brackets", "right_brackets", "minus", "plus", "multi",
+            "alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta", "iota", "kappa", "lambda", 
+            "mu", "xi", "rho", "sigma", "tau", "phi", "chi", "psi", "omega",
+            "alphabet_a", "alphabet_b", "alphabet_c", "alphabet_d", "alphabet_f", "alphabet_g", "alphabet_h", "alphabet_i", 
+            "alphabet_j", "alphabet_k", "alphabet_l", "alphabet_m", "alphabet_n", "alphabet_o", "alphabet_p", "alphabet_q", 
+            "alphabet_r", "alphabet_s", "alphabet_t", "alphabet_u", "alphabet_v", "alphabet_w", "alphabet_x", "alphabet_y", "alphabet_z"]
 
 clear_btn = ["delete_limit", "delete_sum", "delete_diff", "delete_integral", "delete_matrix"]
 
@@ -81,7 +85,7 @@ right = [
     [sg.Multiline("", font=INPUT_FONT, size=(20, 2), key="limit_formula", expand_x=True)],
     #Tab内のサイズを調整
     [sg.Text("  ", background_color=COLOR, font=FONT)],
-    [sg.Button(add[lang], font=BTNS_FONT, size=SIZE, key="add_limit"), 
+    [sg.Button(add[lang], font=BTNS_FONT, size=Add_size, key="add_limit"), 
      sg.Button(clear[lang], font=BTNS_FONT, key="delete_limit")]
 ]
 limit_layout = [
@@ -101,7 +105,7 @@ right = [
     [sg.Text("  ", background_color=COLOR, font=BTNS_FONT)],
     [sg.Multiline("", font=INPUT_FONT, size=(20, 2), key="sum_formula", expand_x=True)],
     [sg.Text("  ", background_color=COLOR, font=FONT)],
-    [sg.Button(add[lang], font=BTNS_FONT, size=SIZE, key="add_sum"), 
+    [sg.Button(add[lang], font=BTNS_FONT, size=Add_size, key="add_sum"), 
      sg.Button(clear[lang], font=BTNS_FONT, key="delete_sum")]
 ]
 sigma_layout = [
@@ -126,7 +130,7 @@ right = [
         [sg.Text("  ", background_color=COLOR, font=BTNS_FONT)],
         [sg.Multiline("", font=INPUT_FONT, size=(20, 2), key="diff_formula", expand_x=True)],
         [sg.Text("  ", background_color=COLOR, font=FONT)],
-        [sg.Button(add[lang], font=BTNS_FONT, size=SIZE, key="add_diff"), 
+        [sg.Button(add[lang], font=BTNS_FONT, size=Add_size, key="add_diff"), 
          sg.Button(clear[lang], font=BTNS_FONT, key="delete_diff")],
         ], background_color=COLOR, element_justification='l', vertical_alignment='c')
     ]
@@ -158,7 +162,7 @@ right = [
     [sg.Text("  ", background_color=COLOR, font=BTNS_FONT)],
     [sg.Multiline("", font=INPUT_FONT, size=(20, 2), key="integral_formula", expand_x=True)],
     [sg.Text("  ", background_color=COLOR, font=FONT)],
-    [sg.Button(add[lang], font=BTNS_FONT, size=SIZE, key="add_integral"), 
+    [sg.Button(add[lang], font=BTNS_FONT, size=Add_size, key="add_integral"), 
      sg.Button(clear[lang], font=BTNS_FONT, key="delete_integral")],
     [sg.Text("  ", background_color=COLOR, font=('HGS明朝B', 5))]
 ]

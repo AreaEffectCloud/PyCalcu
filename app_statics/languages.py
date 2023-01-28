@@ -21,5 +21,5 @@ integral = { 'en':str('Integral'), 'ja':str('積分')}
 top = { 'en':str('Top'), 'ja':str('上端')}
 bottom = { 'en':str('Bottom'), 'ja':str('下端')}
 
-add = { 'en':str('Add'), 'ja':str('追加')}
+add = { 'en':str('Export'), 'ja':str('生成')}
 clear = { 'en':str('Clear'), 'ja':str('クリア')}

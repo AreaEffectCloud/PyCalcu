@@ -42,9 +42,10 @@ diff_tab = ["diff_formula"]
 integral_tab = ["integral_end", "integral_start", "integral_formula"]
 
 all_alpha = {"alpha":"α", "beta":"β", "gamma":"γ", "delta":"δ",
-             "epsilon":"ε", "zeta":"ζ", "eta":"η", "iota":"ι", "kappa":"κ",
-             "lambda":"λ", "mu":"μ", "xi":"ξ", "rho":"ρ", "sigma":"σ",
-             "tau":"τ", "upsilon":"υ", "phi":"φ", "chi":"Χ", "psi":"Ψ"}
+             "epsilon":"ε", "zeta":"ζ", "eta":"η", "theta":"θ", "iota":"ι", "kappa":"κ",
+             "lambda":"λ", "mu":"μ", "nu":"ν", "xi":"ξ", "omicron":"ο", "pi":"π", 
+             "rho":"ρ", "sigma":"σ", "tau":"τ", "upsilon":"υ", 
+             "phi":"φ", "chi":"χ", "psi":"ψ", "omega":"ω"}
 
 #α -> alpha
 def symbol_latex(text):
@@ -56,7 +57,6 @@ def symbol_latex(text):
 
 #LiteralString ->return: r"""$${tex}$$"""
 def transform_latex(text):
-    #How to replace π to \pi
     text= str(text).replace("√", "sqrt").replace("∞", "oo").replace("＋", "+").replace("－", "-")
     try:
         formula = sympify(text, convert_xor=True, evaluate=True)
@@ -69,7 +69,6 @@ def transform_latex(text):
 # formula : r"{\frac{}{}}"
 def autosize_latex(formula):
     formula = symbol_latex(formula)
-    formula = formula.replace("π", "\\pi")
     sympy.preview(formula, viewer="file", filename="output_images/formula.png", euler=False, dvioptions=["-T", "tight", "-z", "0", "--truecolor", "-D 600"])
 
     #元画像は保存
@@ -77,11 +76,20 @@ def autosize_latex(formula):
     width, height = im.size
     
     #全ての画像の縦の大きさを260に指定
+    #横の大きさが上限を突破したときどうするか
     #拡大は不可
-    size = (width, 260)
+    size = (0, 0)
+    if height >= 260 and width >= 984:
+        print("")
+    elif height >= 260:
+        size = (width, 260)
+    elif width >= 984:
+        size = (984, height)
+
     im.thumbnail(size)
     out_dim = im.size
     out_name = "formula_resized-" + str(out_dim[0]) + "-" + str(out_dim[1]) + ".png"
     im.save("output_images/" + out_name, "PNG")
     im.close()
+    #縦の大きさを260以下にした画像を表示
     return "output_images/" + out_name
