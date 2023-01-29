@@ -36,8 +36,8 @@ layout = [[output_frame],
          ]
 
 window = sg.Window(title[lang], layout, icon="", use_default_focus=False, resizable=True, finalize=True)
-
 set_bind(window)
+
 # -------------------------------------
 #           イベント毎の処理
 # -------------------------------------
@@ -57,7 +57,7 @@ while True:
         diff_selected = values["diff_select"]
         window["diff_img"].update(filename="images/diff/diff_{0}.png".format(diff_selected))
 
-    #Integral /
+    #Integral
     elif event in "integral_select":
         int_selected = values["integral_select"]
 
@@ -85,13 +85,14 @@ while True:
         if focus != "":
             text = values["{0}".format(focus)]
             text = text + window[event].get_text() + "(" #type:ignore
-            window["{0}".format(focus)].update(text) # type: ignore
+            window["{0}".format(focus)].update(text) #type:ignore
+
     #逆三角関数
     elif event in triangle_brackets:
         if focus != "":
             value = str(event)
             text = values["{0}".format(focus)] + value + "("
-            window["{0}".format(focus)].update(text) # type: ignore
+            window["{0}".format(focus)].update(text) #type:ignore
 
     #Other Bottons
     elif event in all_btns_keys:
@@ -194,7 +195,6 @@ while True:
                 print(integral_int_tex)
                 window["show_latex_formula"].update(visible=True)
                 window["image_formula_latex"].update(filename=autosize_latex(integral_int_tex))
-
             
             elif values["integral_start"] == "" and values["integral_end"] == "":
                 window["output_tex"].update(space) #type:ignore
@@ -210,5 +210,4 @@ while True:
     elif event in clear_btn:
         if focus != "":
             window["{0}".format(focus)].update(space) #type:ignore
-
 window.close()

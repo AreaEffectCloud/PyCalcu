@@ -52,6 +52,7 @@ def symbol_latex(text):
             text = text.replace(value, "\\" + key)
     return text
 
+# "=" isn't supported by sympify
 def transform_latex(text):
     text= str(text).replace("√", "sqrt").replace("∞", "oo").replace("＋", "+").replace("－", "-")
     try:
