@@ -1,6 +1,5 @@
 {
     "user": {
-        "language": "en",
-        "tex_multiline" : "True"
+        "language": "en"
     }
 }

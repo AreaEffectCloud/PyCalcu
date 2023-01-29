@@ -41,13 +41,10 @@ sum_tab = ["sum_end", "sum_func", "sum_start", "sum_formula"]
 diff_tab = ["diff_formula"]
 integral_tab = ["integral_end", "integral_start", "integral_formula"]
 
-all_alpha = {"alpha":"α", "beta":"β", "gamma":"γ", "delta":"δ",
-             "epsilon":"ε", "zeta":"ζ", "eta":"η", "theta":"θ", "iota":"ι", "kappa":"κ",
-             "lambda":"λ", "mu":"μ", "nu":"ν", "xi":"ξ", "omicron":"ο", "pi":"π", 
-             "rho":"ρ", "sigma":"σ", "tau":"τ", "upsilon":"υ", 
-             "phi":"φ", "chi":"χ", "psi":"ψ", "omega":"ω"}
+all_alpha = {"alpha":"α", "beta":"β", "gamma":"γ", "delta":"δ", "epsilon":"ε", "zeta":"ζ", "eta":"η", "theta":"θ", "iota":"ι", "kappa":"κ", "lambda":"λ", 
+             "mu":"μ", "nu":"ν", "xi":"ξ", "omicron":"ο", "pi":"π", "rho":"ρ", "sigma":"σ", "tau":"τ", "upsilon":"υ", "phi":"φ", "chi":"χ", "psi":"ψ", "omega":"ω"}
 
-#α -> alpha
+#α to \\alpha
 def symbol_latex(text):
     for key, value in all_alpha.items():
         text = str(text)
@@ -55,42 +52,54 @@ def symbol_latex(text):
             text = text.replace(value, "\\" + key)
     return text
 
-#LiteralString ->return: r"""$${tex}$$"""
 def transform_latex(text):
     text= str(text).replace("√", "sqrt").replace("∞", "oo").replace("＋", "+").replace("－", "-")
     try:
         formula = sympify(text, convert_xor=True, evaluate=True)
         text = sympy.latex(formula)
     except:
-        #How to show the error about format error
         if lang == "en":
             print("========================================\n[Format Error]\n---> \"{0}\"\n========================================".format(text))
         elif lang == "ja":
             print("========================================\n[Format Error]\n---> {0}\n========================================".format(text))
     return text
 
-# formula : r"{\frac{}{}}"
 def autosize_latex(formula):
     formula = symbol_latex(formula)
-    sympy.preview(formula, viewer="file", filename="output_images/formula.png", euler=False, dvioptions=["-T", "tight", "-z", "0", "--truecolor", "-D 600"])
+    try:
+        sympy.preview(formula, viewer="file", filename="output_images/formula.png", euler=False, dvioptions=["-T", "tight", "-z", "0", "--truecolor", "-D 600"])
 
-    #元画像は保存
-    im = Image.open("output_images/formula.png")
-    width, height = im.size
+        im = Image.open("output_images/formula.png")
+        width, height = im.size
     
-    #拡大は不可
-    size = (0, 0)
-    if height >= 260 and width >= 984:
-        print("")
-    elif height >= 260:
-        size = (width, 260)
-    elif width >= 984:
-        size = (984, height)
-    else: size = (width, height)
+        #拡大は不可
+        size = (0, 0)
+        if height >= 260 and width >= 984:
+            size = (984, height)
+        elif height >= 260:
+            size = (width, 260)
+        elif width >= 984:
+            size = (984, height)
+        else: size = (width, height)
 
-    im.thumbnail(size)
-    out_dim = im.size
-    out_name = "formula_resized-" + str(out_dim[0]) + "-" + str(out_dim[1]) + ".png"
-    im.save("output_images/" + out_name, "PNG")
-    im.close()
-    return "output_images/" + out_name
+        im.thumbnail(size)
+        out_dim = im.size
+        if out_dim[1] >= 260:
+            size = (out_dim[0], 260)
+            im.thumbnail(size)
+            out_twice_dim = im.size
+            out_twice_name = "formula_resized-" + str(out_twice_dim[0]) + "-" + str(out_twice_dim[1]) + ".png"
+            im.save("output_images/" + out_twice_name, "PNG")
+            im.close()
+            return "output_images/" + out_twice_name
+        else:
+            out_name = "formula_resized-" + str(out_dim[0]) + "-" + str(out_dim[1]) + ".png"
+            im.save("output_images/" + out_name, "PNG")
+            im.close()
+            return "output_images/" + out_name
+
+    except:
+        if lang == "en":
+            print("========================================Couldn't generate a image of result========================================")
+        elif lang == "ja":
+            print("========================================画像を生成することが出来ませんでした========================================")

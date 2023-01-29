@@ -1,6 +1,4 @@
 import PySimpleGUI as sg
-import shutil
-import os
 
 from app_statics.gui_layout import *
 from app_statics.functions import *
@@ -9,7 +7,6 @@ sg.theme("Reddit")
 
 ##### ##### Layout  #####  #####
 
-#must resize
 image_formula_latex_column = sg.Column([
     [sg.Image(filename="output_images/formula.png", key="image_formula_latex", expand_y=True)]
     ], element_justification='c', vertical_alignment='center', 
@@ -33,7 +30,6 @@ main_column_right_tabs = sg.TabGroup([[
 multiline_formula_tex = sg.Output(key='output_tex', font=FONT_output, pad=((0, 0), (0, 0)), size=(100, 6), expand_x=True)
 output_frame = sg.Frame(output_frame_title[lang], [[multiline_formula_tex]], font=FONT_output, expand_x=True)
 
-#レイアウト
 layout = [[output_frame], 
           [main_column_left_tabs, main_column_right_tabs],
           [image_formula_latex_column]
@@ -42,14 +38,11 @@ layout = [[output_frame],
 window = sg.Window(title[lang], layout, icon="", use_default_focus=False, resizable=True, finalize=True)
 
 set_bind(window)
-#shutil.rmtree("output_images/")
-#os.mkdir("output_images")
 # -------------------------------------
 #           イベント毎の処理
 # -------------------------------------
 focus = ""
 space = ""
-index = 0
 diff_selected = "x"
 int_selected = "dx"
 while True:
@@ -216,6 +209,6 @@ while True:
     #Clear
     elif event in clear_btn:
         if focus != "":
-            window["{i}".format(i=focus)].update(space) #type:ignore
+            window["{0}".format(focus)].update(space) #type:ignore
 
 window.close()
