@@ -1,13 +1,7 @@
-from .functions import get_json
-#En and Jp
-## load a config.json file | Get setting of language
-config = get_json("config.json")
-lang = config['user']['language']
-
 #Window title
 title = { 'en':str('Function Application'), 'ja':str('関数アプリ') }
 
-#Tex Multiline
+#LaTex Multiline
 output_frame_title = { 'en':str('Output'), 'ja':str('出力') }
 
 #Tab title

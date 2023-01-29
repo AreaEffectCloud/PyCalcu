@@ -1,6 +1,7 @@
 import PySimpleGUI as sg
+import shutil
+import os
 
-from app_statics.languages import *
 from app_statics.gui_layout import *
 from app_statics.functions import *
 
@@ -10,9 +11,9 @@ sg.theme("Reddit")
 
 #must resize
 image_formula_latex_column = sg.Column([
-    [sg.Image(filename="output_images/resized-313-260.png", key="image_formula_latex", expand_y=True)]
+    [sg.Image(filename="output_images/formula.png", key="image_formula_latex", expand_y=True)]
     ], element_justification='c', vertical_alignment='center', 
-       expand_x=True, expand_y=True, key="show_latex_formula", visible=True)
+       expand_x=True, expand_y=True, key="show_latex_formula", visible=False)
 
 #####   Tab Group #####
 main_column_left_tabs = sg.TabGroup([[
@@ -29,7 +30,7 @@ main_column_right_tabs = sg.TabGroup([[
     ]], font=FONT, expand_x=True)
 
 #####   Output  #####
-multiline_formula_tex = sg.Output(key='output_tex', font=FONT_output, pad=((0, 0), (0, 0)), size=(100, 5), expand_x=True)
+multiline_formula_tex = sg.Output(key='output_tex', font=FONT_output, pad=((0, 0), (0, 0)), size=(100, 6), expand_x=True)
 output_frame = sg.Frame(output_frame_title[lang], [[multiline_formula_tex]], font=FONT_output, expand_x=True)
 
 #レイアウト
@@ -41,6 +42,8 @@ layout = [[output_frame],
 window = sg.Window(title[lang], layout, icon="", use_default_focus=False, resizable=True, finalize=True)
 
 set_bind(window)
+#shutil.rmtree("output_images/")
+#os.mkdir("output_images")
 # -------------------------------------
 #           イベント毎の処理
 # -------------------------------------
@@ -93,8 +96,8 @@ while True:
     #逆三角関数
     elif event in triangle_brackets:
         if focus != "":
-            value = window[event].get_text().lstrip("a") #type:ignore
-            text = values["{0}".format(focus)] + "arc" + value + "("
+            value = str(event)
+            text = values["{0}".format(focus)] + value + "("
             window["{0}".format(focus)].update(text) # type: ignore
 
     #Other Bottons
@@ -147,7 +150,6 @@ while True:
                     window["output_tex"].update(space) #type:ignore
                     tex_func = values["sum_func"]
                     tex_formula = transform_latex(values["sum_formula"])
-
                     sum_func_tex = r"""$$\sum_{{{0}}}^{{}}{{{1}}}$$""".format(tex_func, tex_formula)
                     print(sum_func_tex)
                     window["show_latex_formula"].update(visible=True)
@@ -181,9 +183,9 @@ while True:
             diff = transform_latex(values["diff_formula"])
 
             diff_tex = r"""$$\frac{{d}}{{d{0}}}{{{1}}}$$""".format(diff_selected, diff)
+            print(diff_tex)
             window["show_latex_formula"].update(visible=True)
             window["image_formula_latex"].update(filename=autosize_latex(diff_tex))
-            print(diff_tex)
 
     #積分   
     elif event in "add_integral":
@@ -196,9 +198,9 @@ while True:
                 tex_formula = transform_latex(values["integral_formula"])
 
                 integral_int_tex = r"""$$\int\limits_{{{0}}}^{{{1}}}{{{2}}}{{{3}}}$$""".format(tex_start, tex_end, tex_formula, int_selected)
+                print(integral_int_tex)
                 window["show_latex_formula"].update(visible=True)
                 window["image_formula_latex"].update(filename=autosize_latex(integral_int_tex))
-                print(integral_int_tex)
 
             
             elif values["integral_start"] == "" and values["integral_end"] == "":
@@ -207,9 +209,9 @@ while True:
                 tex_formula = transform_latex(values["integral_formula"])
 
                 integral_tex = r"""$$\int{{{0}}}{{{1}}}$$""".format(tex_formula, int_selected)
+                print(integral_tex)
                 window["show_latex_formula"].update(visible=True)
                 window["image_formula_latex"].update(filename=autosize_latex(integral_tex))
-                print(integral_tex)
                 
     #Clear
     elif event in clear_btn:

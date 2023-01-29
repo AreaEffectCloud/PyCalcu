@@ -4,10 +4,10 @@ from sympy import sympify
 from PIL import Image
 
 ##### config.json から設定の読み込み
-def get_json(path):
-    with open(path, encoding="utf-8_sig") as json_file:
-       f = json.load(json_file)
-    return f
+with open("config.json", encoding="utf-8_sig") as f:
+    config = json.load(f)
+## load a config.json file | Get setting of language
+lang = config['user']['language']
 
 def set_bind(window):
     #Limit
@@ -63,7 +63,10 @@ def transform_latex(text):
         text = sympy.latex(formula)
     except:
         #How to show the error about format error
-        print(f"[Error Text : ]", text)
+        if lang == "en":
+            print("========================================\n[Format Error]\n---> \"{0}\"\n========================================".format(text))
+        elif lang == "ja":
+            print("========================================\n[Format Error]\n---> {0}\n========================================".format(text))
     return text
 
 # formula : r"{\frac{}{}}"
@@ -75,8 +78,6 @@ def autosize_latex(formula):
     im = Image.open("output_images/formula.png")
     width, height = im.size
     
-    #全ての画像の縦の大きさを260に指定
-    #横の大きさが上限を突破したときどうするか
     #拡大は不可
     size = (0, 0)
     if height >= 260 and width >= 984:
@@ -85,11 +86,11 @@ def autosize_latex(formula):
         size = (width, 260)
     elif width >= 984:
         size = (984, height)
+    else: size = (width, height)
 
     im.thumbnail(size)
     out_dim = im.size
     out_name = "formula_resized-" + str(out_dim[0]) + "-" + str(out_dim[1]) + ".png"
     im.save("output_images/" + out_name, "PNG")
     im.close()
-    #縦の大きさを260以下にした画像を表示
     return "output_images/" + out_name
