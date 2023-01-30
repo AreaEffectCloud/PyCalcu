@@ -121,7 +121,7 @@ while True:
                 tex_end = transform_latex(values["limit_end"])
                 tex_formula = transform_latex(values["limit_formula"])
 
-                limit_tex = r"""$$\lim_{{{0}\to{1}}}{{{2}}}$$""".format(tex_start, tex_end, tex_formula)
+                limit_tex = r"""$$\lim_{{{0} \to {1}}}{{{2}}}$$""".format(tex_start, tex_end, tex_formula)
                 print(limit_tex)
                 window["show_latex_formula"].update(visible=True)
                 window["image_formula_latex"].update(filename=autosize_latex(limit_tex))
