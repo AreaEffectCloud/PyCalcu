@@ -68,8 +68,6 @@ all_btns_keys = ["pi", "theta", "infty", "napier",
 
 clear_btn = ["delete_limit", "delete_sum", "delete_diff", "delete_integral", "delete_matrix"]
 
-#setting_layout = [[]]
-
 ##### Main / Right Layout #####
 #Limit
 left = [
