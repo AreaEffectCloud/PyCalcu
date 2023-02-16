@@ -16,5 +16,5 @@
 ![An image of LaTeX](https://github.com/AreaEffectCloud/PyCalcu/blob/master/output_images/formula.png)
 ### LaTex Command is: 
 ```
-\int\limits_{\frac{π}{2}}^{\frac{2 π}{3}}{\frac{\sin{\left(x \right)}}{\cos{\left(x^{2} \right)} + 1}}{dx}
+$$\int\limits_{\frac{π}{2}}^{\frac{2 π}{3}}{\frac{\sin{\left(x \right)}}{\cos{\left(x^{2} \right)} + 1}}{dx}$$
 ```
