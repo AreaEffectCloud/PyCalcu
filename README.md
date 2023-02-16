@@ -8,5 +8,4 @@
 3. Put the Add button,
    to create an image of the LaTex formula.
 
-Example : ![the image of LaTeX]
-(https://github.com/AreaEffectCloud/PyCalcu/blob/master/output_images/formula.png)
+Example : ![the image of LaTeX](https://github.com/AreaEffectCloud/PyCalcu/blob/master/output_images/formula.png)
