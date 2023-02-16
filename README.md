@@ -1,5 +1,7 @@
 # PyCalcu
 
+***For academic paper writers***
+
 ## It helps you to write the LaTex command
 
 **How to use** 
