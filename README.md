@@ -1,5 +1,5 @@
 # PyCalcu 
-###This is a simple design GUI for academic paper writers
+### This is a simple design GUI for academic paper writers
 ## It helps you to write the LaTex command 
 
 ### How to use
