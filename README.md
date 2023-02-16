@@ -10,4 +10,4 @@
    to create an image of the LaTex.
 4. And generate LaTex commands on Output 
 
-Example : ![the image of LaTeX](https://github.com/AreaEffectCloud/PyCalcu/blob/master/output_images/formula.png)
+Generation example : ![the image of LaTeX](https://github.com/AreaEffectCloud/PyCalcu/blob/master/output_images/formula.png)
