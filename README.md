@@ -1,5 +1,7 @@
 # PyCalcu 
 ### This is a simple design GUI for academic paper writers
+### Default screen:
+![gui screen](https://github.com/AreaEffectCloud/PyCalcu/blob/master/images/gui.png)
 ## It helps you to write the LaTex command 
 
 ### How to use
