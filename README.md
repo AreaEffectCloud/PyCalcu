@@ -32,7 +32,7 @@
 
 ## Generation example
 ### Formula is: 
-$$\int\limits_{\frac{π}{2}}^{\frac{2 π}{3}}{\frac{\sin{\left(x \right)}}{\cos{\left(x^{2} \right)} + 1}}{dx}$$
+![LaTex-image](https://github.com/AreaEffectCloud/PyCalcu/blob/master/output_images/formula.png)
 ### LaTex Command is: 
 ```
 $$\int\limits_{\frac{π}{2}}^{\frac{2 π}{3}}{\frac{\sin{\left(x \right)}}{\cos{\left(x^{2} \right)} + 1}}{dx}$$
@@ -41,4 +41,4 @@ $$\int\limits_{\frac{π}{2}}^{\frac{2 π}{3}}{\frac{\sin{\left(x \right)}}{\cos{
 ## Using Library
 + **PySimpleGUI (ver4.60.4)**
 + **Sympy (ver1.11.1)**
-+ **Pillow**
++ **Pillow (ver9.4.0)**
