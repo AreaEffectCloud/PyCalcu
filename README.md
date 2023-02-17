@@ -31,7 +31,8 @@
    - Couldn't generate an image of result
 
 ## Generation example
-### Formula is: $$\int\limits_{\frac{π}{2}}^{\frac{2 π}{3}}{\frac{\sin{\left(x \right)}}{\cos{\left(x^{2} \right)} + 1}}{dx}$$
+### Formula is: 
+$$\int\limits_{\frac{π}{2}}^{\frac{2 π}{3}}{\frac{\sin{\left(x \right)}}{\cos{\left(x^{2} \right)} + 1}}{dx}$$
 ### LaTex Command is: 
 ```
 $$\int\limits_{\frac{π}{2}}^{\frac{2 π}{3}}{\frac{\sin{\left(x \right)}}{\cos{\left(x^{2} \right)} + 1}}{dx}$$
