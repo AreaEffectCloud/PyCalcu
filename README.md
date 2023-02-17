@@ -51,7 +51,7 @@
 $$\int\limits_{\frac{π}{2}}^{\frac{2 π}{3}}{\frac{\sin{\left(x \right)}}{\cos{\left(x^{2} \right)} + 1}}{dx}$$
 ```
 
-## Using Library
+## Using library
 + **PySimpleGUI (ver4.60.4)**
 + **Sympy (ver1.11.1)**
 + **Pillow (ver9.4.0)**
