@@ -44,7 +44,7 @@
    - Called when 
 
 ## Generation example
-### Formula is: 
+### An image is: 
 ![LaTex-image](https://github.com/AreaEffectCloud/PyCalcu/blob/master/output_images/formula.png)
 ### LaTex Command is: 
 ```
