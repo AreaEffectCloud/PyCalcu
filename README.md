@@ -40,8 +40,6 @@
 ### Error
 - Format Error
    - Called when entered text is grammatically incorrect.
-- Couldn't generate an image of result
-   - Called when 
 
 ## Generation example
 ### An image is: 
