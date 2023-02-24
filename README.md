@@ -38,8 +38,7 @@
    - Only text that you're focusing in the input box is deleted.
 
 ### Error
-- Format Error
-   - Called when entered text is grammatically incorrect.
+- **Format error** : called when entered text is grammatically incorrect.
 
 ## Generation example
 ### An image is: 
