@@ -14,7 +14,7 @@
 ## Default screen:
 ![gui screen](https://github.com/AreaEffectCloud/PyCalcu/blob/master/images/gui.png) 
 
-## How to use
+## Usage
 1. Select a tab from "Limit", "Sum", "Differential", and "Integral" tabs(these are on the right).
 2. From the "Normal", "Function", and "Alphabet" tabs, enter numbers or text in the input area on the right.
 3. Press the Export button to create a LaTex image. And it's displayed at the bottom of the GUI.
