@@ -3,14 +3,14 @@
 
 + [Overview](https://github.com/AreaEffectCloud/PyCalcu/edit/master/README.md#overview)
 + [Default screen](https://github.com/AreaEffectCloud/PyCalcu/edit/master/README.md#default-screen)
-+ [How to use](https://github.com/AreaEffectCloud/PyCalcu/edit/master/README.md#how-to-use)
++ [Usage](https://github.com/AreaEffectCloud/PyCalcu/edit/master/README.md#how-to-use)
 + [Features](https://github.com/AreaEffectCloud/PyCalcu/edit/master/README.md#features)
 + [Generation example](https://github.com/AreaEffectCloud/PyCalcu/edit/master/README.md#generation-example)
 + [Using Library](https://github.com/AreaEffectCloud/PyCalcu/edit/master/README.md#using-library)
 
 ## Overview
 ### It displays previews of "Limit", "Sum", "Differential", and "Integral" as images in LaTex notation based on the numerical values entered and outputs LaTex commands. It doesn't function as a calculator, but rather displays the equations as the library organizes them
-### Operating system: windows 10, 11
+### Operating conditions: windows 10, 11
 ## Default screen:
 ![gui screen](https://github.com/AreaEffectCloud/PyCalcu/blob/master/images/gui.png) 
 
