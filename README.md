@@ -10,7 +10,7 @@
 
 ## Overview
 ### It displays previews of "Limit", "Sum", "Differential", and "Integral" as images in LaTex notation based on the numerical values entered and outputs LaTex commands. It doesn't function as a calculator, but rather displays the equations as the library organizes them
-### Operating conditions: windows 10, 11
+### Operating system: windows 10, 11
 ## Default screen:
 ![gui screen](https://github.com/AreaEffectCloud/PyCalcu/blob/master/images/gui.png) 
 
