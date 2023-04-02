@@ -38,8 +38,8 @@ Operating system: windows 10, 11
 - The Clear button
    - Only text that you're focusing in the input box is deleted.
 
-### Error
-- **Format error** : called when entered text is grammatically incorrect.
+### Format Error
+- Called when entered text is grammatically incorrect.
 
 ## Generation example
 ### An image is: 
